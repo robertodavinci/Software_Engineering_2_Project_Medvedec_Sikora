@@ -20,7 +20,16 @@ sig GPSCoordinates extends Location {
 		longitude < 180 and longitude > -180
 	}*/
 
+// Simplified version of address only includes GPSCoordinates
+/*
+sig Address extends Location {
+	country: one Country,
+	city: one City,
+	street: one Street,
+	number: one Int
+	}
 
+*/
 
   // Working time has been simplified for clearer view
 sig WorkingTime{

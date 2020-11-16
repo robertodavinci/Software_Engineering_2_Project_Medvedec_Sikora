@@ -1,0 +1,114 @@
+\subsection{Purpose}
+\hspace{\parindent}The purpose of this document is to serve as a Requirement Analysis and Specification Document (RASD) for the development of the CLup - Customer Line-up application.
+
+It will clearly introduce the problem at hand, propose an adequate solution and explain it in detail. It will do so through the use of appropriate language, with software engineers, system and requirement analysts, and product testers as the target audience. 
+
+The document fully details the scope and the basic functions of the system. Furthermore, it expands the core functionality with conceivable upgrades and improvements. It characterizes requirements, assumptions, and constraints of the system and outlines its goals. 
+
+CLup is a mobile application that helps grocery store chains manage the influx of customers and reduce crowding both inside and outside of the store. Moreover, it enables people to reserve a timeslot in a specific store through the "book a visit" feature. 
+
+\newpage
+
+\subsection{Scope}
+\subsubsection{Description of the problem}
+\hspace{\parindent}Faced with a worldwide pandemic of the COVID-19 virus countries across the world imposed strict health measures in line with the recommendations of the World Health Organization. 
+
+Most governments introduced decrees that limited the movement of the population to a certain degree. They did so in hope of reducing the spread of the virus. Only essential movement, such as: going to work, grocery shopping or outdoor exercise, was deemed acceptable. 
+
+Although successful in the mitigation of the disease, the act put a serious strain on society on many levels. For the time being, people are slowly becoming annoyed with the measures and uncertainty, occasionally leading to protests.
+
+To help reduce the stress and anxiety, many aspects of everyday life involving close contact can be considered and improved upon. 
+
+\subsubsection{Proposed solution}
+\hspace{\parindent}This project aims to help with, and resolve the issues surrounding grocery shopping. As we all know, grocery shopping is an essential activity which involves close contact inside the store. Since the COVID-19 virus spreads mainly through airborne particles, this activity plays a key role in its mitigation. 
+
+To reduce crowding inside the stores, supermarkets need to restrict access to their store and keep the number of people inside below the optimal maximum capacity. A solution to this seemingly easy task can be found by looking at the way banks and other community services handle the issue. In the most common situation, after retrieving a personal number at a printer, people wait in a line according to their ticket number. 
+
+This system can serve as a good base for the solution but does not come without flaws. Firstly, the interaction with the ticket printer normally includes the use of a touchscreen. To avoid constant wiping and sanitizing of the screen, the system should not use a printer's touchscreen as an interface. 
+
+Furthermore, while waiting outside for a number to be called dramatically reduces indoor crowding, if the current number is shown on a screen in the store, outdoor crowding is inevitable. To avoid larger gatherings, a person should be able to have an idea of how long until their number is called without nearing the store. In such a way, a person could enter a store without physically waiting in a line and avoid close contact.
+
+To resolve the issues that arise with available solutions
+because of the pandemic, a software application can be used. The application could provide a virtual counterpart to a physical line up in front of a store. The main idea is to enable store customers to enter a queue from home (or wherever they find themselves) through simple interaction with the application.
+
+Upon the request, the person receives a number and a QR code. The person waits until that number is called to approach the store, and before entering, camera or store personnel, if available, scans the code to check its validity. Such a system allows store managers to monitor entrance in the store and control the influx of the customers. 
+
+Introducing such a system has its drawbacks and consequences, some more significant than others. The most obvious consequence is that upon implementing such a system, to attain the number of people inside the store under a certain threshold, all customers will be obligated to use it to enter the store. Creating a system that is usable, intuitive, and clear for all demographics of a society is hard, but necessary. The application should, therefore, be very simple to use. Moreover, to make sure every customer can access the grocery store, a solution should also be available for people who do not have access to the technology required by the system. The easiest solution is to have a traditional ticket printer in front of the store. 
+
+A simple intervention of removing the touchscreen and printing a new ticket as soon as the last one is taken addresses the problems regarding the printer. Another important area to address is the effectiveness of the mechanism. Just like in real life physical lines, if a person arrives before/after their number is called the system should send the person back in line. To minimize the frequency of such events, the developed solution should be capable of calculating a reasonably precise estimation of the wait time for the customer. A basic approach is to simply provide the number of people in line that are ahead of you, but more precise estimations can and should be implemented. Furthermore, to avoid the loss of one’s place in line, the system should send occasional notifications to the user, to remind them of and update the estimated waiting time. 
+
+After having resolved all conceived problems of the system, one more suggestion can be proposed to enhance its convenience and user experience. Besides managing crowding inside the store and real-time queueing, the application will give customers the option to "book a visit" to the grocery store. This feature will allow them to view available time slots for their grocery shop and book the most convenient one. Also, during the booking process, a person will have an option to indicate an approximated duration of their visit to further improve the accuracy of the wait time estimation of the system. 
+\subsubsection{Domain}
+\hspace{\parindent}The target audience for this application includes every person that shops for groceries in a store. Almost all demographics fall into this category, specifically people of age that use a smartphone (although a solution is given even for those who do not), have access to a store and live in fairly densely populated areas.
+  
+To use the application the person would have to have a smartphone and know how to use it, along with internet connection so the application can communicate with the database. This excludes some groups of the society, especially elderly ones, but still vast majority of young and working-class people should have easy access to it.
+\newpage
+\subsubsection{Goals [Gn]}
+\hspace{\parindent}\begin{itemize}
+	\item[\textbf{G1}]Allow the user to "line up" /retrieve a number.
+	\begin{itemize}
+		\item[\textbf{G1.1}]Allow the user to retrieve a number through the application.
+		\item[\textbf{G1.2}]Allow the user to retrieve a number physically from the printer. 
+	\end{itemize}
+	\item[\textbf{G2}]Allow the store manager to control the entrance of the user via QR code scanning. 
+	\item[\textbf{G3}]Allow the user to get precise calculations of the wait time. 
+	\item[\textbf{G4}]Allow the user to get updates/notifications on the estimated wait time.
+	\item[\textbf{G5}]Allow the user to "book a visit" to the store.
+	\begin{itemize}
+		\item[\textbf{G5.1}]Allow the user to "book a visit" to the store without indicating the expected duration of the visit.
+		\item[\textbf{G5.2}]Allow the user to "book a visit" to the store with indicating the expected duration of the visit. 
+	\end{itemize}
+	\item[\textbf{G6}]Allow the user to automatically indicate the expected visit duration while booking a visit. 
+\end{itemize}
+
+\newpage
+\subsection{Definitions, Acronyms, Abbreviations}
+\subsubsection{Definitions}
+\begin{itemize}
+	\item \textbf{Application}: a computer (mobile) program that is designed for a particular purpose. 
+	\item \textbf{QR code}: a machine-readable code consisting of an array of black and white squares, typically used for storing URLs or other information for reading by the camera or a scanner. 
+	\item \textbf{Smartphone}: a mobile phone that performs many of the functions of a computer, typically having a touchscreen interface, internet access, and an operating system capable of running downloaded apps. 
+\end{itemize}
+\subsubsection{Acronyms}
+\begin{itemize}
+	\item \textbf{RASD}: Requirement Analysis and Specification Document. 
+	\item \textbf{COVID-19}: Virus responsible for the spread of the coronavirus disease 2019. 
+	\item \textbf{CLup}: Customer Line-up. 
+	\item \textbf{API}: Application programming interface, computing interface which defines interactions between multiple software intermediaries 
+\end{itemize}
+\subsubsection{Abbreviations}
+\begin{itemize}
+	\item \textbf{Gn}: nth goal.
+	\item \textbf{Dn}: nth domain assumption.
+	\item \textbf{Rn}: nth functional requirement.
+	\item \textbf{App}: Application.
+\end{itemize}
+
+\newpage
+\subsection{Revision History}
+\begin{itemize}
+	\item \textbf{Version 0.1}: First edition; 7.11.2020.
+	\item \textbf{Version 0.2}: First check and added some stuff; 9.11.2020.
+	\item \textbf{Version 1.0}: First .tex document created and added all together; 15.11.2020.
+\end{itemize}
+
+\newpage
+\subsection{Reference Documents}
+\begin{itemize}
+	\item Specification document "R\&DD Assignment A.Y. 2020-2021.pdf"
+	\item Alloy Dynamic Model example:\url{http://homepage.cs.uiowa.edu/~tinelli/classes/181/Spring10/Notes/09-dynamic-models.pdf}
+	\item Presentations Software Engineering 2, Politecnico di Milano
+\end{itemize}
+
+\newpage
+\subsection{Document Structure}
+\hspace{\parindent}The structure of this document is divided into six chapters. 
+The first chapter gives an elaborate introduction to the problem at hand and the proposed solution. In the first part of the chapter the purpose of the document and the goals of the project are presented. In the second part the project's scope is given, outlining the description of the problem, proposing a solution, and defining the domain of the problem. The third part includes the definitions, acronyms, and abbreviations necessary to understand the project. Fourth and fifth part of the chapter provide an oversight of the revision history of this document and a list of reference documents, and the last part presents the structure of the document.
+ 
+The second chapter gives an overall description of the product. In the beginning introducing the product perspective, containing scenarios and further details on the shared phenomena and a domain model. It also introduces the product functions with the most important requirements and user characteristics. In the end, necessary assumptions are displayed together with the system's dependencies and constraints.
+
+The third part includes all the specific requirements of the system, explained in more detail where necessary, to help the development team. It includes external interface requirements, functional and performance requirements, design constraints and software system attributes. 
+The fourth part provides a formal analysis using Alloy, to prove the feasibility and soundness of the system. A formal model is presented and described and so are some worlds obtained by running it. 
+
+The fifth part provides information about the number of hours each group member has spent working on each part of this document. 
+The sixth part contains a list of references such as the tools used to create the content of the document. 
