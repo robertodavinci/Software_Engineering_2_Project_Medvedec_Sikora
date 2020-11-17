@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  16 NOV 2020 22:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  17 NOV 2020 14:39
 entering extended mode
 **./main.tex
 (main.tex
@@ -1351,7 +1351,7 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  23345 strings out of 479799
- 435689 string characters out of 2869722
+ 436789 string characters out of 2869722
  854411 words of memory out of 3000000
  39559 multiletter control sequences out of 15000+200000
  560114 words of font info for 92 fonts, out of 3000000 for 9000
@@ -1368,7 +1368,7 @@ blic/lm/lmtt12.pfb><C:/Users/medve/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/lm/lmtti10.pfb><C:/Users/medve/AppData/Local/Programs/MiKTeX/fonts/type1/u
 rw/palatino/uplb8a.pfb><C:/Users/medve/AppData/Local/Programs/MiKTeX/fonts/type
 1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (49 pages, 2030689 bytes).
+Output written on main.pdf (49 pages, 2030746 bytes).
 PDF statistics:
  818 PDF objects out of 1000 (max. 8388607)
  244 named destinations out of 1000 (max. 500000)
