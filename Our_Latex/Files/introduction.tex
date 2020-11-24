@@ -35,14 +35,35 @@ Upon the request, the person receives a number and a QR code. The person waits u
 
 Introducing such a system has its drawbacks and consequences, some more significant than others. The most obvious consequence is that upon implementing such a system, to attain the number of people inside the store under a certain threshold, all customers will be obligated to use it to enter the store. Creating a system that is usable, intuitive, and clear for all demographics of a society is hard, but necessary. The application should, therefore, be very simple to use. Moreover, to make sure every customer can access the grocery store, a solution should also be available for people who do not have access to the technology required by the system. The easiest solution is to have a traditional ticket printer in front of the store. 
 
-A simple intervention of removing the touchscreen and printing a new ticket as soon as the last one is taken addresses the problems regarding the printer. Another important area to address is the effectiveness of the mechanism. Just like in real life physical lines, if a person arrives before/after their number is called the system should send the person back in line. To minimize the frequency of such events, the developed solution should be capable of calculating a reasonably precise estimation of the wait time for the customer. A basic approach is to simply provide the number of people in line that are ahead of you, but more precise estimations can and should be implemented. Furthermore, to avoid the loss of one’s place in line, the system should send occasional notifications to the user, to remind them of and update the estimated waiting time. 
+A simple intervention of removing the touchscreen and printing a new ticket as soon as the last one is taken addresses the problems regarding the printer. Another important area to address is the effectiveness of the mechanism. Just like in real life physical lines, if a person arrives before/after their number is called the system should send the person back in line. To minimize the frequency of such events, the developed solution should be capable of calculating a reasonably precise estimation of the waiting time for the customer. A basic approach is to simply provide the number of people in line that are ahead of you, but more precise estimations can and should be implemented. Furthermore, to avoid the loss of one’s place in line, the system should send occasional notifications to the user, to remind them of and update the estimated waiting time. 
 
-After having resolved all conceived problems of the system, one more suggestion can be proposed to enhance its convenience and user experience. Besides managing crowding inside the store and real-time queueing, the application will give customers the option to "book a visit" to the grocery store. This feature will allow them to view available time slots for their grocery shop and book the most convenient one. Also, during the booking process, a person will have an option to indicate an approximated duration of their visit to further improve the accuracy of the wait time estimation of the system. 
+After having resolved all conceived problems of the system, one more suggestion can be proposed to enhance its convenience and user experience. Besides managing crowding inside the store and real-time queueing, the application will give customers the option to "book a visit" to the grocery store. This feature will allow them to view available time slots for their grocery shop and book the most convenient one. Also, during the booking process, a person will have an option to indicate an approximated duration of their visit to further improve the accuracy of the waiting time estimation of the system. 
 \subsubsection{Domain}
 \hspace{\parindent}The target audience for this application includes every person that shops for groceries in a store. Almost all demographics fall into this category, specifically people of age that use a smartphone (although a solution is given even for those who do not), have access to a store and live in fairly densely populated areas.
   
 To use the application the person would have to have a smartphone and know how to use it, along with internet connection so the application can communicate with the database. This excludes some groups of the society, especially elderly ones, but still vast majority of young and working-class people should have easy access to it.
 \newpage
+
+\subsubsection{World Phenomena[WPn]}
+\hspace{\parindent}\begin{itemize}
+	\item[\textbf{WP1}]The user needs to shop for groceries.
+	\item[\textbf{WP2}]Store influx has to be regulated due to pandemic.
+	\item[\textbf{WP3}]The store manager controls the number of people inside the store.
+	\item[\textbf{WP4}]Crowds forming in front of the stores.
+\end{itemize}
+
+
+\subsubsection{Shared Phenomena [SPn]}
+\hspace{\parindent}\begin{itemize}
+	\item[\textbf{SP1}]Send a ticket request to the system. (Machine)
+	\item[\textbf{SP2}]Regulate virtual queueing of customers. (Machine)
+	\item[\textbf{SP3}]Manage and print out virtual tickets. (Machine)
+	\item[\textbf{SP4}]Update waiting time estimation. (World)
+	\item[\textbf{SP5}]Free timeslot reservation. (World)
+\end{itemize}
+
+\newpage
+
 \subsubsection{Goals [Gn]}
 \hspace{\parindent}\begin{itemize}
 	\item[\textbf{G1}]Allow the user to "line up" /retrieve a number.
@@ -50,15 +71,10 @@ To use the application the person would have to have a smartphone and know how t
 		\item[\textbf{G1.1}]Allow the user to retrieve a number through the application.
 		\item[\textbf{G1.2}]Allow the user to retrieve a number physically from the printer. 
 	\end{itemize}
-	\item[\textbf{G2}]Allow the store manager to control the entrance of the user via QR code scanning. 
-	\item[\textbf{G3}]Allow the user to get precise calculations of the wait time. 
-	\item[\textbf{G4}]Allow the user to get updates/notifications on the estimated wait time.
-	\item[\textbf{G5}]Allow the user to "book a visit" to the store.
-	\begin{itemize}
-		\item[\textbf{G5.1}]Allow the user to "book a visit" to the store without indicating the expected duration of the visit.
-		\item[\textbf{G5.2}]Allow the user to "book a visit" to the store with indicating the expected duration of the visit. 
-	\end{itemize}
-	\item[\textbf{G6}]Allow the user to automatically indicate the expected visit duration while booking a visit. 
+	\item[\textbf{G2}]Allow the store manager to control the entrance of customers via QR code scanning. 
+	\item[\textbf{G3}]Allow the user to receive precise calculations of the waiting time. 
+	\item[\textbf{G4}]Allow the user to be updated on the store waiting time situation.
+	\item[\textbf{G5}]Allow the user to "Book a visit" to the store.
 \end{itemize}
 
 \newpage
@@ -78,6 +94,8 @@ To use the application the person would have to have a smartphone and know how t
 \end{itemize}
 \subsubsection{Abbreviations}
 \begin{itemize}
+	\item \textbf{WPn}: nth world phenomena.
+	\item \textbf{SPn}: nth shared phenomena.
 	\item \textbf{Gn}: nth goal.
 	\item \textbf{Dn}: nth domain assumption.
 	\item \textbf{Rn}: nth functional requirement.
@@ -87,9 +105,10 @@ To use the application the person would have to have a smartphone and know how t
 \newpage
 \subsection{Revision History}
 \begin{itemize}
-	\item \textbf{Version 0.1}: First edition; 7.11.2020.
-	\item \textbf{Version 0.2}: First check and added some stuff; 9.11.2020.
-	\item \textbf{Version 1.0}: First .tex document created and added all together; 15.11.2020.
+	\item \textbf{Version 0.1}: First edition; 7th November 2020
+	\item \textbf{Version 0.2}: First check and added some stuff; 9th November 2020
+	\item \textbf{Version 1.0}: First .tex document created and added all together; 15th November 2020
+	\item \textbf{Version 1.1}: Added World and Shared Phenomena, updated use cases, added class diagram, updated mapping table, re-done Goals, Requirements, and Domain assumptions; 24th November 2020
 \end{itemize}
 
 \newpage

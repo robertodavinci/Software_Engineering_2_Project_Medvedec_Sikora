@@ -93,6 +93,33 @@ The following images show some basic concepts on how the app should look on both
 
 \newpage
 \subsection{Functional Requirements}
+
+\begin{enumerate}
+			\item [\textbf{R1}] The user must be able to select a specific store in which they want to do the shopping.
+			\item [\textbf{R2}] The user must be able to request a number and a ticket.
+			\item [\textbf{R3}] The user must be able to receive a number and a ticket.
+			\item [\textbf{R4}] The user must be able to physically retrieve a ticket from the printer containing a number and a QR code.
+			\item [\textbf{R5}] A new ticket must be printed whenever a user physically retrieves the old one.
+			\item [\textbf{R6}] The store manager must be able to scan a QR code.
+			\item [\textbf{R7}] The store manager must be informed by the application if a user tries to enter the store out of order.
+			\item [\textbf{R8}] The store manager must be informed when the capacity of the store is full.
+			\item [\textbf{R9}] The store manager must be able to alert the system whenever a customer exits the store.
+			\item [\textbf{R10}] The store manager must be provided with the login credentials upon request to the system administrator.	
+			\item [\textbf{R11}] Allow the user to receive a precise estimation of waiting time when retrieving a number.
+			\item [\textbf{R12}] The system must calculate an estimation of the waiting time based on data.
+			\item [\textbf{R13}] The system must be able to update its estimated waiting time in real time.
+			\item [\textbf{R14}] The system must be able to send an update to the user in specific intervals regarding estimated waiting time until it's their turn.
+			\item [\textbf{R15}] The user must be able to request to see all the available timeslots in that specific store.
+			\item [\textbf{R16}] The system must be able to provide the user with the list of all available timeslots upon the request.
+			\item [\textbf{R17}] The user must be able to select a specific timeslot.
+			\item [\textbf{R18}] The user must be able to receive a confirmation of his timeslot reservation, along with a number and a ticket.
+			\item [\textbf{R19}] Allow the user to be at most five minutes late for his reservation before cancelling his ticket.
+			\item [\textbf{R20}] The user must be able to specify expected duration of his visit to the store.
+			\end{enumerate}			
+\newpage
+		
+\subsubsection{Mapping}	
+
 \begin{enumerate}
 	\item [\textbf{G1}] Allow the user to "line up"/retrieve a number.
 	\begin{enumerate}
@@ -101,61 +128,66 @@ The following images show some basic concepts on how the app should look on both
 			\item [\textbf{R1}] The user must be able to select a specific store in which they want to do the shopping.
 			\item [\textbf{R2}] The user must be able to request a number and a ticket.
 			\item [\textbf{R3}] The user must be able to receive a number and a ticket.
+			\item [\textbf{D4}] The registered store is a physical store, not a virtual store.
+			\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
+			\item [\textbf{D11}] The user has internet connection for the device at all times.
 		\end{enumerate}
 		\item [\textbf{G1.2}] Allow the user to retrieve a number physically from the printer.
 		\begin{enumerate}
-			\item [\textbf{R4}] The user must be able to physically retrieve a ticket from the printer containing a number and a QR code.		
+			\item [\textbf{R4}] The user must be able to physically retrieve a ticket from the printer containing a number and a QR code.
+			\item [\textbf{R5}] A new ticket must be printed whenever a user physically retrieves the old one.	
+			\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.	
 		\end{enumerate}
-		\item [\textbf{D8}] The user has internet connection for the device at all times.
 	\end{enumerate}
-	\item [\textbf{G2}] Allow the store manager to control the entrance of the user via QR code scanning.
+	\item [\textbf{G2}] Allow the store manager to control the entrance of customers via QR code scanning.
 	\begin{enumerate}
-		\item [\textbf{R5}] The store manager must be able to scan a QR code.
-		\item [\textbf{R6}] The store manager must be informed by the application if a user tries to enter the store out of order.
-		\item [\textbf{R7}] The store manager must be informed when the capacity of the store is full.
-		\item [\textbf{R8}] The store manager must be able to alert the system whenever a customer exits the store.
-		\item [\textbf{D6}] The system can correctly save data about enter and exit times of anonymous customers, in order to calculate estimated wait time.
-		\item [\textbf{D8}] The user has internet connection for the device at all times.
-	\end{enumerate}
-	\item [\textbf{G3}] Allow the user to get precise calculations of the wait time.
-	\begin{enumerate}
-		\item [\textbf{R9}] Allow the user to receive a precise estimation of wait time when retrieving a number.
-		\item [\textbf{R10}] The system must provide the user with an estimation of wait time based on data.
-		\item [\textbf{D4}] The system can use data about the registered user to calculate estimated wait time.
-		\item [\textbf{D6}] The system can correctly save data about enter and exit times of anonymous customers, in order to calculate estimated wait time.
-		\item [\textbf{D8}] The user has internet connection for the device at all times.
-	\end{enumerate}
-	\item [\textbf{G4}] Allow the user to get updates/notifications on the estimated wait time.
-	\begin{enumerate}
-		\item [\textbf{R11}] The system must be able to update its estimated wait time in real time.
-		\item [\textbf{R12}] The system must be able to send an update to the user in specific intervals regarding estimated wait time until it's their turn.
-		\item [\textbf{D4}] The system can use data about the registered user to calculate estimated wait time.
-		\item [\textbf{D6}] The system can correctly save data about enter and exit times of anonymous customers, in order to calculate estimated wait time.
-		\item [\textbf{D8}] The user has internet connection for the device at all times.
-	\end{enumerate}
-	\item [\textbf{G5}] Allow the user to "book a visit" to the store.
-	\begin{enumerate}
-		\item [\textbf{G5.1}] Allow the user to "book a visit" to the store without indicating the expected duration of the visit.
-		\begin{enumerate}
-			\item [\textbf{R13}] The user must be able to request to see all the available timeslots in that specific store.
-			\item [\textbf{R14}] The system must be able to provide the user with the list of all available timeslots upon the request.
-			\item [\textbf{R15}] The user must be able to select a specific timeslot.
-			\item [\textbf{R16}] The user must be able to receive a confirmation of his timeslot reservation, along with a number and a ticket.
-			\item [\textbf{R17}] Allow the user to be at most five minutes late for his reservation before cancelling his ticket.
-		\end{enumerate}
-		\item [\textbf{G5.2}] Allow the user to "book a visit" to the store with indicating the expected duration of the visit.
-		\begin{enumerate}
-			\item [\textbf{R18}] The user must be able to specify expected duration of his visit to the store.
-		\end{enumerate}
- 		\item [\textbf{D3}] The user's device provides accurate GPS information.
-		\item [\textbf{D7}] The system can correctly save data to and pull data from available time slot schema in the database. 
-		\item [\textbf{D8}] The user has internet connection for the device at all times.
-	\end{enumerate}
-	\item [\textbf{G6}] Allow the store manager to login to his store manager account with credentials.
-	\begin{enumerate}
-		\item [\textbf{R19}] The store manager must be provided with the login credentials upon request to the system administrator.
+		\item [\textbf{R6}] The store manager must be able to scan a QR code.
+		\item [\textbf{R7}] The store manager must be informed by the application if a user tries to enter the store out of order.
+		\item [\textbf{R8}] The store manager must be informed when the capacity of the store is full.
+		\item [\textbf{R9}] The store manager must be able to alert the system whenever a customer exits the store.
+		\item [\textbf{R10}] The store manager must be provided with the login credentials upon request to the system administrator.
 		\item [\textbf{D1}] The store manager's username must be unique. 
-		\item [\textbf{D2}] The store manager's password must be secure. 
+		\item [\textbf{D2}] The store manager can observe both entering and exiting customers.
+		\item [\textbf{D3}] The store manager's password must be secure. 
+		\item [\textbf{D5}] The screen of the user's phone is scannable and not to damaged.
+		\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
+		\item [\textbf{D11}] The user has internet connection for the device at all times.
+
+
+	\end{enumerate}
+	\item [\textbf{G3}] Allow the user to get precise calculations of the waiting time.
+	\begin{enumerate}
+		\item [\textbf{R11}] Allow the user to receive a precise estimation of waiting time when retrieving a number.
+		\item [\textbf{R12}] The system must calculate an estimation of the waiting time based on data.
+		\item [\textbf{D4}] The registered store is a physical store, not a virtual store.
+		\item [\textbf{D7}] The system can use data about the user to calculate estimated waiting time.
+		\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
+		\item [\textbf{D11}] The user has internet connection for the device at all times.
+	\end{enumerate}
+	\item [\textbf{G4}] Allow the user to be updated on the store waiting time situation.
+	\begin{enumerate}
+		\item [\textbf{R13}] The system must be able to update its estimated waiting time in real time.
+		\item [\textbf{R14}] The system must be able to send an update to the user in specific intervals regarding estimated waiting time until it's their turn.
+		\item [\textbf{D4}] The registered store is a physical store, not a virtual store.
+		\item [\textbf{D7}] The system can use data about the user to calculate estimated waiting time.
+		\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
+		\item [\textbf{D11}] The user has internet connection for the device at all times.
+	\end{enumerate}
+	\item [\textbf{G5}] Allow the user to "Book a visit" to the store.
+	\begin{enumerate}
+			\item [\textbf{R15}] The user must be able to request to see all the available timeslots in that specific store.
+			\item [\textbf{R16}] The system must be able to provide the user with the list of all available timeslots upon the request.
+			\item [\textbf{R17}] The user must be able to select a specific timeslot.
+			\item [\textbf{R18}] The user must be able to receive a confirmation of his timeslot reservation, along with a number and a ticket.
+			\item [\textbf{R19}] Allow the user to be at most five minutes late for his reservation before cancelling his ticket.
+			\item [\textbf{R20}] The user must be able to specify expected duration of his visit to the store.
+			\item [\textbf{D4}] The registered store is a physical store, not a virtual store.
+			\item [\textbf{D6}] The user's device provides accurate GPS information.
+			\item [\textbf{D7}] The system can use data about the user to calculate estimated waiting time.
+			\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
+			\item [\textbf{D9}] The system can correctly save and pull data from available timeslot tables in the database.
+			\item [\textbf{D10}] The system can update timeslot tables at any moment while available.
+			\item [\textbf{D11}] The user has internet connection for the device at all times.
 	\end{enumerate}
 \end{enumerate}
 
@@ -165,26 +197,26 @@ The following images show some basic concepts on how the app should look on both
 \begin{tabular}{|
 >{\columncolor[HTML]{EFEFEF}}l |l|l|}
 \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Requirement, {[}Rn{]}} & \cellcolor[HTML]{C0C0C0}\textbf{Goals, {[}Gn{]}} & \cellcolor[HTML]{C0C0C0}\textbf{Domains, {[}Dn{]}} \\ \hline
-R1  & G1.1 & D8         \\ \hline
-R2  & G1.1 & D8         \\ \hline
-R3  & G1.1 & D8         \\ \hline
-R4  & G1.2 & D8         \\ \hline
-R5  & G2   & D6, D8     \\ \hline
-R6  & G2   & D6, D8     \\ \hline
-R7  & G2   & D6, D8     \\ \hline
-R8  & G2   & D6, D8     \\ \hline
-R9  & G3   & D4, D6, D8 \\ \hline
-R10 & G3   & D4, D6, D8 \\ \hline
-R11 & G4   & D4, D6, D8 \\ \hline
-R12 & G4   & D4, D6, D8 \\ \hline
-R13 & G5.1 & D3, D7, D8 \\ \hline
-R14 & G5.1 & D3, D7, D8 \\ \hline
-R15 & G5.1 & D3, D7, D8 \\ \hline
-R16 & G5.1 & D3, D7, D8 \\ \hline
-R17 & G5.1 & D3, D7, D8 \\ \hline
-R18 & G5.2 & D3, D7, D8 \\ \hline
-R19 & G6   & D1, D2     \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Goal, {[}Gn{]}} & \cellcolor[HTML]{C0C0C0}\textbf{Requirements, {[}Rn{]}} & \cellcolor[HTML]{C0C0C0}\textbf{Domains, {[}Dn{]}} \\ \hline
+ &   & \\
+G1.1 & R1, R2, R3, R4 & D4, D8, D11         \\ 
+&   & \\ \hline
+&   & \\
+G1.2  & R4, R5 & D8         \\ 
+&   & \\ \hline
+&   & \\
+G2  & R6, R7, R8, R9, R10 & D1, D2, D3, D5, D8, D11         \\
+&   & \\ \hline
+&   & \\
+G3  & R11, R12 & D4, D7, D8, D11         \\ 
+&   & \\ \hline
+&   & \\
+G4  & R13, R14 & D4, D7, D8, D11     \\ 
+&   & \\ \hline
+&   & \\
+G5  & R15, R16, R17, R18, R19, R20 & D4, D6, D7, D8, D9, D10, D11    
+ \\
+&   & \\ \hline
 \end{tabular}
 \caption{\textbf{Mapping table}}
 \label{tab:my-table}
@@ -221,7 +253,7 @@ UMLs                 & \textbf{\hyperref[fig:usecase1]{Use case}, \hyperref[fig:
 \hline
 Name           & \textbf{Retrieve a number (in person)} \\ \hline
 Actors         & \textbf{User, Store manager}           \\ \hline
-Goals          & \textbf{G1}                            \\ \hline
+Goals          & \textbf{G1.2}                            \\ \hline
 Entry condition &
   \begin{tabular}[c]{@{}l@{}}User present at the store \\ Desired store is in the CLup database\end{tabular} \\ \hline
 Event flow &
@@ -244,10 +276,10 @@ UMLs           & \textbf{\hyperref[fig:statechart1]{State chart}}     \\ \hline
 \hline
 Name                 & \textbf{Retrieve a number (through the application)}                                                                \\ \hline
 Actors               & \textbf{User, store manager}                                                                                        \\ \hline
-Goals                & \textbf{G1}                                                                                                         \\ \hline
+Goals                & \textbf{G1.1}                                                                                                         \\ \hline
 Entry condition      & \begin{tabular}[c]{@{}l@{}}User has the application installed \\ Desired store is in the CLup database\end{tabular} \\ \hline
 Event flow &
-  \begin{tabular}[c]{@{}l@{}}User opens the application \\ User selects a store \\ User selects "Get ticket" \\ User receives a number, a QR code, and an estimated wait time \\ User waits for his number \\ User gets to the store \\ Store manager scans user's QR code \\ User enters the store\end{tabular} \\ \hline
+  \begin{tabular}[c]{@{}l@{}}User opens the application \\ User selects a store \\ User selects "Get ticket" \\ User receives a number, a QR code, and an estimated waiting time \\ User waits for his number \\ User gets to the store \\ Store manager scans user's QR code \\ User enters the store\end{tabular} \\ \hline
 Exit condition       & User exits the store                                                                                                \\ \hline
 Exception            &  
 \begin{tabular}[c]{@{}l@{}} The QR code cannnot be scanned due to broken screen, \\ user gets physical ticket ticket                                \end{tabular} \\ \hline
@@ -325,7 +357,7 @@ UMLs                 & \textbf{\hyperref[fig:statechart3]{State chart}}
 \hline
 Name                 & \textbf{Store manager login}                                     \\ \hline
 Actors               & \textbf{Store manger}                                            \\ \hline
-Goals                & \textbf{G6, G2}                                                  \\ \hline
+Goals                & \textbf{G2}                                                  \\ \hline
 Entry condition      & Store manager has downloaded the application            \\ \hline
 Event flow & \begin{tabular}[c]{@{}l@{}}Open the CLup application \\ Login to the store manager account\end{tabular} \\ \hline
 Exit condition       & Store manager has successfully logged in to his account \\ \hline
@@ -346,17 +378,17 @@ UMLs                 & \textbf{\hyperref[fig:sequence2]{Sequence}}              
 \begin{tabular}{|
 >{\columncolor[HTML]{EFEFEF}}l |l|}
 \hline
-Name            & \textbf{Calculate estimated wait time}         \\ \hline
+Name            & \textbf{Calculate estimated waiting time}         \\ \hline
 Actors          & \textbf{User}                                  \\ \hline
-Goals           & \textbf{G3, G4, G5}                            \\ \hline
+Goals           & \textbf{G3, G4}                            \\ \hline
 Entry condition & User requested a ticket or booked a visit  \\ \hline
-Event flow           & \begin{tabular}[c]{@{}l@{}}System calculates estimated wait time \\ User receives estimated wait time\end{tabular} \\ \hline
-Exit condition  & Estimated wait time displayed on user's device \\ \hline
+Event flow           & \begin{tabular}[c]{@{}l@{}}System calculates estimated waiting time \\ User receives estimated waiting time\end{tabular} \\ \hline
+Exit condition  & Estimated waiting time displayed on user's device \\ \hline
 Exception       & /                                              \\ \hline
-Special requirements & Estimated wait time has to be calculated in less than five sconds                                                      \\ \hline
+Special requirements & Estimated waiting time has to be calculated in less than five sconds                                                      \\ \hline
 UMLs            & /                 \\ \hline
 \end{tabular}
-\caption{\textbf{Use case - Calculate estimated wait time}}
+\caption{\textbf{Use case - Calculate estimated waiting time}}
 \label{tab:my-table}
 \end{table}
 
@@ -389,7 +421,7 @@ UMLs           & /                       \\ \hline
 \hline
 Name                 & \textbf{Store registration}                        \\ \hline
 Actors               & \textbf{System manager, store manager}             \\ \hline
-Goals                & \textbf{G6}                                        \\ \hline
+Goals                & \textbf{G2}                                        \\ \hline
 Entry condition      & /                                                  \\ \hline
 Event flow &
   \begin{tabular}[c]{@{}l@{}}Store manager requests putting the store in the system's database \\ System manager reqests additional data about the store \\ Store manager sends the data to the system manager \\ System manager inserts the store into the system's database \\ System manager sends the confirmation and the login \\credentials to the store manager\end{tabular} \\ \hline

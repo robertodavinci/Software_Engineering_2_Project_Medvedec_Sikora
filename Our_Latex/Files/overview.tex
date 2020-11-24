@@ -19,6 +19,26 @@ API is used to do all the work in between. Calculating waiting time, slot reserv
 
 Another part of the app is the store manager version, which requires login to connect a store manager to the specific store, so he/she can manage the influx of people to and from the store.
 
+\newpage
+\paragraph{Class diagram}\hfill \break
+
+The UML class diagram below provides a high-level sketch of the system that is going to be developed. All of the users, functions, and other subjects in the system are provided with some level of detail. It is important to take into account that not all of the possible actions and informations about the subjects are provided in the diagram and that this is just an overview of the most important ones.
+Some of the most important things to notice are:
+\begin{itemize}
+\item Every store has a name, location, and a set of tickets that is provided for its customers. Every store has at least one store manager that can scan a ticket and control the influx of people going in and out of the store. Every store manager is provided with his/her own login details for the system. Stores are also provided with their own timetables that are used in the "Book a visit" feature.
+\item Each ticket has a store and a number, making it unique. Tickets can be either virtual or physical, and both of those have a QR code to go along with the number. Tickets can have three possible states: "waiting", for tickets that are in queue, "in store" for tickets that were scanned and are not yet expired, and "expired" for tickets that are expired. 
+\item Users are divided to physical users and virtual users. Virtual users can only be provided with a virtual ticket, and only they can use "Book a visit" feature. Physical users are provided with physical tickets and are not able to use "Book a visit feature".
+\end{itemize}
+
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{Images/ClassDiagramMain.png}
+\caption{\label{fig:statechart1}\textbf{Class diagram}}
+\end{figure}
+\newpage
+\newpage
+
 \paragraph{State chart diagrams}\hfill \break
 
 \hspace{\parindent}Core functioning of the system is shown in this chapter using the state chart diagrams. These are simplified representations of the process that is happening during the most basic functionalities of the application and the system. Following state charts will be further explained and deepened through other diagrams in the following chapters. 
@@ -28,6 +48,8 @@ Another part of the app is the store manager version, which requires login to co
 \includegraphics[width=\textwidth]{Images/StatechartDiagram1_RequestAndScan.png}
 \caption{\label{fig:statechart1}\textbf{State chart diagram 1 - Request and scan}}
 \end{figure}
+\newpage
+
 
 \hspace{\parindent}\textbf{State chart 1} represents the most basic function of the CLup app - requesting and using a ticket. This diagram can be used both for the ticket request through the app or for taking the ticket from the printing machine. The mechanism works the same way. Once the ticket has been acquired by the customer, and the ticket's number gets called (either by the store manager or by the screen that shows the queue), the user must enter the store and present the ticket on his way in. The ticket will then be scanned and either accepted or denied by the store manager. After successfully entering the store, the customer can do the shopping and exit the store normally.  
 
@@ -36,8 +58,10 @@ Another part of the app is the store manager version, which requires login to co
 \includegraphics[width=\textwidth]{Images/StatechartDiagram2_BookAVisit}
 \caption{\label{fig:statechart2}\textbf{State chart diagram 2 - Book a visit}}
 \end{figure}
+\newpage
 
-\hspace{\parindent}\textbf{State chart 2} shows the usage of the app's second feature - "Book a visit". This can be done exclusively through the app and it's not possible to do it in person. Booking a visit is aimed for people who have less time to wait in the line and is projected to be the most effective way of stopping any additional virus spreading, as there will be less people in front of the stores at the same time. The customer must select a store and an available timeslot through the app. The customer will then be presented with a ticket that can be used only during that timeslot and in that specific store which customer has specified. Customers also have an option of entering estimated duration of shopping as well as allowing the app to access location services of the device, which would then be used to calculate the full duration of the customer's visit to the store. This would not only help the customers, but also help regulate the traffic in stores. However, these two options are optional as they slow down the reservation process and acquire confidential information from the customers, which we want to avoid doing if not needed.
+
+\hspace{\parindent}\textbf{State chart 2} shows the usage of the app's second feature - "Book a visit". This can be done exclusively through the app and it's not possible to do in person. Booking a visit is aimed for people who have less time to wait in the line and is projected to be the most effective way of stopping any additional virus spreading, as there will be less people in front of the stores at the same time. The customer must select a store and an available timeslot through the app. The customer will then be presented with a ticket that can be used only during that timeslot and in that specific store which customer has specified. Customers also have an option of entering estimated duration of shopping as well as allowing the app to access location services of the device, which would then be used to calculate the full duration of the customer's visit to the store. This would not only help the customers, but also help regulate the traffic in stores. However, these two options are optional as they slow down the reservation process and acquire confidential information from the customers, which we want to avoid doing if not needed.
 
 \newpage
 
@@ -47,7 +71,7 @@ Another part of the app is the store manager version, which requires login to co
 \caption{\label{fig:statechart3}\textbf{State chart diagram 3 - Store manager}}
 \end{figure}
 
-\hspace{\parindent}\textbf{State chart 3} describes the flow of the whole application usage for the store manager. Since every store manager is connected to a specific store that is in the system, it must provide the login details, which will be given during the store registration process. This diagram also shows how the store manager can control the influx of people to the store, simply by scanning their tickets' QR code when a customer enters and pressing the button when a customer exists. That way the store manager can keep the store under capacity at all times and make sure that no customer with an invalid ticket can enter the store.
+\hspace{\parindent}\textbf{State chart 3} describes the flow of the whole application usage for the store manager. Since every store manager is connected to a specific store that is in the system, it must provide the login details, which will be given during the store registration process. This diagram also shows how the store manager can control the influx of people to the store, simply by scanning their tickets' QR code when a customer tries to enter and pressing the button when a customer exits the store. That way the store manager can keep the store under capacity at all times and make sure that no customer with an invalid ticket can enter the store.
 
 \newpage
 
@@ -107,9 +131,9 @@ To support "book a visit" function, the system must maintain a schedule that is 
 \hspace{\parindent} There are four different categories of users in this application:
 
 \subsubsection{User}
-\hspace{\parindent}A person using the CLup application, not necessarily registered. The person can request to be queued in line, get an approximation of the wait time, and get updates on the estimated time left until their number is called. Furthermore, the person can request to inspect and reserve available time slots for the "book a visit" feature during which they can also indicate the estimated visit duration. 
+\hspace{\parindent}A person using the CLup application, not necessarily registered. The person can request to be queued in line, get an approximation of the waiting time, and get updates on the estimated time left until their number is called. Furthermore, the person can request to inspect and reserve available time slots for the "book a visit" feature during which they can also indicate the estimated visit duration. 
 \subsubsection{Store manager}
-\hspace{\parindent}An employee of the grocery store that uses the CLup application in charge of monitoring and controlling the influx of customers of the store. The person scans the QR code of incoming customers to prevent irregularities and registers their exit time (specific information about which customer exactly is exiting is not necessary as this feature is used only for calculating wait time statistics). The person uses a different UI from an ordinary user and their credentials are added to the system directly through installation. 
+\hspace{\parindent}An employee of the grocery store that uses the CLup application in charge of monitoring and controlling the influx of customers of the store. The person scans the QR code of incoming customers to prevent irregularities and registers their exit time (specific information about which customer exactly is exiting is not necessary as this feature is used only for calculating waiting time statistics). The person uses a different UI from an ordinary user and their credentials are added to the system directly through installation. 
 \subsubsection{System manager}
 \hspace{\parindent}An employee of CLup in charge of maintaining and updating the application. The person has administrative authority in the application setup during the system's installation. 
 \subsubsection{Physical customer}
@@ -123,12 +147,16 @@ To support "book a visit" function, the system must maintain a schedule that is 
 
 \begin{itemize}
 	\item[\textbf{D1}]The store manager's username must be unique. 
-	\item[\textbf{D2}]The registered store manager's password secure. 
-	\item[\textbf{D3}]The user's device provides accurate GPS information. 
-	\item[\textbf{D4}]The system can use data about the registered user to calculate estimated wait time.
-	\item[\textbf{D5}]The system can correctly save data about enter and exit times of anonymous customers, to calculate estimated wait time. 
-	\item[\textbf{D6}]The system can correctly save data to and pull data from available time slot schema in the database.
-	\item[\textbf{D7}]The user always has internet connection for the device.
+	\item[\textbf{D2}]The store manager can observe both entering and exiting customers.
+	\item[\textbf{D3}]The registered store manager's password must be secure.
+	\item[\textbf{D4}]The registered store is a physical store, not a virtual store.
+	\item[\textbf{D5}]The screen of the user's phone is scannable and not too damaged.
+	\item[\textbf{D6}]The user's device provides accurate GPS information. 
+	\item[\textbf{D7}]The system can use data about the user to calculate estimated waiting time.
+	\item[\textbf{D8}]The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time. 
+	\item[\textbf{D9}]The system can correctly save and pull data from available timeslot tables in the database.
+	\item[\textbf{D10}]The system can update timeslot tables at any moment while available. 
+	\item[\textbf{D11}]The user has internet connection for the device at all times.
 \end{itemize}
 
 \subsubsection{Dependencies and constraints}
@@ -142,6 +170,6 @@ To support "book a visit" function, the system must maintain a schedule that is 
 
 \textbf{User permissions and agreements}
 
-\hspace{\parindent}The user will have to agree to the general terms and conditions agreement as part of the installation process to use the application. Also, other permissions such as the access to the devices location for more precise wait time estimation can be allowed, if the user wants to. Naturally, no user information will be used for commercial purposes. 
+\hspace{\parindent}The user will have to agree to the general terms and conditions agreement as part of the installation process to use the application. Also, other permissions such as the access to the devices location for more precise waiting time estimation can be allowed, if the user wants to. Naturally, no user information will be used for commercial purposes. 
 
 

@@ -1,22 +1,23 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces \textbf {Internal structure of the system}\relax }}{14}{figure.caption.6}%
-\contentsline {figure}{\numberline {2}{\ignorespaces \textbf {State chart diagram 1 - Request and scan}\relax }}{15}{figure.caption.8}%
-\contentsline {figure}{\numberline {3}{\ignorespaces \textbf {State chart diagram 2 - Book a visit}\relax }}{16}{figure.caption.9}%
-\contentsline {figure}{\numberline {4}{\ignorespaces \textbf {State chart diagram 3 - Store manager}\relax }}{17}{figure.caption.10}%
-\contentsline {figure}{\numberline {5}{\ignorespaces \textbf {Logo concept}\relax }}{24}{figure.caption.11}%
-\contentsline {figure}{\numberline {6}{\ignorespaces \textbf {App icon concept}\relax }}{24}{figure.caption.11}%
-\contentsline {figure}{\numberline {7}{\ignorespaces \textbf {Android app 1}\relax }}{24}{figure.caption.12}%
-\contentsline {figure}{\numberline {8}{\ignorespaces \textbf {iOS app 1}\relax }}{24}{figure.caption.12}%
-\contentsline {figure}{\numberline {9}{\ignorespaces \textbf {Android app 2}\relax }}{25}{figure.caption.13}%
-\contentsline {figure}{\numberline {10}{\ignorespaces \textbf {iOS app 2}\relax }}{25}{figure.caption.13}%
-\contentsline {figure}{\numberline {11}{\ignorespaces \textbf {Android app 3}\relax }}{25}{figure.caption.14}%
-\contentsline {figure}{\numberline {12}{\ignorespaces \textbf {iOS app 3}\relax }}{25}{figure.caption.14}%
-\contentsline {figure}{\numberline {13}{\ignorespaces \textbf {Android app 3}\relax }}{26}{figure.caption.15}%
-\contentsline {figure}{\numberline {14}{\ignorespaces \textbf {iOS app 3}\relax }}{26}{figure.caption.15}%
-\contentsline {figure}{\numberline {15}{\ignorespaces \textbf {Use case diagram 1 - Book a visit}\relax }}{34}{figure.caption.26}%
-\contentsline {figure}{\numberline {16}{\ignorespaces \textbf {Use case diagram 2 - Retrieve a number}\relax }}{35}{figure.caption.27}%
-\contentsline {figure}{\numberline {17}{\ignorespaces \textbf {Sequence diagram 1 - Retrieve a number}\relax }}{36}{figure.caption.28}%
-\contentsline {figure}{\numberline {18}{\ignorespaces \textbf {Sequence diagram 2 - Store manager login}\relax }}{37}{figure.caption.29}%
-\contentsline {figure}{\numberline {19}{\ignorespaces \textbf {Sequence diagram 3 - Store registration}\relax }}{38}{figure.caption.30}%
-\contentsline {figure}{\numberline {20}{\ignorespaces \textbf {Sequence diagram 4 - Book a visit}\relax }}{39}{figure.caption.31}%
-\contentsline {figure}{\numberline {21}{\ignorespaces \textbf {Alloy graph 1}\relax }}{47}{figure.caption.32}%
-\contentsline {figure}{\numberline {22}{\ignorespaces \textbf {Alloy graph 2}\relax }}{48}{figure.caption.33}%
+\contentsline {figure}{\numberline {1}{\ignorespaces \textbf {Internal structure of the system}\relax }}{15}{figure.caption.6}%
+\contentsline {figure}{\numberline {2}{\ignorespaces \textbf {Class diagram}\relax }}{18}{figure.caption.8}%
+\contentsline {figure}{\numberline {3}{\ignorespaces \textbf {State chart diagram 1 - Request and scan}\relax }}{19}{figure.caption.10}%
+\contentsline {figure}{\numberline {4}{\ignorespaces \textbf {State chart diagram 2 - Book a visit}\relax }}{20}{figure.caption.11}%
+\contentsline {figure}{\numberline {5}{\ignorespaces \textbf {State chart diagram 3 - Store manager}\relax }}{21}{figure.caption.12}%
+\contentsline {figure}{\numberline {6}{\ignorespaces \textbf {Logo concept}\relax }}{28}{figure.caption.13}%
+\contentsline {figure}{\numberline {7}{\ignorespaces \textbf {App icon concept}\relax }}{28}{figure.caption.13}%
+\contentsline {figure}{\numberline {8}{\ignorespaces \textbf {Android app 1}\relax }}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {9}{\ignorespaces \textbf {iOS app 1}\relax }}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {10}{\ignorespaces \textbf {Android app 2}\relax }}{29}{figure.caption.15}%
+\contentsline {figure}{\numberline {11}{\ignorespaces \textbf {iOS app 2}\relax }}{29}{figure.caption.15}%
+\contentsline {figure}{\numberline {12}{\ignorespaces \textbf {Android app 3}\relax }}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {13}{\ignorespaces \textbf {iOS app 3}\relax }}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {14}{\ignorespaces \textbf {Android app 3}\relax }}{30}{figure.caption.17}%
+\contentsline {figure}{\numberline {15}{\ignorespaces \textbf {iOS app 3}\relax }}{30}{figure.caption.17}%
+\contentsline {figure}{\numberline {16}{\ignorespaces \textbf {Use case diagram 1 - Book a visit}\relax }}{39}{figure.caption.28}%
+\contentsline {figure}{\numberline {17}{\ignorespaces \textbf {Use case diagram 2 - Retrieve a number}\relax }}{40}{figure.caption.29}%
+\contentsline {figure}{\numberline {18}{\ignorespaces \textbf {Sequence diagram 1 - Retrieve a number}\relax }}{41}{figure.caption.30}%
+\contentsline {figure}{\numberline {19}{\ignorespaces \textbf {Sequence diagram 2 - Store manager login}\relax }}{42}{figure.caption.31}%
+\contentsline {figure}{\numberline {20}{\ignorespaces \textbf {Sequence diagram 3 - Store registration}\relax }}{43}{figure.caption.32}%
+\contentsline {figure}{\numberline {21}{\ignorespaces \textbf {Sequence diagram 4 - Book a visit}\relax }}{44}{figure.caption.33}%
+\contentsline {figure}{\numberline {22}{\ignorespaces \textbf {Alloy graph 1}\relax }}{52}{figure.caption.34}%
+\contentsline {figure}{\numberline {23}{\ignorespaces \textbf {Alloy graph 2}\relax }}{53}{figure.caption.35}%
