@@ -149,7 +149,7 @@ The following images show some basic concepts on how the app should look on both
 		\item [\textbf{D1}] The store manager's username must be unique. 
 		\item [\textbf{D2}] The store manager can observe both entering and exiting customers.
 		\item [\textbf{D3}] The store manager's password must be secure. 
-		\item [\textbf{D5}] The screen of the user's phone is scannable and not to damaged.
+		\item [\textbf{D5}] The screen of the user's phone is scannable and not too damaged.
 		\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
 		\item [\textbf{D11}] The user has internet connection for the device at all times.
 
@@ -173,7 +173,7 @@ The following images show some basic concepts on how the app should look on both
 		\item [\textbf{D8}] The system can correctly save data about enter and exit times of anonymous customers to calculate estimated waiting time.
 		\item [\textbf{D11}] The user has internet connection for the device at all times.
 	\end{enumerate}
-	\item [\textbf{G5}] Allow the user to "Book a visit" to the store.
+	\item [\textbf{G5}] Allow the user to "book a visit" to the store.
 	\begin{enumerate}
 			\item [\textbf{R15}] The user must be able to request to see all the available timeslots in that specific store.
 			\item [\textbf{R16}] The system must be able to provide the user with the list of all available timeslots upon the request.
@@ -199,7 +199,7 @@ The following images show some basic concepts on how the app should look on both
 \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Goal, {[}Gn{]}} & \cellcolor[HTML]{C0C0C0}\textbf{Requirements, {[}Rn{]}} & \cellcolor[HTML]{C0C0C0}\textbf{Domains, {[}Dn{]}} \\ \hline
  &   & \\
-G1.1 & R1, R2, R3, R4 & D4, D8, D11         \\ 
+G1.1 & R1, R2, R3 & D4, D8, D11         \\ 
 &   & \\ \hline
 &   & \\
 G1.2  & R4, R5 & D8         \\ 
@@ -235,7 +235,7 @@ Actors               & \textbf{User}                                            
 Goals                & \textbf{G5}                                                                                                         \\ \hline
 Entry condition      & \begin{tabular}[c]{@{}l@{}}User has the application installed \\ Desired store is in the CLup database\end{tabular} \\ \hline
 Event flow &
-  \begin{tabular}[c]{@{}l@{}}User opens the CLup application \\ User selects a store \\ User selects "Book a visit" \\ System sends user a list of available timeslots \\ User selects a specific timeslot \\ User inputs the estimated shopping time (optional) \\ User enables location services (optional) \\ If user has enabled location services \\ System calculates distance to the store \\ User receives estimated traveling time to the store \\ User receives a number and a QR code\end{tabular} \\ \hline
+  \begin{tabular}[c]{@{}l@{}}User opens the CLup application \\ User selects a store \\ User selects "book a visit" \\ System sends user a list of available timeslots \\ User selects a specific timeslot \\ User inputs the estimated shopping time (optional) \\ User enables location services (optional) \\ If user has enabled location services \\ System calculates distance to the store \\ User receives estimated traveling time to the store \\ User receives a number and a QR code\end{tabular} \\ \hline
 Exit condition       & Ticket request is successful                                                                                        \\ \hline
 Exception            & There are no available timeslots, user can search for a another store                                               \\ \hline
 Special requirements & \textbf{/}                                                                                                          \\ \hline
@@ -260,7 +260,7 @@ Event flow &
   \begin{tabular}[c]{@{}l@{}}User goes to the ticket machine and takes a ticket \\ User waits for his number \\ Store manager scans user's QR code \\ User enters the store\end{tabular} \\ \hline
 Exit condition & User exits the store                   \\ \hline
 Exception &
-  \begin{tabular}[c]{@{}l@{}}The ticket printer is not working, user waits for it to be fixed \\ The QR code cannnot be scanned due to damaged ticket, \\ user gets another ticket\end{tabular} \\ \hline
+  \begin{tabular}[c]{@{}l@{}}The ticket printer is not working, user waits for it to be fixed \\ The QR code cannot be scanned due to damaged ticket, \\ user gets another ticket\end{tabular} \\ \hline
 Special requirements &
   \begin{tabular}[c]{@{}l@{}} A new ticket gets printed in less \\ than  two seconds after the old ticket got taken\end{tabular} \\ \hline
 UMLs           & \textbf{\hyperref[fig:statechart1]{State chart}}     \\ \hline
@@ -282,7 +282,7 @@ Event flow &
   \begin{tabular}[c]{@{}l@{}}User opens the application \\ User selects a store \\ User selects "Get ticket" \\ User receives a number, a QR code, and an estimated waiting time \\ User waits for his number \\ User gets to the store \\ Store manager scans user's QR code \\ User enters the store\end{tabular} \\ \hline
 Exit condition       & User exits the store                                                                                                \\ \hline
 Exception            &  
-\begin{tabular}[c]{@{}l@{}} The QR code cannnot be scanned due to broken screen, \\ user gets physical ticket ticket                                \end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}} The QR code cannot be scanned due to broken screen, \\ user gets physical ticket ticket                                \end{tabular} \\ \hline
 Special requirements & 
 \begin{tabular}[c]{@{}l@{}}The ticket number has to be inserted in the queue immediately \\after its generation                                  \end{tabular}\\ \hline
 UMLs                 & \textbf{\hyperref[fig:sequence1]{Sequence}, \hyperref[fig:usecase2]{Use case}} \\ \hline
@@ -312,7 +312,7 @@ Event flow &
   \begin{tabular}[c]{@{}l@{}}Scan the user's QR code \\ If the QR code is valid \\ Let the user inside of the store \\ If the QR code is not valid \\ Send the user back to the virtual line\end{tabular} \\ \hline
 Exit condition       & End of working hours                                                           \\ \hline
 Exception            & 
-\begin{tabular}[c]{@{}l@{}}The QR code cannnot be scanned due to damaged ticket, \\user gets another ticket\end{tabular}
+\begin{tabular}[c]{@{}l@{}}The QR code cannot be scanned due to damaged ticket, \\user gets another ticket\end{tabular}
  \\ \hline
 Special requirements & \textbf{/}                                                                     \\ \hline
 UMLs                 & \textbf{\hyperref[fig:statechart3]{State chart}}
@@ -385,7 +385,7 @@ Entry condition & User requested a ticket or booked a visit  \\ \hline
 Event flow           & \begin{tabular}[c]{@{}l@{}}System calculates estimated waiting time \\ User receives estimated waiting time\end{tabular} \\ \hline
 Exit condition  & Estimated waiting time displayed on user's device \\ \hline
 Exception       & /                                              \\ \hline
-Special requirements & Estimated waiting time has to be calculated in less than five sconds                                                      \\ \hline
+Special requirements & Estimated waiting time has to be calculated in less than five seconds                                                      \\ \hline
 UMLs            & /                 \\ \hline
 \end{tabular}
 \caption{\textbf{Use case - Calculate estimated waiting time}}
@@ -424,7 +424,7 @@ Actors               & \textbf{System manager, store manager}             \\ \hl
 Goals                & \textbf{G2}                                        \\ \hline
 Entry condition      & /                                                  \\ \hline
 Event flow &
-  \begin{tabular}[c]{@{}l@{}}Store manager requests putting the store in the system's database \\ System manager reqests additional data about the store \\ Store manager sends the data to the system manager \\ System manager inserts the store into the system's database \\ System manager sends the confirmation and the login \\credentials to the store manager\end{tabular} \\ \hline
+  \begin{tabular}[c]{@{}l@{}}Store manager requests putting the store in the system's database \\ System manager requests additional data about the store \\ Store manager sends the data to the system manager \\ System manager inserts the store into the system's database \\ System manager sends the confirmation and the login \\credentials to the store manager\end{tabular} \\ \hline
 Exit condition       & Store manager has received his account credentials \\ \hline
 Exception &
   \begin{tabular}[c]{@{}l@{}}Store manager provides invalid information about the store,\\ store manager corrects invalid data \\ Store manager provides information about a store\\ inside the database, system rejects the input and\\ notifies the store manager\end{tabular} \\ \hline
@@ -495,7 +495,7 @@ UMLs                 & \textbf{\hyperref[fig:sequence3]{Sequence}}      \\ \hlin
 When user want to print a ticket virtually, the system has to provide it with an average waiting time within a couple of seconds. This is a piece of data that is going to be stored in the database of every store, and it should be updated at least every 30 minutes based on the current traffic and other available data, like day of the week and time of day.
 
 
-When calculating the distance from the user's current location to the desired store, the information should be available to the user in ten seconds at most. If the system is for any reason unable to calculate the distance it should display a message that it it unable to do it and continue to the next step.
+When calculating the distance from the user's current location to the desired store, the information should be available to the user in ten seconds at most. If the system is for any reason unable to calculate the distance it should display a message that it is unable to do it and continue to the next step.
 
 \newpage
 
@@ -515,13 +515,13 @@ The application will only work on iOS devices that support iOS 7.0 or above due 
 Device in use must have access to the internet connection during the ticket request. After it acquires the ticket, the internet connection is no longer required.
 \subsubsection{Privacy limitations}
 
-\hspace{\parindent} The application should not collect nor ask any personal information from the user. It should only request for access to publish push notifications, as well as location, but only if the user decides to use "Book a visit feature". No other data is to be collected at all. 
+\hspace{\parindent} The application should not collect nor ask any personal information from the user. It should only request for access to publish push notifications, as well as location, but only if the user decides to use "book a visit feature". No other data is to be collected at all. 
 
 \newpage
 
 \subsection{Software system attributes}
 \subsubsection{Reliability and availability}
-\hspace{\parindent}The system must be available at all times during the day. The only times that the system is allowed to be down, due to maintenance or any other reason, is during the night hours, while the stores are not working. In that time the use of application is nearly non-existent as only the "Book a visit" function is working, and the number of users using the function should be close to zero.
+\hspace{\parindent}The system must be available at all times during the day. The only times that the system is allowed to be down, due to maintenance or any other reason, is during the night hours, while the stores are not working. In that time the use of application is nearly non-existent as only the "book a visit" function is working, and the number of users using the function should be close to zero.
 
 In case the system has stopped working during the day, a notification has to be sent to every user that uses the application, and the queueing in stores should be taken over by the store manager until the system is back up.
 

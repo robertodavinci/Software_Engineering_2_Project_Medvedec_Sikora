@@ -17,7 +17,7 @@ Since there is no need for users to have accounts, their personal data is not pe
 
 API is used to do all the work in between. Calculating waiting time, slot reservation, scheduling, queue management, and calculating distance is done based on the request by the user and with using the data provided by the database. 
 
-Another part of the app is the store manager version, which requires login to connect a store manager to the specific store, so he/she can manage the influx of people to and from the store.
+The app also features the store manager part, which requires a login to connect the store manager to the specific store, so he/she can manage the influx of people to and from the store.
 
 \newpage
 \paragraph{Class diagram}\hfill \break
@@ -25,9 +25,9 @@ Another part of the app is the store manager version, which requires login to co
 The UML class diagram below provides a high-level sketch of the system that is going to be developed. All of the users, functions, and other subjects in the system are provided with some level of detail. It is important to take into account that not all of the possible actions and informations about the subjects are provided in the diagram and that this is just an overview of the most important ones.
 Some of the most important things to notice are:
 \begin{itemize}
-\item Every store has a name, location, and a set of tickets that is provided for its customers. Every store has at least one store manager that can scan a ticket and control the influx of people going in and out of the store. Every store manager is provided with his/her own login details for the system. Stores are also provided with their own timetables that are used in the "Book a visit" feature.
+\item Every store has a name, location, and a set of tickets that is provided for its customers. Every store has at least one store manager that can scan a ticket and control the influx of people going in and out of the store. Every store manager is provided with his/her own login details for the system. Stores are also provided with their own timetables that are used in the "book a visit" feature.
 \item Each ticket has a store and a number, making it unique. Tickets can be either virtual or physical, and both of those have a QR code to go along with the number. Tickets can have three possible states: "waiting", for tickets that are in queue, "in store" for tickets that were scanned and are not yet expired, and "expired" for tickets that are expired. 
-\item Users are divided to physical users and virtual users. Virtual users can only be provided with a virtual ticket, and only they can use "Book a visit" feature. Physical users are provided with physical tickets and are not able to use "Book a visit feature".
+\item Users are divided to physical users and virtual users. Virtual users can only be provided with a virtual ticket, and only they can use "book a visit" feature. Physical users are provided with physical tickets and are not able to use "book a visit" feature.
 \end{itemize}
 
 
@@ -61,7 +61,7 @@ Some of the most important things to notice are:
 \newpage
 
 
-\hspace{\parindent}\textbf{State chart 2} shows the usage of the app's second feature - "Book a visit". This can be done exclusively through the app and it's not possible to do in person. Booking a visit is aimed for people who have less time to wait in the line and is projected to be the most effective way of stopping any additional virus spreading, as there will be less people in front of the stores at the same time. The customer must select a store and an available timeslot through the app. The customer will then be presented with a ticket that can be used only during that timeslot and in that specific store which customer has specified. Customers also have an option of entering estimated duration of shopping as well as allowing the app to access location services of the device, which would then be used to calculate the full duration of the customer's visit to the store. This would not only help the customers, but also help regulate the traffic in stores. However, these two options are optional as they slow down the reservation process and acquire confidential information from the customers, which we want to avoid doing if not needed.
+\hspace{\parindent}\textbf{State chart 2} shows the usage of the app's second feature - "book a visit". This can be done exclusively through the app and it's not possible to do in person. Booking a visit is aimed for people who have less time to wait in the line and is projected to be the most effective way of stopping any additional virus spreading, as there will be less people in front of the stores at the same time. The customer must select a store and an available timeslot through the app. The customer will then be presented with a ticket that can be used only during that timeslot and in that specific store which customer has specified. Customers also have an option of entering estimated duration of shopping as well as allowing the app to access location services of the device, which would then be used to calculate the full duration of the customer's visit to the store. This would not only help the customers, but also help regulate the traffic in stores. However, these two options are optional as they slow down the reservation process and acquire confidential information from the customers, which we want to avoid doing if not needed.
 
 \newpage
 
@@ -107,7 +107,7 @@ Now customers can either reserve their spot in advance and plan their quick shop
 \subsection{Product functions}
 \hspace{\parindent}Functions of the final product should provide easy and accessible use for everyone, regardless of their experience and knowledge regarding technology and smartphones. 
 
-These functions are mentioned on several places in the document, but their most thorough explanation can be found here.
+These functions are mentioned in several places in the document, but their most thorough explanation can be found here.
 
 \subsubsection{Generating a scannable QR code}
 
@@ -148,7 +148,7 @@ To support "book a visit" function, the system must maintain a schedule that is 
 \begin{itemize}
 	\item[\textbf{D1}]The store manager's username must be unique. 
 	\item[\textbf{D2}]The store manager can observe both entering and exiting customers.
-	\item[\textbf{D3}]The registered store manager's password must be secure.
+	\item[\textbf{D3}]The store manager's password must be secure.
 	\item[\textbf{D4}]The registered store is a physical store, not a virtual store.
 	\item[\textbf{D5}]The screen of the user's phone is scannable and not too damaged.
 	\item[\textbf{D6}]The user's device provides accurate GPS information. 
