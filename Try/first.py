@@ -11,7 +11,7 @@ with open('input.txt') as fp:
         if not Lines == "\n":
             falsePass = True
             split = Lines.split(" ")
-            for s in split:
+            for s in splitaa:
                 ssplit = s.split(":")
                 if not (ssplit[0] == "cid"):
                     #hasCid = True
