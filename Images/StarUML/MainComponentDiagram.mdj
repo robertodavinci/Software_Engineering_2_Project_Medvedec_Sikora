@@ -7942,7 +7942,7 @@
 											"top": 1022,
 											"width": 88.35205078125,
 											"height": 15,
-											"text": "ManageBOV"
+											"text": "ManageBAV"
 										},
 										{
 											"_type": "LabelView",
@@ -20751,7 +20751,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ManageBOV"
+					"name": "ManageBAV"
 				},
 				{
 					"_type": "UMLInterface",
@@ -21224,9 +21224,9 @@
 														"$ref": "AAAAAAF2tfZQCPnVm28="
 													},
 													"font": "Arial;13;0",
-													"left": 134,
+													"left": 134.97900390625,
 													"top": 5,
-													"width": 63.54345703125,
+													"width": 62.6611328125,
 													"height": 13,
 													"text": "BookAVisit"
 												},
@@ -21239,7 +21239,7 @@
 													"font": "Arial;13;1",
 													"left": 69,
 													"top": 5,
-													"width": 60,
+													"width": 60.97900390625,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -25293,9 +25293,9 @@
 														"$ref": "AAAAAAF2uILrZwDzeFg="
 													},
 													"font": "Arial;13;0",
-													"left": 101,
+													"left": 101.07177734375,
 													"top": 725,
-													"width": 82,
+													"width": 79.78076171875,
 													"height": 13,
 													"text": "AdditionalInfo"
 												},
@@ -25308,7 +25308,7 @@
 													"font": "Arial;13;1",
 													"left": 77,
 													"top": 725,
-													"width": 19,
+													"width": 19.07177734375,
 													"height": 13,
 													"text": "opt"
 												},
@@ -25394,9 +25394,9 @@
 														"$ref": "AAAAAAF2uIh4XwIRvHs="
 													},
 													"font": "Arial;13;0",
-													"left": 101,
+													"left": 101.07177734375,
 													"top": 877,
-													"width": 100,
+													"width": 105.7744140625,
 													"height": 13,
 													"text": "CalculateDistance"
 												},
@@ -25409,7 +25409,7 @@
 													"font": "Arial;13;1",
 													"left": 77,
 													"top": 877,
-													"width": 19,
+													"width": 19.07177734375,
 													"height": 13,
 													"text": "opt"
 												},
@@ -27304,9 +27304,9 @@
 														"$ref": "AAAAAAF2uSAV9A78fZs="
 													},
 													"font": "Arial;13;0",
-													"left": 75,
+													"left": 75.97900390625,
 													"top": 10,
-													"width": 99,
+													"width": 104.314453125,
 													"height": 13,
 													"text": "RetrieveANumber"
 												},
@@ -27319,7 +27319,7 @@
 													"font": "Arial;13;1",
 													"left": 10,
 													"top": 10,
-													"width": 60,
+													"width": 60.97900390625,
 													"height": 13,
 													"text": "interaction"
 												}
