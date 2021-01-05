@@ -1,0 +1,220 @@
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+R1&The user must be able to select a specific store in which they want to do the shopping.\\
+\hline
+R2&The user must be able to request a number and a ticket.\\
+\hline
+R3&The user must be able to receive a number and a ticket. \\
+\hline
+R4&The user must be able to physically retrieve a ticket from the printer containing a number and a QR code.\\
+\hline
+R5&A new ticket must be printed whenever a user physically retrieves the old one.\\
+\hline
+R6&The store manager must be able to scan a QR code.\\
+\hline
+R7&The store manager must be informed by the application if a user tries to enter the store out of order.\\
+\hline
+R8&The store manager must be informed when the capacity of the store is full.\\
+\hline
+R9&The store manager must be able to alert the system whenever a customer exits the store.\\
+\hline
+R10&The store manager must be provided with the login credentials upon request to the system administrator.\\
+\hline
+R11&Allow the user to receive a precise estimation of waiting time when retrieving a number.\\
+\hline
+R12&The system must calculate an estimation of the waiting time based on data.\\
+\hline
+R13&The system must be able to update its estimated waiting time in real time.\\
+\hline
+R14&The system must be able to send an update to the user in specific intervals regarding estimated waiting time until it’s their turn.\\
+\hline
+R15&The user must be able to request to see all the available timeslots in that specific store.\\
+\hline
+R16&The system must be able to provide the user with the list of all available timeslots upon the request.\\
+\hline
+R17&The user must be able to select a specific timeslot.\\
+\hline
+R18&The user must be able to receive a confirmation of his timeslot reservation, along with a number and a ticket.\\
+\hline
+R19&Allow the user to be at most five minutes late for his reservation before cancelling his ticket.\\
+\hline
+R20&The user must be able to specify expected duration of his visit to the store.\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Allow the user to retrieve a number through the application.\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Requirements: R1, R2, R3\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}&Components:\\
+
+\cellcolor[HTML]{EC8D78}G1.1&\quad\quad AndroidApp/IPhoneApp\\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	Director \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	StoreSelectionManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	RequestManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	TicketService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	QueueService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	ScheduleService\\ 
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	DBService and DB \\
+\hline
+\end{tabular}
+\end{center}
+
+
+ 
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Allow the user to retrieve a number physically from the printer.\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Requirements: R4, R5 \\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}&Components:\\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	Director \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	StoreSelectionManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	RequestManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	TicketService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	QueueService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	ScheduleService\\ 
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	DBService and DB \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Allow the store manager to control the entrance of customers via QR code scanning.\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Requirements: R6, R7, R8, R9, R10\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}&Components:\\
+
+\cellcolor[HTML]{EC8D78}G2&\quad\quad AndroidApp/IPhoneApp\\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	Director \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	LoginManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	StoreSelectionManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	StoreManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad EnterService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad ExitService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	RequestManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	DBService and DB \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Allow the user to receive precise calculations of the waiting time.\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Requirements: R11, R12\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}&Components:\\
+
+\cellcolor[HTML]{EC8D78}G3&\quad\quad AndroidApp/IPhoneApp\\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	Director \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	RequestManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	DistanceService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	GoogleMapsService\\ 
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	DBService and DB \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Allow the user to be updated on the store waiting time situation.\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Requirements: R13, R14\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}&Components:\\
+
+\cellcolor[HTML]{EC8D78}G4&\quad\quad AndroidApp/IPhoneApp\\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	Director \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	RequestManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	GoogleMapsService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	DBService and DB \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Allow the user to "book a visit" to the store.\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}& \cellcolor[HTML]{F4D5CE}Requirements: R15, R16, R17, R18, R19, R20\\
+\cline{2-2}
+\cellcolor[HTML]{EC8D78}&Components:\\
+
+\cellcolor[HTML]{EC8D78}G5&\quad\quad AndroidApp/IPhoneApp\\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	Director \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	StoreSelectionManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	RequestManager \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	BookAVisitService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	TicketService \\
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	QueueService\\ 
+
+\cellcolor[HTML]{EC8D78}&\quad\quad\quad\quad	ScheduleService\\ 
+
+\cellcolor[HTML]{EC8D78}&\quad\quad	DBService and DB \\
+\hline
+\end{tabular}
+\end{center}
