@@ -57,33 +57,9 @@ In this section, a more thorough and detailed view of all of the main components
 \end{itemize}
 
 \newpage
-
-\textbf{Interface list:}
-\begin{itemize}
-\item AppManager (Android and iPhone) 
-\item ManageRequests 
-\item CalcuateTime 
-\item StoreSelector 
-\item ManageLogin 
-\item ManageStore 
-\item TicketChecker 
-\item ManageData 
-\item StoreManagerLogin 
-\item DatabaseManager 
-\item ManageEntrance 
-\item ManageExit 
-\item ManageTickets 
-\item ManageBAV 
-\item CalculateDistance 
-\item ManageQueue 
-\item ManageSchedule 
-\item GoogleMaps 
-\end{itemize}
-
-\newpage
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.65\textwidth]{Images/ComponentDiagram1v3Vert}
+\includegraphics[width=0.65\textwidth]{Images/ComponentDiagram1v4Vert}
 \caption{\label{fig:componentdiagram1}\textbf{Main component diagram}}
 \end{figure}
 
@@ -277,7 +253,7 @@ This section gives a thorough overview of the systems interfaces, divided by com
 \item CalculateTime 
 \item ManageRequests 
 \item StoreSelector 
-\item ManageStore 
+\item InfluxManager 
 \item ManageLogin 
 \item ManageData 
 \item DatabaseManager 
@@ -302,7 +278,7 @@ The systems' main global component, ApplicationServer, is divided into smaller c
 
 For the Director to propagate users requests, the RequestManager offers methods contained in the ManageRequests interface. Other than that, the two components also communicate to calculate wait time through the CalculateTime interface. 
 
-Furthermore, the Director component communicates with the LoginManager and StoreSelectionManager components. For the LoginManager, it does so through a ManageLogin interface, which enables the propagation of the credential check used when a store manager accesses the application. For the StoreSelectionManager, it uses methods offered by the StoreSelectionManager in the ManageStore interface, so that the store manager can manage information about his store.  \newline
+Furthermore, the Director component communicates with the LoginManager and StoreSelectionManager components. For the LoginManager, it does so through a ManageLogin interface, which enables the propagation of the credential check used when a store manager accesses the application. For the StoreSelectionManager, it uses methods offered by the StoreSelector interface. \newline
 
 To enable users to choose between the stores using the CLup system, the StoreSelectionManager also offers the StoreSelection interface, used by the LoginManager for store managers and the RequestManager for store customers. 
 
@@ -315,6 +291,11 @@ To physically manage store entrances and exits, the CLup system also offers a sp
 
 Lastly, in order to persist the applications data, the DatabaseManager interface is used. The interface enables the Application server, or more precisely, the DBService component, to invoke methods to write data to, or read data from, the database. The DBService itself, offers the ManageData interface to all other subcomponents of the ApplicationServer to connect them to the database. 
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{Images/InterfaceDiagram}
+\caption{\label{fig:interfacediagram}\textbf{Interface diagram}}
+\end{figure}
 
 \newpage
 \subsection{Selected architectural styles and patterns}
