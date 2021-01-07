@@ -1,8 +1,8 @@
 \subsection{Overview}
 
-In this section the whole process and the idea of the system implementation is explained in detail. The whole integration and implementation process of the already presented subcomponents of the system,  together with the testing plan is a very detailed and specific process. In order to get the best possible picture of the recommended implementation process, both diagrams and detailed explanations are used. \newline
+\hspace{\parindent}In this section the whole process and the idea of the system implementation is explained in detail. The whole integration and implementation process of the already presented subcomponents of the system,  together with the testing plan is a very detailed and specific process. In order to get the best possible picture of the recommended implementation process, both diagrams and detailed explanations are used. \newline
 
-As mentioned in the \hyperlink{section.2}{second section}, the system is divided into three layers: Presentation layer, Application layer, and Data layer. Each of these layers holds one major subcomponent; Phone app, Application server, and Data base, respectively.  \newline
+As mentioned in the \hyperlink{section.2}{second section}, the system is divided into three layers: Presentation layer, Application layer, and Data layer. Each of these layers holds one major subcomponent; Phone app, Application server, and Database, respectively.  \newline
 
  
 
@@ -10,7 +10,7 @@ These subcomponents feature many different services, managers, and interfaces, w
 
  
 
-Google Maps API and Data base are external and somewhat outside of our control, which also has to be taken into account during the integration and testing process.  
+Google Maps API and Database are external and somewhat outside of our control, which also has to be taken into account during the integration and testing process.  
 
 
 \subsubsection{Importance of features}
@@ -42,7 +42,7 @@ Store selection & High & Low  \\
 \newpage
 
 \subsection{Implementation}
-The desired implementation process technique for this project is top-down. Since all of the major system components are already known and the application has a clear cut of what it should exactly do, we believe this is the way to go. By using this design technique, most of the biggest components are implemented and defined at the beginning and we work our way down to the smaller ones. This gives us a clear picture of the whole system and strong points to lean on when implementing smaller parts. The opposite technique bottom-up, which is used to build the system from the ground up, defining smaller components and then searching for the bigger picture, would be slower to implement and unnecessary since the main goals and components are clearly defined. \newline
+\hspace{\parindent}The desired implementation process technique for this project is top-down. Since all major system components are already known and the application has a clear cut of what it should exactly do, we believe this is the way to go. By using this design technique, most of the biggest components are implemented and defined at the beginning and we work our way down to the smaller ones. This gives us a clear picture of the whole system and strong points to lean on when implementing smaller parts. The opposite technique bottom-up, which is used to build the system from the ground up, defining smaller components and then searching for the bigger picture, would be slower to implement and unnecessary since the main goals and components are clearly defined. \newline
 
 The order of developing and integrating major components of the system should be the following:
 
@@ -50,11 +50,11 @@ First we develop a basic app and set up a database – this way we already have 
 
 The setup of the application server and application logic follows. 
 
-Director, Request manager, and DB service should follow, creating a set of the most important subcomponents that allow the app to communicate with the data base. Smaller parts of these components, like Queue manager, Ticket manager, and others are to be implemented at the end. 
+Director, RequestManager, and DB service should follow, creating a set of the most important subcomponents that allow the app to communicate with Database. Smaller parts of these components, like QueueManager, TicketManager, and others are to be implemented at the end. 
 
-At the end, other smaller components, like Store selection manager, Store manager and Login manager are implemented, to extend the functionalities of the application. After that other components of the Request manager come in line. 
+At the end, other smaller components, like StoreSelectionManager, StoreManager and LoginManager are implemented, to extend the functionalities of the application. After that other components of the RequestManager come in line. 
 
-Finally, Google Maps service can be implemented at the end since it is used the least and is the least important part of the system.  \newline
+Finally, GoogleMapsService can be implemented at the end since it is used the least and is the least important part of the system.  \newline
 
  
 
@@ -62,10 +62,10 @@ This design flow will allow for easier testing of the major components. Testing 
 
 \subsection{Integration strategy}
 
-Using the following components, the strategy regarding integration order explained in the previous section is showcased. Each component is implemented one-by-one or in a groups of up to three subcomponents. This policy allows fastest development, while still maintaining a coherent global picture in mind. 
+\hspace{\parindent}Using the following components, the strategy regarding integration order explained in the previous section is showcased. Each component is implemented one-by-one or in groups of up to three subcomponents. This policy allows fastest development, while still maintaining a coherent global picture in mind. 
 
  
-After the Phone app and Data base have been set up, the Application server is being implemented. 
+After the PhoneApp and Database have been set up, the ApplicationServer is being implemented. 
 
  
 \begin{figure}[!h]
@@ -75,7 +75,7 @@ After the Phone app and Data base have been set up, the Application server is be
 \end{figure}
  
 
-Director and DB service come first – ensuring that the connection and communication is properly implemented between the App and the Data base. Setting the director up is the most important step – with proper basic implementation, all of the other components and services are going to be to easily implemented and connected to the director.  
+Director and DBService come first – ensuring that the connection and communication is properly implemented between PhoneApp and Database. Setting the director up is the most important step – with proper basic implementation, all of the other components and services are going to be to easily implemented and connected to Director.  
 
  
 
@@ -87,7 +87,7 @@ Director and DB service come first – ensuring that the connection and communic
 
  
 
-Request manager is the third subcomponent to be implemented, being connected both to Director and DB Service. Most of the requests will go through Request manager before heading to the DB Service, rather than going directly through the director, because some additional computation has to be done via the services located in the Request manager. 
+Request manager is the third subcomponent to be implemented, being connected both to Director and DBService. Most of the requests will go through RequestManager before heading to the DBService, rather than going directly through Director, because some additional computation has to be done via the services located in the RequestManager. 
 
  
 \begin{figure}[!h]
@@ -108,7 +108,7 @@ Managers regarding store selection and store manager login are implemented. This
 \end{figure}
  
 
-Lastly, all of the services in Store manager and Request manager are implemented. Now the ticket and queue handling are available, controlling influx of people to the store, and other functionalities like "Book a visit" are available. After all of these services have been set up and properly interconnected, Google Maps service can be implemented to finalize the system.
+Lastly, all of the services in StoreManager and RequestManager are implemented. Now the ticket and queue handling are available, controlling influx of people to the store, and other functionalities like "Book a visit" are available. After all of these services have been set up and properly interconnected, GoogleMapsService can be implemented to finalize the system.
 
 \begin{figure}[!h]
 \centering
@@ -118,13 +118,13 @@ Lastly, all of the services in Store manager and Request manager are implemented
 
 \subsection{Testing}
 
-Designing a good test plan is crucial in application development. It reduces uncertainty upon release, excessive work for error resolving and bug fixing, and as a result, lowers the overall costs of the process. This paramount task usually consists of UI testing, functional testing, and security testing. \newline
+\hspace{\parindent}Designing a good test plan is crucial in application development. It reduces uncertainty upon release, excessive work for error resolving and bug fixing, and as a result, lowers the overall costs of the process. This paramount task usually consists of UI testing, functional testing, and security testing. \newline
 
 Today, there is a lot of available tools for quick and thorough UI testing through the use of automated scripts. Besides that, an application should also be manually tested by few real users. In our case, it is best to have friends and family do that, since they cover almost all demographics. 
 
 To check whether all functional requirements are met, we use functional testing. The best method to carry out functional testing is the black box technique.  It is a method of software testing that examines the functionality without peering into the applications internal structures. \newline
 
-The last important part of the testing plan is security testing. To test whether the system is vulnerable, we use white box testing. Do carry out white box testing, we check the software code for internal security holes, and for broken or poorly structured loops or paths. 
+The last important part of the testing plan is security testing. To test whether the system is vulnerable, we use white box testing. To carry out white box testing, we check the software code for internal security holes, and for broken or poorly structured loops or paths. 
 
 After going through with our testing plan, the application is ready for fine tuning and its first release. \newline
 

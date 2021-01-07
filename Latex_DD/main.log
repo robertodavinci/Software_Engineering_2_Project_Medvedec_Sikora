@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 JAN 2021 00:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 JAN 2021 22:16
 entering extended mode
 **./main.tex
 (main.tex
@@ -860,6 +860,9 @@ LaTeX Warning: Label `tab:comp1' multiply defined.
 
 LaTeX Warning: Label `tab:comp1' multiply defined.
 
+
+LaTeX Warning: Label `tab:my-table' multiply defined.
+
 )
 \openout1 = `main.aux'.
 
@@ -1015,21 +1018,6 @@ This may cause the page layout to be inconsistent, however.
 
 ]
 [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--70
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
@@ -1049,17 +1037,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 77--78
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
 )
-Underfull \hbox (badness 10000) in paragraph at lines 79--71
+Underfull \hbox (badness 10000) in paragraph at lines 83--71
 
  []
 
 [10] (Files/architecture.tex
+Overfull \hbox (3.3789pt too wide) in paragraph at lines 4--5
+ \T1/ppl/m/n/12 Ar-chi-tec-tural de-sign of the ap-pli-ca-tion is based on the 
+widespread three-layer model
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
-<Images/DetailedArchitecturev2.png, id=298, 1405.25pt x 903.375pt>
+<Images/DetailedArchitecturev2.png, id=302, 1405.25pt x 903.375pt>
 File: Images/DetailedArchitecturev2.png Graphic file (type png)
 <use Images/DetailedArchitecturev2.png>
 Package pdftex.def Info: Images/DetailedArchitecturev2.png  used on input line 
@@ -1091,14 +1095,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--37
  []
 
 [13]
-<Images/ComponentDiagram1v4Vert.png, id=314, 1205.50375pt x 2480.26625pt>
+<Images/ComponentDiagram1v4Vert.png, id=318, 1205.50375pt x 2480.26625pt>
 File: Images/ComponentDiagram1v4Vert.png Graphic file (type png)
 <use Images/ComponentDiagram1v4Vert.png>
 Package pdftex.def Info: Images/ComponentDiagram1v4Vert.png  used on input line
  62.
 (pdftex.def)             Requested size: 295.90588pt x 608.787pt.
  [14 <./Images/ComponentDiagram1v4Vert.png>] [15] [16]
-<Images/DeploymentDiagram1v2.png, id=328, 2069.7325pt x 825.0825pt>
+<Images/DeploymentDiagram1v2.png, id=332, 2069.7325pt x 825.0825pt>
 File: Images/DeploymentDiagram1v2.png Graphic file (type png)
 <use Images/DeploymentDiagram1v2.png>
 Package pdftex.def Info: Images/DeploymentDiagram1v2.png  used on input line 93
@@ -1125,7 +1129,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--122
  []
 
 [18]
-<Images/SequenceDiagramComponents1_BookAVisit.png, id=339, 1949.2825pt x 1427.3
+<Images/SequenceDiagramComponents1_BookAVisit.png, id=343, 1949.2825pt x 1427.3
 325pt>
 File: Images/SequenceDiagramComponents1_BookAVisit.png Graphic file (type png)
 <use Images/SequenceDiagramComponents1_BookAVisit.png>
@@ -1133,7 +1137,7 @@ Package pdftex.def Info: Images/SequenceDiagramComponents1_BookAVisit.png  used
  on input line 136.
 (pdftex.def)             Requested size: 455.24411pt x 333.33237pt.
  [19 <./Images/SequenceDiagramComponents1_BookAVisit.png>] [20]
-<Images/SequenceDiagramComponents2_RetrieveANumber.png, id=350, 1752.5475pt x 1
+<Images/SequenceDiagramComponents2_RetrieveANumber.png, id=354, 1752.5475pt x 1
 240.635pt>
 File: Images/SequenceDiagramComponents2_RetrieveANumber.png Graphic file (type 
 png)
@@ -1142,7 +1146,7 @@ Package pdftex.def Info: Images/SequenceDiagramComponents2_RetrieveANumber.png
  used on input line 176.
 (pdftex.def)             Requested size: 455.24411pt x 322.25461pt.
  [21 <./Images/SequenceDiagramComponents2_RetrieveANumber.png>]
-<Images/SequenceDiagramComponents3_StoreManager.png, id=356, 1659.19875pt x 154
+<Images/SequenceDiagramComponents3_StoreManager.png, id=360, 1659.19875pt x 154
 6.77875pt>
 File: Images/SequenceDiagramComponents3_StoreManager.png Graphic file (type png
 )
@@ -1161,9 +1165,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 274--275
  []
 
 
-Overfull \hbox (42.79887pt too wide) in paragraph at lines 277--278
-\T1/ppl/m/n/12 core com-po-nents Di-rec-tor, Login-Man-ager, Store-S-e-lec-tion
--Man-ager, DB-Ser-vice, GoogleMapsSer-
+Overfull \hbox (3.18703pt too wide) in paragraph at lines 277--278
+\T1/ppl/m/n/12 core com-po-nents Di-rec-tor, GoogleMapsSer-vice, Login-Man-ager
+, Store-S-e-lec-tion-Man-ager,
  []
 
 
@@ -1177,8 +1181,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 285--286
  []
 
 
+Overfull \hbox (9.3903pt too wide) in paragraph at lines 287--288
+\T1/ppl/m/n/12 dif-fer-ent sub-com-po-nents. Tick-et-Ser-vice and Queue-Ser-vic
+e en-cap-su-late func-tions needed
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 287--288
 
+ []
+
+
+Overfull \hbox (1.91513pt too wide) in paragraph at lines 289--290
+\T1/ppl/m/n/12 Store-M-an-ager com-po-nent. The com-po-nent com-mu-ni-cates wit
+h Login-Man-ager through
  []
 
 
@@ -1187,13 +1203,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 289--290
  []
 
 [25]
-<Images/InterfaceDiagram.png, id=375, 1697.34125pt x 1215.54124pt>
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
+
+ []
+
+<Images/InterfaceDiagram.png, id=379, 1697.34125pt x 1215.54124pt>
 File: Images/InterfaceDiagram.png Graphic file (type png)
 <use Images/InterfaceDiagram.png>
 Package pdftex.def Info: Images/InterfaceDiagram.png  used on input line 296.
 (pdftex.def)             Requested size: 455.24411pt x 326.0119pt.
- [26 <./Images/InterfaceDiagram.png>]
-<Images/ThreeLayers.png, id=381, 1003.75pt x 602.25pt>
+[26 <./Images/InterfaceDiagram.png>]
+<Images/ThreeLayers.png, id=385, 1003.75pt x 602.25pt>
 File: Images/ThreeLayers.png Graphic file (type png)
 <use Images/ThreeLayers.png>
 Package pdftex.def Info: Images/ThreeLayers.png  used on input line 305.
@@ -1208,7 +1228,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 313--314
 
  []
 
-<Images/MVC.png, id=382, 1405.25pt x 903.375pt>
+<Images/MVC.png, id=386, 1405.25pt x 903.375pt>
 File: Images/MVC.png Graphic file (type png)
 <use Images/MVC.png>
 Package pdftex.def Info: Images/MVC.png  used on input line 319.
@@ -1269,24 +1289,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--17
 [30
 
 ]
-<Images/App/Android_AppIcon.png, id=401, 385.44pt x 791.95876pt>
+<Images/App/Android_AppIcon.png, id=405, 385.44pt x 791.95876pt>
 File: Images/App/Android_AppIcon.png Graphic file (type png)
 <use Images/App/Android_AppIcon.png>
 Package pdftex.def Info: Images/App/Android_AppIcon.png  used on input line 29.
 
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/iPhone_AppIcon.png, id=402, 385.44pt x 791.95876pt>
+<Images/App/iPhone_AppIcon.png, id=406, 385.44pt x 791.95876pt>
 File: Images/App/iPhone_AppIcon.png Graphic file (type png)
 <use Images/App/iPhone_AppIcon.png>
 Package pdftex.def Info: Images/App/iPhone_AppIcon.png  used on input line 34.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_HomeScreenv2.png, id=403, 385.44pt x 791.95876pt>
+<Images/App/Android_HomeScreenv2.png, id=407, 385.44pt x 791.95876pt>
 File: Images/App/Android_HomeScreenv2.png Graphic file (type png)
 <use Images/App/Android_HomeScreenv2.png>
 Package pdftex.def Info: Images/App/Android_HomeScreenv2.png  used on input lin
 e 45.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/iPhone_HomeScreenv2.png, id=404, 385.44pt x 791.95876pt>
+<Images/App/iPhone_HomeScreenv2.png, id=408, 385.44pt x 791.95876pt>
 File: Images/App/iPhone_HomeScreenv2.png Graphic file (type png)
 <use Images/App/iPhone_HomeScreenv2.png>
 Package pdftex.def Info: Images/App/iPhone_HomeScreenv2.png  used on input line
@@ -1294,25 +1314,25 @@ Package pdftex.def Info: Images/App/iPhone_HomeScreenv2.png  used on input line
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
  [31 <./Images/App/Android_AppIcon.png> <./Images/App/iPhone_AppIcon.png> <./Im
 ages/App/Android_HomeScreenv2.png> <./Images/App/iPhone_HomeScreenv2.png>]
-<Images/App/Android_MainScreenv3.png, id=414, 385.44pt x 791.95876pt>
+<Images/App/Android_MainScreenv3.png, id=418, 385.44pt x 791.95876pt>
 File: Images/App/Android_MainScreenv3.png Graphic file (type png)
 <use Images/App/Android_MainScreenv3.png>
 Package pdftex.def Info: Images/App/Android_MainScreenv3.png  used on input lin
 e 65.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_StoreSelection.png, id=415, 385.44pt x 791.95876pt>
+<Images/App/Android_StoreSelection.png, id=419, 385.44pt x 791.95876pt>
 File: Images/App/Android_StoreSelection.png Graphic file (type png)
 <use Images/App/Android_StoreSelection.png>
 Package pdftex.def Info: Images/App/Android_StoreSelection.png  used on input l
 ine 70.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_LoginManager.png, id=416, 385.44pt x 791.95876pt>
+<Images/App/Android_LoginManager.png, id=420, 385.44pt x 791.95876pt>
 File: Images/App/Android_LoginManager.png Graphic file (type png)
 <use Images/App/Android_LoginManager.png>
 Package pdftex.def Info: Images/App/Android_LoginManager.png  used on input lin
 e 81.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_RequestTicket.png, id=417, 385.44pt x 791.95876pt>
+<Images/App/Android_RequestTicket.png, id=421, 385.44pt x 791.95876pt>
 File: Images/App/Android_RequestTicket.png Graphic file (type png)
 <use Images/App/Android_RequestTicket.png>
 Package pdftex.def Info: Images/App/Android_RequestTicket.png  used on input li
@@ -1322,32 +1342,32 @@ ne 86.
 [32 <./Images/App/Android_MainScreenv3.png> <./Images/App/Android_StoreSelectio
 n.png> <./Images/App/Android_LoginManager.png> <./Images/App/Android_RequestTic
 ket.png>]
-<Images/App/Android_BookAVisit.png, id=426, 385.44pt x 791.95876pt>
+<Images/App/Android_BookAVisit.png, id=430, 385.44pt x 791.95876pt>
 File: Images/App/Android_BookAVisit.png Graphic file (type png)
 <use Images/App/Android_BookAVisit.png>
 Package pdftex.def Info: Images/App/Android_BookAVisit.png  used on input line 
 98.
 (pdftex.def)             Requested size: 295.90588pt x 607.98541pt.
  [33 <./Images/App/Android_BookAVisit.png>]
-<Images/App/Android_AdditionalInfoYesLoc.png, id=432, 385.44pt x 791.95876pt>
+<Images/App/Android_AdditionalInfoYesLoc.png, id=436, 385.44pt x 791.95876pt>
 File: Images/App/Android_AdditionalInfoYesLoc.png Graphic file (type png)
 <use Images/App/Android_AdditionalInfoYesLoc.png>
 Package pdftex.def Info: Images/App/Android_AdditionalInfoYesLoc.png  used on i
 nput line 111.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_AdditionalInfoNoLoc.png, id=433, 385.44pt x 791.95876pt>
+<Images/App/Android_AdditionalInfoNoLoc.png, id=437, 385.44pt x 791.95876pt>
 File: Images/App/Android_AdditionalInfoNoLoc.png Graphic file (type png)
 <use Images/App/Android_AdditionalInfoNoLoc.png>
 Package pdftex.def Info: Images/App/Android_AdditionalInfoNoLoc.png  used on in
 put line 116.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_ValidScan.png, id=434, 385.44pt x 791.95876pt>
+<Images/App/Android_ValidScan.png, id=438, 385.44pt x 791.95876pt>
 File: Images/App/Android_ValidScan.png Graphic file (type png)
 <use Images/App/Android_ValidScan.png>
 Package pdftex.def Info: Images/App/Android_ValidScan.png  used on input line 1
 27.
 (pdftex.def)             Requested size: 118.36055pt x 243.1845pt.
-<Images/App/Android_InvalidScan.png, id=435, 385.44pt x 791.95876pt>
+<Images/App/Android_InvalidScan.png, id=439, 385.44pt x 791.95876pt>
 File: Images/App/Android_InvalidScan.png Graphic file (type png)
 <use Images/App/Android_InvalidScan.png>
 Package pdftex.def Info: Images/App/Android_InvalidScan.png  used on input line
@@ -1406,33 +1426,42 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--58
  []
 
 [39]
-<Images/IntegrationDiagram1.png, id=469, 1136.245pt x 322.20375pt>
+Overfull \hbox (1.74673pt too wide) in paragraph at lines 65--66
+ \T1/ppl/m/n/12 Us-ing the fol-low-ing com-po-nents, the strat-egy re-gard-ing 
+in-te-gra-tion or-der ex-plained
+ []
+
+<Images/IntegrationDiagram1.png, id=473, 1136.245pt x 322.20375pt>
 File: Images/IntegrationDiagram1.png Graphic file (type png)
 <use Images/IntegrationDiagram1.png>
 Package pdftex.def Info: Images/IntegrationDiagram1.png  used on input line 73.
 
 (pdftex.def)             Requested size: 455.24411pt x 129.09554pt.
-<Images/IntegrationDiagram2.png, id=470, 1015.795pt x 513.92pt>
+<Images/IntegrationDiagram2.png, id=474, 1015.795pt x 513.92pt>
 File: Images/IntegrationDiagram2.png Graphic file (type png)
 <use Images/IntegrationDiagram2.png>
 Package pdftex.def Info: Images/IntegrationDiagram2.png  used on input line 84.
 
 (pdftex.def)             Requested size: 455.24411pt x 230.32085pt.
-<Images/IntegrationDiagram3.png, id=471, 1015.795pt x 513.92pt>
+<Images/IntegrationDiagram3.png, id=475, 1015.795pt x 513.92pt>
 File: Images/IntegrationDiagram3.png Graphic file (type png)
 <use Images/IntegrationDiagram3.png>
 Package pdftex.def Info: Images/IntegrationDiagram3.png  used on input line 95.
 
 (pdftex.def)             Requested size: 455.24411pt x 230.32085pt.
- [40 <./Images/IntegrationDiagram1.png> <./Images/IntegrationDiagram2.png>]
-<Images/IntegrationDiagram4.png, id=478, 1082.0425pt x 593.21625pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[40 <./Images/IntegrationDiagram1.png> <./Images/IntegrationDiagram2.png>]
+<Images/IntegrationDiagram4.png, id=482, 1082.0425pt x 593.21625pt>
 File: Images/IntegrationDiagram4.png Graphic file (type png)
 <use Images/IntegrationDiagram4.png>
 Package pdftex.def Info: Images/IntegrationDiagram4.png  used on input line 106
 .
 (pdftex.def)             Requested size: 455.24411pt x 249.5836pt.
+
 [41 <./Images/IntegrationDiagram3.png> <./Images/IntegrationDiagram4.png>]
-<Images/IntegrationDiagram5.png, id=485, 1082.0425pt x 593.21625pt>
+<Images/IntegrationDiagram5.png, id=489, 1082.0425pt x 593.21625pt>
 File: Images/IntegrationDiagram5.png Graphic file (type png)
 <use Images/IntegrationDiagram5.png>
 Package pdftex.def Info: Images/IntegrationDiagram5.png  used on input line 115
@@ -1467,21 +1496,21 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 22808 strings out of 479799
- 432326 string characters out of 2869722
- 707643 words of memory out of 3000000
- 39152 multiletter control sequences out of 15000+200000
+ 22811 strings out of 479799
+ 432372 string characters out of 2869722
+ 707707 words of memory out of 3000000
+ 39153 multiletter control sequences out of 15000+200000
  555902 words of font info for 75 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 93i,20n,100p,1445b,655s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 93i,20n,100p,1443b,655s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/medve/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C
 :/Users/medve/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Use
 rs/medve/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Use
 rs/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/
 Users/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (44 pages, 2542263 bytes).
+Output written on main.pdf (44 pages, 2543808 bytes).
 PDF statistics:
- 541 PDF objects out of 1000 (max. 8388607)
- 111 named destinations out of 1000 (max. 500000)
+ 545 PDF objects out of 1000 (max. 8388607)
+ 113 named destinations out of 1000 (max. 500000)
  433 words of extra memory for PDF output out of 10000 (max. 10000000)
 

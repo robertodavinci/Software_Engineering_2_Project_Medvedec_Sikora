@@ -1,7 +1,7 @@
 \subsection{Purpose}
 \hspace{\parindent}This document provides a detailed view of the architecture and the user interface design of the CLup system. Building on the RASD document, it gives a more refined technical and functional description of the system, explaining it on a much lower level. 
 
-To provide the full description of the system, UML diagrams will be used since they are the de facto industry standard. While actual implementation is not part of the document, it outlines the presumed implementation, integration, and test plan, to help the software development team in the realization of the application.
+To provide the full description of the system, UML diagrams will be used since they are the de facto industry standard. While the actual implementation is not part of the document, it outlines the presumed implementation, integration, and test plan, to help the software development team in the realization of the application.
 
 The purpose of the document is primarily to guide software developers, but it can also provide useful information to end users and investors.  
 
@@ -14,7 +14,7 @@ Faced with a worldwide pandemic of the COVID-19 virus countries across the world
 
 This project aims to help with, and resolve the issues surrounding grocery shopping. As we all know, grocery shopping is an essential activity which involves close contact inside the store. Since the COVID-19 virus spreads mainly through airborne particles, this activity plays a key role in its mitigation. To reduce crowding inside the stores, supermarkets need to restrict access to their store and keep the number of people inside below the optimal maximum capacity. 
 
-The main idea is to enable store customers to enter a queue from home (or wherever they find themselves) through simple interaction with the application. Besides that, the application will give customers the option to "book a visit" to the grocery store. This feature will allow them to view available time slots for their grocery shop, book the most convenient one, and optionally indicate an approximated duration of their visit to further improve the accuracy of the waiting time estimation of the system.  
+The main idea is to enable store customers to enter a queue from home (or wherever they find themselves) through simple interaction with the application. Besides that, the application will give customers the option to "Book a visit" to the grocery store. This feature will allow them to view available time slots for their grocery shop, book the most convenient one, and optionally indicate an approximated duration of their visit to further improve the accuracy of the waiting time estimation of the system.  
 
 \newpage
 
@@ -24,7 +24,9 @@ The main idea is to enable store customers to enter a queue from home (or wherev
 	\item \textbf{Application}: a computer (mobile) program that is designed for a particular purpose. 
 	\item \textbf{QR code}: a machine-readable code consisting of an array of black and white squares, typically used for storing URLs or other information for reading by the camera or a scanner. 
 	\item \textbf{Smartphone}: a mobile phone that performs many of the functions of a computer, typically having a touchscreen interface, internet access, and an operating system capable of running downloaded apps. 
-	\item \textbf{Google Maps}: a web mapping service developed by Google, used both as a standalone app and as a integrated mapping solution in most of the apps.
+	\item \textbf{Google Maps}: a web mapping service developed by Google, used both as a standalone app and as an integrated mapping solution in most of the apps.
+	\item \textbf{iOS}: Operating system developed by Apple, used by their portable devices like iPads and iPhones
+	\item \textbf{Android}: Most popular operating system for smartphones and tablets, developed by Google and partners
 \end{itemize}
 \subsubsection{Acronyms}
 \begin{itemize}
@@ -34,7 +36,7 @@ The main idea is to enable store customers to enter a queue from home (or wherev
 	\item \textbf{API}: Application programming interface, computing interface which defines interactions between multiple software intermediaries 
 	\item \textbf{WHO}: World Health Organization
 	\item \textbf{GUI}: Graphical user interface
-	\item \textbf{DB}: Data base
+	\item \textbf{DB}: Database
 	\item \textbf{REST}: Representational state transfer - software architectural style used in web services
 	\item \textbf{DAO}: Data access object
 	\item \textbf{JDBC}: Java Database Connectivity, API used in Java programming language
@@ -50,7 +52,8 @@ The main idea is to enable store customers to enter a queue from home (or wherev
 \subsection{Revision History}
 \begin{itemize}
 	\item \textbf{Version 1.0}: First .tex document created and added all together; 5th January 2021
-		\item \textbf{Version 1.0}: Added interface diagram and fixed some errors, minor tweaks; 6th January 2021
+	\item \textbf{Version 1.1}: Added interface diagram and fixed some errors, minor tweaks; 6th January 2021
+	\item \textbf{Version 1.2}: Fixed grammatical errors, added effort spent tables, minor tweaks; 7th January 2021
 \end{itemize}
 
 \newpage
@@ -58,7 +61,10 @@ The main idea is to enable store customers to enter a queue from home (or wherev
 \begin{itemize}
 	\item Specification document "R\&DD Assignment A.Y. 2020-2021.pdf"
 	\item Presentations Software Engineering 2, Politecnico di Milano
+	\item Star UML - Program used for creating diagrams
+	\item Fundementals of Software Engineering - C. Ghezzi, M. Jazayeri, D. Mandrioli
 \end{itemize}
+
 
 \newpage
 \subsection{Document Structure}
@@ -72,8 +78,6 @@ The third chapter revolves around the design of the user interface. To get a sen
 
 The fourth chapter lists the requirement traceability by mapping requirements, goals, and components. It ties the core ideas of the RASD and the DD document together, by coupling the goals and the requirements listed in the RASD, with specific implementation components defined in the DD. \newline 
 
-The fifth chapter contains our thoughts and guidelines for the actual implementation, integration, and testing of the system. It can serve as a development plan for the software engineers creating an application according to these documents. The chapter identifies the order in which the subcomponents are to be implemented, and in which points in time should each one of them be integrated. In the end, it provides a thorough overview of the test plan of the system as a whole. \newline
+The fifth chapter contains our thoughts and guidelines for the actual implementation, integration, and testing of the system. It can serve as a development plan for the software engineers creating an application according to these documents. The chapter identifies the order in which the subcomponents are to be implemented, and at which points in time each one of them should be integrated. In the end, it provides a thorough overview of the test plan of the system as a whole. \newline
 
 The sixth part provides information about the number of hours each group member has spent working on each part of this document. \newline
-
-The seventh part of the document contains a list of references such as the tools used to create the content of this design document. \newline
