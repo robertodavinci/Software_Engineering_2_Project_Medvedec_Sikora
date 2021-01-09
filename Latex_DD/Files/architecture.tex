@@ -3,7 +3,7 @@
 \label{sec:overview}
 \hspace{\parindent}Architectural design of the application is based on the widespread three-layer model that is used in most applications. Those three layers are presentation layer, also known as frontend, application layer, also known as middleware, and data layer, also known as backend. Every one of those three layers does its own part of the job and communicates with other two layers, directly or indirectly, to transfer necessary data and present needed information to the user. 
 
-This software design pattern is also very similar to model-view-controller or MVC, which is gathering information and presenting it to the user differently based on their needs. 
+This software design pattern is also very similar to MVC (Model-view-controller), which is gathering information and presenting it to the user differently based on their needs. 
 
 This architecture is a typical client-server implementation where server holds the data, and the client is accessing it through requests. 
 
@@ -26,7 +26,7 @@ In the following illustration, the concept is being shown along with the directi
 
   
 
-Most of the additional variables, like estimated wait time and queueing is done within the data layer through the database. The data is calculated in real-time and stored directly into the database, so it is accessible to every client who requests it, with the application layer just being responsible for the data transfer. Since there are no user accounts in the application, all sent data is independent and there are no private variables for certain users (other than store managers of different stores). This improves security and privacy since no personal or vulnerable data is stored within the database. Nearly every piece of information is available to everyone, which improves speed and simplicity of the whole system due to not having to check user information by using ID tokens or some other technique. 
+Most of the additional variables, like estimated wait time and queueing are done within the data layer through the database. The data is calculated in real-time and stored directly into the database, so it is accessible to every client who requests it, with the application layer just being responsible for the data transfer. Since there are no user accounts in the application, all sent data is independent and there are no private variables for certain users (other than store managers of different stores). This improves security and privacy since no personal or vulnerable data is stored within the database. Nearly every piece of information is available to everyone, which improves speed and simplicity of the whole system due to not having to check user information by using ID tokens or some other technique. 
 
 \newpage 
 
@@ -72,11 +72,11 @@ Most of the additional variables, like estimated wait time and queueing is done 
 
 \item \textbf{LoginManager} is shown in the simplified form due to its simplicity, as only store managers of the stores will be using this component, since users do not have accounts and therefore do not need to login. It checks the input data username and password with the corresponding data in Database and is responsible for logging in a store manager into their store's account if the credentials are valid. It is then connected to the StoreManager via StoreManagerLogin interface. 
 
-\item \textbf{StoreSelectionManager} is also shown in simplified form since it only features a single information that is a certain store with its name and address. When the selected store's ID is found in Database it is transferred to the RequestManager which then handles its requests and retrieves data from Database based on the ID. Because of that, to emphasize the connection of those two components, another socket has been added which directly connects StoreSelectionManager to the RequestManager.  
+\item \textbf{StoreSelectionManager} is also shown in simplified form since it only features a single information that is a certain store with its name and address. When the selected store's ID is found in Database it is transferred to RequestManager which then handles its requests and retrieves data from Database based on the ID. Because of that, to emphasize the connection of those two components, another socket has been added which directly connects StoreSelectionManager to RequestManager.  
 
 \newpage
 
-\item \textbf{RequestManager} is the most complex component of the subsystem as it has five additional subcomponents. Two main functions of the application are "Request a ticket" and "Book a visit", which have their own respective services inside RequestManager. Depending on the request, QueueService and ScheduleService are activated, which then communicate with Database to send or gather additional information about the future or the current situation in the certain store (which is known via the StoreSelectionManager). If the "Book a visit" request is received, and location services are enables on the user's device, additional service called DistanceService is activated. It generates a request to the external component GoogleMapsService in order to calculate the distance from the user to the store and get the estimated time needed for the user to get there in order to arrive at a proper time in the schedule. Calculated data does not go to Database but rather goes directly back to the Director which then forwards the data to the user, since this information is based on current variables and is not something that can be reused by other users, so there is no need to put it inside the database.  
+\item \textbf{RequestManager} is the most complex component of the subsystem as it has five additional subcomponents. Two main functions of the application are "Request a ticket" and "Book a visit", which have their own respective services inside RequestManager. Depending on the request, QueueService and ScheduleService are activated, which then communicate with Database to send or gather additional information about the future or the current situation in the certain store (which is known via StoreSelectionManager). If a "Book a visit" request is received, and location services are enabled on the user's device, additional service called DistanceService is activated. It generates a request to the external component GoogleMapsService in order to calculate the distance from the user to the store and get the estimated time needed for the user to get there in order to arrive at a proper time in the schedule. Calculated data does not go to Database but rather goes directly back to Director which then forwards the data to the user, since this information is based on current variables and is not something that can be reused by other users, so there is no need to put it inside the database.  
 
 \item \textbf{StoreManager} is a component that is only used when a store manager of a certain store logs in to their account. From there, they can control the influx of people to the store, scanning and validating tickets as well as sending a signal to Database whenever a customer exits the store. It contains two services, EnterService and ExitService. EnterService concludes whether a scanned ticket is valid or not, and ExitService sends the signal to Database when a customer exits the store and also keeps track of the customer limit in a store. 
 
@@ -103,7 +103,7 @@ Most of the additional variables, like estimated wait time and queueing is done 
 
   
 
-\textbf{Data layer} consists of a single node which represents database server. This node is not directly connected to the presentation layer but can only communicate with the application layer.  
+\textbf{Data layer} consists of a single node which represents database server. This node is not directly connected to the presentation layer and can only communicate with the application layer.  
 
   
 
@@ -146,11 +146,11 @@ The diagram shows one of the basic functions of the app, which is booking a visi
 
   
 
-Every diagram including this one starts with the app opening and store selection. Store is selected by choosing a store from a list which contains store's name and address. This selection is forwarded through Director to the StoreSelectionManager, which then asks for the StoreID and details from the DBService. Every request that comes to the DBService is forwarded to Database which is not shown in these diagrams. After fetching the data from Database, DBService returns the StoreID which goes all the way back the same way to the PhoneApp.   
+Every diagram including this one starts with the app opening and store selection. Store is selected by choosing a store from a list which contains store's name and address. This selection is forwarded through Director to StoreSelectionManager, which then asks for the StoreID and details from the DBService. Every request that comes to the DBService is forwarded to Database which is not shown in these diagrams. After fetching the data from Database, DBService returns the StoreID which goes all the way back the same way to the PhoneApp.   
 
   
 
-The user then proceeds with using Book a visit feature. The feature is requested along with a StoreID all the way to DBService, using Director, BookAVisitService, and ScheduleService, with the latter two being a part of the RequestManager which then retrieves a schedule for that specific store with a list of available timeslots. User then receives the list and picks his timeslot, which starts the return to Database.  
+The user then proceeds with using Book a visit feature. The feature is requested along with a StoreID all the way to DBService, using Director, BookAVisitService, and ScheduleService, with the latter two being a part of RequestManager which then retrieves a schedule for that specific store with a list of available timeslots. User then receives the list and picks his timeslot, which starts the return to Database.  
 
   
 After DBService has gotten confirmation and a ticket from Database, it transfers the confirmation along with the QR code and a ticket back to the PhoneApp.  
@@ -269,14 +269,14 @@ This section gives a thorough overview of the systems interfaces, divided by com
 \item TicketChecker 
 \end{itemize}
 
-To begin with, the application on the users phone communicates with the system through AndroidAppManager and IPhoneAppManager interfaces, according to the type of the users OS. They enable communication between ApplicationServer, or more specifically, the Director component, and the smartphone application. Depending on the type of the user, the interface offers all methods for the interaction with the system. 
+To begin with, the application on the users phone communicates with the system through AndroidAppManager and IPhoneAppManager interfaces, according to the type of the users OS. They enable communication between ApplicationServer, or more specifically, Director component, and the smartphone application. Depending on the type of the user, the interface offers all methods for the interaction with the system. 
 
-For example, upon the push of a button in the UI, the application invokes RequestTicket method on the Director to propagate the request. Similar to that, an application of a store manager can invoke CheckTicket method on the Director, to propagate the specific request to ApplicationServer. \newline
+For example, upon the push of a button in the UI, the application invokes RequestTicket method on Director to propagate the request. Similar to that, an application of a store manager can invoke CheckTicket method on Director, to propagate the specific request to ApplicationServer. \newline
  
 
 The systems' main global component, ApplicationServer, is divided into smaller core components Director, GoogleMapsService, LoginManager, StoreSelectionManager, DBService, StoreManager and RequestManager. The communication between the core components is also done through interfaces. 
 
-For the Director to propagate users requests, RequestManager offers methods contained in ManageRequests interface. Other than that, the two components also communicate to calculate wait time through CalculateTime interface. 
+For Director to propagate users requests, RequestManager offers methods contained in ManageRequests interface. Other than that, the two components also communicate to calculate wait time through CalculateTime interface. 
 
 Furthermore, Director component communicates with LoginManager and StoreSelectionManager components. For LoginManager, it does so through a ManageLogin interface, which enables the propagation of the credential check used when a store manager accesses the application. For StoreSelectionManager, it uses methods offered by StoreSelector interface. \newline
 
@@ -284,7 +284,7 @@ To enable users to choose between the stores using the CLup system, StoreSelecti
 
 The calculation of the distance between the user and the store is done with the help of Google Maps. To implement that, GoogleMapsService offers a GoogleMaps interface to RequestManager. Upon gathering information, RequestManagers subcomponents BookAVisitService and DistanceService perform the distance calculation through CalculateDistance interface. \newline
 
-Depending on the type of the user request, RequestManager further branches into different subcomponents. TicketService and QueueService encapsulate functions needed to perform the get in a virtual line function, and BookAVisitService and ScheduleService serve to carry out the "Book a visit" function of the system. For communication between the Director and RequestManager, the former uses ManageTickets and ManageQueue interfaces, whereas the latter uses ManageBAV and ManageSchedule interfaces. \newline
+Depending on the type of the user request, RequestManager further branches into different subcomponents. TicketService and QueueService encapsulate functions needed to perform the get in a virtual line function, and BookAVisitService and ScheduleService serve to carry out the "Book a visit" function of the system. For communication between Director and RequestManager, the former uses ManageTickets and ManageQueue interfaces, whereas the latter uses ManageBAV and ManageSchedule interfaces. \newline
 
 To physically manage store entrances and exits, the CLup system also offers a specific interface for the store managers. The logic behind that interface is contained in StoreManager component. The component communicates with LoginManager through StoreManagerLogin interface, to execute logins of the store managers. This design choice improves upgradeability for future requests and different users. Furthermore, StoreManager component also communicates with DBService to persist data through ManageData interface. Before persisting, the data is handled by the subcomponents EnterService and ExitService through ManageEntrance and ManageExit interfaces. To connect the full circle of the system function, through TicketChecker interface, offered by RequestManager, StoreManager can control the influx of the customers. \newline
 
@@ -322,10 +322,10 @@ Basic software design practices such as modularity and the use interfaces will h
 
  
 
-We would also like to take advantage of the MVC(Model-View-Controller) global design pattern. The pattern is widespread in the software engineering community because of its scalability and simplicity, and provides a perfect base for our application. The Model component is the main component of the pattern in charge of the business logic. The View component controls the user interface, and the way in which information is represented. And the Controller component acts as a bridge between the Model and the View. It accepts data from, and creates instructions for the Model or the View. \newline
+We would also like to take advantage of the MVC (Model-view-controller) global design pattern. The pattern is widespread in the software engineering community because of its scalability and simplicity, and provides a perfect base for our application. The model component is the main component of the pattern in charge of the business logic. The view component controls the user interface, and the way in which information is represented. And the controller component acts as a bridge between the model and the view. It accepts data from, and creates instructions for the model or the view. \newline
 
 
-To persist data like store enter and exit times, the system must be able to communicate with a database. DAO(Data Access Object) design pattern acts as an interface and makes that possible. For example, if written in the Java language, JDBC API will be used as DAO. 
+To persist data like store enter and exit times, the system must be able to communicate with a database. DAO (Data Access Object) design pattern acts as an interface and makes that possible. For example, if written in the Java language, JDBC API will be used as DAO. 
 
  
 
@@ -333,7 +333,7 @@ Main communication protocol used in the system is HTTPS. It provides a simple, p
 
  
 
-In the end, the main software design patterns will be mentioned. Firstly, Observer/Listener behavioral pattern enables the system to subscribe to the updates of the client devices location and upon change execute new calculations. The pattern defines a one-to-many connection between objects and updates them automatically upon notification. And lastly, Bridge structural pattern is used in various places to decouple an abstraction from the implementation. In that way, components can be changed and substituted by new ones completely independently. Through aggregation and encapsulation the Bridge separates responsibilities into different classes. 
+In the end, the main software design patterns will be mentioned. Firstly, observer/listener behavioral pattern enables the system to subscribe to the updates of the client devices location and upon change execute new calculations. The pattern defines a one-to-many connection between objects and updates them automatically upon notification. And lastly, bridge structural pattern is used in various places to decouple an abstraction from the implementation. In that way, components can be changed and substituted by new ones completely independently. Through aggregation and encapsulation the bridge separates responsibilities into different classes. 
 \newpage
 \subsection{Other design decisions}
 \hspace{\parindent}The CLup system relies on two main third party components to function properly: Database and the GoogleMaps API. Since most popular database vendors nowadays offer very similar functionalities, the database choice is left to the development team. For the needs of the system, even a NoSQL database system, like Firebase, would work. Firebase is a platform for creating applications, both web and mobile. It was founded in 2011 and is now the primary database option for application development offered by Google. It offers a real-time database, simple interfaces, and high-level security, which makes it well suited for our needs. \newline

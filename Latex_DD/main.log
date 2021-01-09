@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 JAN 2021 22:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  9 JAN 2021 10:34
 entering extended mode
 **./main.tex
 (main.tex
@@ -1018,37 +1018,37 @@ This may cause the page layout to be inconsistent, however.
 
 ]
 [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--80
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 83--71
+Underfull \hbox (badness 10000) in paragraph at lines 84--71
 
  []
 
@@ -1244,6 +1244,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 325--326
 
 Underfull \hbox (badness 10000) in paragraph at lines 332--333
 
+ []
+
+
+Overfull \hbox (9.11475pt too wide) in paragraph at lines 336--337
+[]\T1/ppl/m/n/12 In the end, the main soft-ware de-sign pat-terns will be men-t
+ioned. Firstly, ob-server/lis-
  []
 
 [28 <./Images/MVC.png>]
@@ -1459,15 +1465,14 @@ File: Images/IntegrationDiagram4.png Graphic file (type png)
 Package pdftex.def Info: Images/IntegrationDiagram4.png  used on input line 106
 .
 (pdftex.def)             Requested size: 455.24411pt x 249.5836pt.
-
-[41 <./Images/IntegrationDiagram3.png> <./Images/IntegrationDiagram4.png>]
-<Images/IntegrationDiagram5.png, id=489, 1082.0425pt x 593.21625pt>
+<Images/IntegrationDiagram5.png, id=483, 1082.0425pt x 593.21625pt>
 File: Images/IntegrationDiagram5.png Graphic file (type png)
 <use Images/IntegrationDiagram5.png>
 Package pdftex.def Info: Images/IntegrationDiagram5.png  used on input line 115
 .
 (pdftex.def)             Requested size: 455.24411pt x 249.5836pt.
 
+[41 <./Images/IntegrationDiagram3.png> <./Images/IntegrationDiagram4.png>]
 [42 <./Images/IntegrationDiagram5.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 121--122
 
@@ -1508,7 +1513,7 @@ Here is how much of TeX's memory you used:
 rs/medve/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Use
 rs/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/
 Users/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (44 pages, 2543808 bytes).
+Output written on main.pdf (44 pages, 2543737 bytes).
 PDF statistics:
  545 PDF objects out of 1000 (max. 8388607)
  113 named destinations out of 1000 (max. 500000)

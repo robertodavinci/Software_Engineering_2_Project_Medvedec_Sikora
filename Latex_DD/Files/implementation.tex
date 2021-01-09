@@ -2,7 +2,7 @@
 
 \hspace{\parindent}In this section the whole process and the idea of the system implementation is explained in detail. The whole integration and implementation process of the already presented subcomponents of the system,  together with the testing plan is a very detailed and specific process. In order to get the best possible picture of the recommended implementation process, both diagrams and detailed explanations are used. \newline
 
-As mentioned in the \hyperlink{section.2}{second section}, the system is divided into three layers: Presentation layer, Application layer, and Data layer. Each of these layers holds one major subcomponent; Phone app, Application server, and Database, respectively.  \newline
+As mentioned in the \hyperlink{section.2}{second section}, the system is divided into three layers: presentation layer, application layer, and data layer. Each of these layers holds one major subcomponent; Phone app, Application server, and Database, respectively.  \newline
 
  
 
@@ -21,7 +21,7 @@ Google Maps API and Database are external and somewhat outside of our control, w
 \hline
 \textbf{Function }& \textbf{Level of importance} & \textbf{Implementation difficulty} \\
 \hline
-Log in & Users – Low; Stores - High & Low \\
+Login & Users – Low; Stores - High & Low \\
 \hline
 Requesting a ticket & High & Medium \\
 \hline
@@ -65,7 +65,7 @@ This design flow will allow for easier testing of the major components. Testing 
 \hspace{\parindent}Using the following components, the strategy regarding integration order explained in the previous section is showcased. Each component is implemented one-by-one or in groups of up to three subcomponents. This policy allows fastest development, while still maintaining a coherent global picture in mind. 
 
  
-After the PhoneApp and Database have been set up, the ApplicationServer is being implemented. 
+After PhoneApp and Database have been set up, the ApplicationServer is being implemented. 
 
  
 \begin{figure}[!h]
@@ -87,7 +87,7 @@ Director and DBService come first – ensuring that the connection and communica
 
  
 
-Request manager is the third subcomponent to be implemented, being connected both to Director and DBService. Most of the requests will go through RequestManager before heading to the DBService, rather than going directly through Director, because some additional computation has to be done via the services located in the RequestManager. 
+Request manager is the third subcomponent to be implemented, being connected both to Director and DBService. Most of the requests will go through RequestManager before heading to DBService, rather than going directly through Director, because some additional computation has to be done via the services located in RequestManager. 
 
  
 \begin{figure}[!h]
