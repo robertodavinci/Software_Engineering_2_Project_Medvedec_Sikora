@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "191193392620",
+    "firebase_url": "https://clupprojectdatabse.firebaseio.com",
+    "project_id": "clupprojectdatabse",
+    "storage_bucket": "clupprojectdatabse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191193392620:android:99e7fb60d5d1af0612ccc9",
+        "android_client_info": {
+          "package_name": "com.example.clup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191193392620-vm40152a4d4g8tarj71mpbeva6d3sife.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpqYG5dSqH73E-wuf2IzIBeIhgRK6-QFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191193392620-vm40152a4d4g8tarj71mpbeva6d3sife.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
