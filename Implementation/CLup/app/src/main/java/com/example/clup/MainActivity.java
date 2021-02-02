@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class LoginController extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editEmail, editPassword;
 
@@ -46,7 +46,7 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
         editEmail = (EditText) findViewById(R.id.editEmailAddress);
         editPassword = (EditText) findViewById(R.id.editPassword);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
-
+        
         loginButton = (Button) findViewById(R.id.button);
         loginButton.setOnClickListener(this);
 
@@ -119,13 +119,13 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.isEmailVerified()){
-                        startActivity(new Intent(LoginController.this, UserProfile.class));
+                        startActivity(new Intent(MainActivity.this, UserProfile.class));
                     } else{
                         user.sendEmailVerification();
-                        Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
                     }
                 } else{
-                    Toast.makeText(LoginController.this, "Failed to log in!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Failed to log in!", Toast.LENGTH_LONG).show();
                 }
             }
         });

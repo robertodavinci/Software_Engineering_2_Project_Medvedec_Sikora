@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.clup"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     //implementation 'com.google.android.gms:play-services-vision:11.8.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
 }
