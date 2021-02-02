@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginController extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editEmail, editPassword;
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.registerLink:
-                startActivity(new Intent(this, RegisterScreen.class));
+                startActivity(new Intent(this, RegisterController.class));
                 break;
             case R.id.button:
                 userLogin();
                 break;
             case R.id.forgottenPassword:
-                startActivity((new Intent(this, ForgotPassword.class)));
+                startActivity((new Intent(this, ForgotPasswordController.class)));
                 break;
         }
     }
@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressBar.setVisibility(View.VISIBLE);
 
+        // Firebase has its own sign in function that automatically checks credentials - no direct checking in the database
+        // is required, therefore creating a safer environment for the user
+
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -98,14 +101,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.isEmailVerified()){
-                        startActivity(new Intent(MainActivity.this, UserProfile.class));
+                        startActivity(new Intent(LoginController.this, UserProfileController.class));
                     } else{
                         user.sendEmailVerification();
-                        Toast.makeText(MainActivity.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 } else{
-                    Toast.makeText(MainActivity.this, "Failed to log in!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginController.this, "Failed to log in!", Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.GONE);
                 }
             }

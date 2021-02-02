@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".RegisterController">
 
     <TextView
         android:id="@+id/banner"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
         android:gravity="center"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textSize="30sp"
         app:layout_constraintHorizontal_bias="0.498"
         android:layout_marginTop="50dp"
@@ -22,17 +22,30 @@
         app:layout_constraintVertical_bias="0.08" />
 
     <EditText
-        android:id="@+id/editEmailAddress"
+        android:id="@+id/editPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/e_mail"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
         android:layout_marginTop="25dp"
-        app:layout_constraintTop_toBottomOf="@+id/banner"/>
+        android:autofillHints="@string/name"/>
+
+    <EditText
+        android:id="@+id/editPersonSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/surname"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPersonName"
+        android:layout_marginTop="25dp"
+        android:autofillHints="Surname"/>
 
     <EditText
         android:id="@+id/editPassword"
@@ -46,42 +59,30 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="25dp"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editPersonSurname" />
+
+    <EditText
+        android:id="@+id/editEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/e_mail"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registerButton"
         android:layout_width="221dp"
         android:layout_height="72dp"
-        android:text="Login"
+        android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="25dp"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
-
-    <TextView
-        android:id="@+id/registerLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Register?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button"
-        app:layout_constraintVertical_bias="0.06" />
-
-    <TextView
-        android:id="@+id/forgottenPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="Forgot password?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintTop_toBottomOf="@+id/editEmailAddress" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -93,5 +94,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

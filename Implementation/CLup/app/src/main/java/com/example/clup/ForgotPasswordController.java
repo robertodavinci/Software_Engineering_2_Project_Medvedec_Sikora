@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
+public class ForgotPasswordController extends AppCompatActivity implements View.OnClickListener {
 
     private TextView banner;
     private EditText emailField;
@@ -52,7 +52,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.banner:
-                startActivity(new Intent(ForgotPassword.this, MainActivity.class));
+                startActivity(new Intent(ForgotPasswordController.this, LoginController.class));
                 break;
             case R.id.resetButton:
 
@@ -78,9 +78,9 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(ForgotPassword.this, "Check your email!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasswordController.this, "Check your email!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(ForgotPassword.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasswordController.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }

@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.entity.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,9 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-public class UserProfile extends AppCompatActivity {
+public class UserProfileController extends AppCompatActivity {
 
     private TextView nameField, surnameField, emailField;
     private Button logoutButton;
@@ -33,7 +31,7 @@ public class UserProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile3);
+        setContentView(R.layout.activity_user_profile);
 
         nameField = (TextView) findViewById(R.id.nameField);
         surnameField = (TextView) findViewById(R.id.surnameField);
@@ -44,7 +42,7 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(UserProfile.this, MainActivity.class));
+                startActivity(new Intent(UserProfileController.this, LoginController.class));
             }
         });
 
@@ -70,7 +68,7 @@ public class UserProfile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserProfile.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserProfileController.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
             }
         });
 

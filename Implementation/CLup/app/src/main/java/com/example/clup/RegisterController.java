@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegisterScreen extends AppCompatActivity implements View.OnClickListener{
+public class RegisterController extends AppCompatActivity implements View.OnClickListener{
 
     private TextView banner, registerButton;
     private EditText nameText, surnameText, passwordText, emailText;
@@ -31,7 +32,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_screen);
+        setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -53,7 +54,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.banner:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginController.class));
                 break;
             case R.id.registerButton:
                 registerUser();
@@ -99,6 +100,9 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         }
 
         progressBar.setVisibility(View.VISIBLE);
+
+        // Firebase has its own password and email function - no passwords are stored directly in the database
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -112,24 +116,24 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Toast.makeText(RegisterScreen.this, "User has been successfully registered!", Toast.LENGTH_LONG).show();
-                                        //redirect to user profile
+                                        Toast.makeText(RegisterController.this, "User has been successfully registered!", Toast.LENGTH_LONG).show();
+                                        // redirect to user profile, keep it in model
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                                         if(user.isEmailVerified()){
-                                            startActivity(new Intent(RegisterScreen.this, UserProfile.class));
+                                            startActivity(new Intent(RegisterController.this, UserProfileController.class));
                                         } else{
                                             user.sendEmailVerification();
-                                            Toast.makeText(RegisterScreen.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(RegisterController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
                                         }
                                     } else{
-                                        Toast.makeText(RegisterScreen.this, "User registration failed!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(RegisterController.this, "User registration failed!", Toast.LENGTH_LONG).show();
                                     }
                                     progressBar.setVisibility(View.GONE);
                                 }
                             });
                         } else{
-                            Toast.makeText(RegisterScreen.this, "User registration failed!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterController.this, "User registration failed!", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }

@@ -1,4 +1,4 @@
-package com.example.clup;
+package com.example.entity;
 
 public class User {
     public String name, surname, email;
