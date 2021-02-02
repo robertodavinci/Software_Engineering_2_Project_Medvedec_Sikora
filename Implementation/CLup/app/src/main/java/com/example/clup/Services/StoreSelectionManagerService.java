@@ -1,9 +1,11 @@
 package com.example.clup.Services;
 
+import com.example.clup.OnGetDataListener;
+
 import java.util.List;
 
 public interface StoreSelectionManagerService {
-    public List<String> getStoreCities();
-    public List<String> getStores(String city);
-    public List<String> getStoreAddresses(String city, String name);
+    public void getStoreCities(OnGetDataListener onGetDataListener);
+    public void getStores(String city, OnGetDataListener onGetDataListener);
+    public void getStoreAddresses(String city, String name, OnGetDataListener onGetDataListener);
 }

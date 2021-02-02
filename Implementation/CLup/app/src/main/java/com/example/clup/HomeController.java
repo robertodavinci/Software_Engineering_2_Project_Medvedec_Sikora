@@ -2,7 +2,9 @@ package com.example.clup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,14 +12,26 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.clup.Services.Implementation.DatabaseManager;
+import com.example.clup.Services.Implementation.Director;
+import com.google.firebase.database.DataSnapshot;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
- // implements AdapterView.OnItemSelectedListener
+import java.util.List;
+
+// implements AdapterView.OnItemSelectedListener
 public class HomeController extends AppCompatActivity{
 
         Spinner stores, cities;
         TextView textView;
         ListView listView;
+        String sCit = new String();
+        String sStore = new String();
+        ArrayList<String> filteredList = new ArrayList<>();
+        private Boolean citySet = false;
+        private Boolean storeSet = false;
 
         String[] country = { "","Esselunga", "Carrefour", "Eurospin", "Lidl", "Milan Store"};
 
@@ -30,45 +44,58 @@ public class HomeController extends AppCompatActivity{
             listView = findViewById(R.id.select_store);
             //textView = findViewById(R.id.text_v);
 
+
+
             ArrayList<String> cit = new ArrayList<>();
-            cit.add("");
-            cit.add("Tokyo");
-            cit.add("Milano");
-            cit.add("London");
-            cit.add("Komiza");
-            cit.add("Split");
-            cit.add("Barcelona");
-            cit.add("London");
-            cit.add("Beč");
-            cit.add("Firenca");
-            cit.add("Rijeka");
-            cit.add("Budva");
-            cit.add("Hvar");
+            cit.add("Split, Croatia");
+            cit.add("Milano, Italy");
 
             ArrayList<String> cit2 = new ArrayList<>();
             cit2.add("Budva");
             cit2.add("Hvar");
 
 
+
             cities.setAdapter(new ArrayAdapter<>(HomeController.this,
             android.R.layout.simple_spinner_dropdown_item, cit));
-            stores.setAdapter(new ArrayAdapter<>(HomeController.this,
-                    android.R.layout.simple_spinner_dropdown_item, country));
-            listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, cit));
+
 
             cities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) {
-                       // Toast.makeText(getApplicationContext(),
-                         //       "Select City", Toast.LENGTH_SHORT).show();
+                   /* if (position == 0) {
+                        citySet = false;
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Select a city", Toast.LENGTH_LONG);
+                        //toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }*/
+                   // else {
+                        citySet = true;
+                        System.out.println("AA");
+                        sCit = parent.getItemAtPosition(position).toString();
+                        //System.out.println(sCit) ;
+                        Director director = new Director();
+                        List<String> res = new ArrayList<String>();
+                        director.getStoreSelectionManager().getStores(sCit, new OnGetDataListener(){
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot i : dataSnapshot.getChildren()) {
+                                    res.add(i.getKey());
+                                }
+                                stores.setAdapter(new ArrayAdapter<>(HomeController.this,
+                                        android.R.layout.simple_spinner_dropdown_item, res));
+                            }
 
-                      //  textView.setText("");
-                    }
-                    else {
-                        String sCit = parent.getItemAtPosition(position).toString();
+                        });
+
+
+                        //listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, res));
+                        //filteredList = (ArrayList<String>) director.getStoreSelectionManager().getStores(sCit);
+                        //System.out.println(filteredList.size());
+                        //listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, filteredList));
                        // textView.setText(sCit);
-                    }
+                   // }
                 }
 
                 @Override
@@ -80,18 +107,31 @@ public class HomeController extends AppCompatActivity{
             stores.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) {
-                      //  Toast.makeText(getApplicationContext(),
-                        //        "Select Store", Toast.LENGTH_SHORT).show();
-                        //  textView.setText("");
-                    }
-                    else {
-                        String sCit = parent.getItemAtPosition(position).toString();
-                        listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, cit2));
-                        // textView.setText(sCit);
-                    }
-                }
+                   /* if (position == 0) {
+                        storeSet = false;
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Select a store", Toast.LENGTH_LONG);
+                        //toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }*/
+                 //   else {
+                        storeSet = true;
+                        sStore = parent.getItemAtPosition(position).toString();
+                        Director director = new Director();
+                        List<String> adr = new ArrayList<String>();
+                        director.getStoreSelectionManager().getStoreAddresses(sCit, sStore, new OnGetDataListener(){
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot i : dataSnapshot.getChildren()) {
+                                    adr.add(i.child("address").getValue().toString());
+                                }
+                                listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, adr));
+                            }
 
+                        });
+
+                //    }
+                }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
 

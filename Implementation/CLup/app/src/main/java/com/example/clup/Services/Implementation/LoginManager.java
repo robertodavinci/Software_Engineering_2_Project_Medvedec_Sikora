@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.clup.MainActivity;
+import com.example.clup.OnCredentialCheckListener;
 import com.example.clup.Services.LoginManagerService;
 import com.example.clup.UserProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginManager implements LoginManagerService {
     private DatabaseManager databaseManager = DatabaseManager.getInstance();
 
-    public boolean manageLogin(String email, String password){
-        return databaseManager.checkCredentials(email, password);
+    public void manageLogin(String email, String password, OnCredentialCheckListener onCredentialCheckListener){
+        databaseManager.checkCredentials(email, password, onCredentialCheckListener);
     }
 }

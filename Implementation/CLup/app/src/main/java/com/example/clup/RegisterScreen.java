@@ -100,6 +100,8 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         }
 
         progressBar.setVisibility(View.VISIBLE);
+        // Firebase has its own password and email function - no passwords are stored directly in the database
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

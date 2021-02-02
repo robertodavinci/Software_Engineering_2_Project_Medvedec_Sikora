@@ -22,6 +22,10 @@ public class Ticket {
         return store;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public TicketState getTicketState() {
         return ticketState;
     }

@@ -3,16 +3,20 @@ package com.example.clup.Services;
 import com.example.clup.Entities.Store;
 import com.example.clup.Entities.Ticket;
 import com.example.clup.Entities.Timeslot;
+import com.example.clup.OnCredentialCheckListener;
+import com.example.clup.OnGetDataListener;
 
 import java.util.List;
 
 public interface DatabaseManagerService {
-    public List<String> getStoreCities();
-    public List<String> getStores(String city);
-    public List<Integer> getStoreOcupancy(Store store);
-    public List<String> getStoreAddresses(String city, String name);
-    public List<Ticket> getTickets(Store store);
-    public List<Integer> getMaxTicketId(Store store);
-    public Boolean checkCredentials(String email, String password);
-    public Ticket getTicket(Store store, String ticketId);
+    public void getStoreCities(OnGetDataListener onGetDataListener);
+    public void getStores(String city, OnGetDataListener onGetDataListener);
+    public void getStoreOcupancy(Store store, OnGetDataListener onGetDataListener);
+    public void getStoreAddresses(String city, String name, OnGetDataListener onGetDataListener);
+    public void getTickets(Store store, OnGetDataListener onGetDataListener);
+    public void getMaxTicketId(Store store, OnGetDataListener onGetDataListener);
+    public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener);
+    public void getTicket(Store store, String ticketId, OnGetDataListener onGetDataListener);
+
+    public void persistExit(Store store);
 }

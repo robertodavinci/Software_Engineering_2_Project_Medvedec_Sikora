@@ -1,5 +1,6 @@
 package com.example.clup.Services.Implementation;
 
+import com.example.clup.OnGetDataListener;
 import com.example.clup.Services.DatabaseManagerService;
 import com.example.clup.Services.StoreSelectionManagerService;
 import com.example.clup.Entities.Store;
@@ -11,14 +12,15 @@ public class StoreSelectionManager implements StoreSelectionManagerService {
     private DatabaseManagerService dbManager = new DatabaseManager();
 
 
-    public List<String> getStoreCities(){
-        return dbManager.getStoreCities();
+    @Override
+    public void getStoreCities(OnGetDataListener onGetDataListener) {
+        dbManager.getStoreCities(onGetDataListener);
     }
-    public List<String> getStores(String city){
-        return dbManager.getStores(city);
+    public void getStores(String city, OnGetDataListener onGetDataListener){
+        dbManager.getStores(city, onGetDataListener);
     }
-    public List<String> getStoreAddresses(String city, String name){
-        return dbManager.getStoreAddresses(city, name);
+    public void getStoreAddresses(String city, String name, OnGetDataListener onGetDataListener) {
+        dbManager.getStoreAddresses(city, name, onGetDataListener);
     }
 
     public void setCurrentStore(Store currentStore) {

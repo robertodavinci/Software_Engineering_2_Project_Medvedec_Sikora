@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.clup">
 
     <application
@@ -9,15 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CLup">
-        <activity android:name=".ForgotPassword"></activity>
-        <activity android:name=".UserProfile" />
-        <activity android:name=".RegisterScreen" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ForgotPassword">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".UserProfile" />
+        <activity android:name=".RegisterScreen"/>
+
+        <activity android:name=".HomeController">
+
+        </activity>
+        <activity android:name=".QrController" />
+        <activity android:name=".ScannerController"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 

@@ -8,6 +8,8 @@ import com.example.clup.Entities.Store;
 import com.example.clup.Entities.Ticket;
 import com.example.clup.Entities.TicketState;
 import com.example.clup.Entities.Timeslot;
+import com.example.clup.OnCredentialCheckListener;
+import com.example.clup.OnGetDataListener;
 import com.example.clup.Services.DatabaseManagerService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,8 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public class DatabaseManager implements DatabaseManagerService {
     static private DatabaseManager singleton = null;
@@ -39,176 +43,112 @@ public class DatabaseManager implements DatabaseManagerService {
     private Ticket tempTicket;
 
     @Override
-    public List<String> getStoreCities(){
-        List<String> res = new ArrayList<String>();
+    public void getStoreCities(OnGetDataListener onGetDataListener){
         storeReference = firebaseDatabase.getReference("Stores");
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    res.add(i.getKey());
-                }
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        return res;
     }
     @Override
-    public List<String> getStores(String city){
-        List<String> res = new ArrayList<String>();
+    public void getStores(String city, OnGetDataListener onGetDataListener){
         storeReference = firebaseDatabase.getReference("Stores/"+city);
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    res.add(i.getKey());
-                }
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        return res;
     }
     @Override
-    public List<Integer> getStoreOcupancy(Store store) {
-        List<Integer> occupancy = new ArrayList<>();
-        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId());
+    public void getStoreOcupancy(Store store, OnGetDataListener onGetDataListener) {
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/occupancy/");
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    if(i.getKey().equals("occupancy")){
-                        occupancy.add(((Long)i.getValue()).intValue());
-                    }
-                }
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        return occupancy;
     }
 
     @Override
-    public List<String> getStoreAddresses(String city, String name){
-        List<String> res = new ArrayList<String>();
+    public void getStoreAddresses(String city, String name, OnGetDataListener onGetDataListener){
         storeReference = firebaseDatabase.getReference("Stores/"+city+"/"+name);
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Store store = dataSnapshot.getValue(Store.class);
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    res.add(i.getKey());
-                    System.out.println(i.getKey());
-                }
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        return res;
     }
 
     @Override
-    public List<Ticket> getTickets(Store store) {
-        List<Ticket> res = new ArrayList<Ticket>();
+    public void getTickets(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets");
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    res.add(getTicket(store, i.getKey()));
-                    System.out.println(i.getKey());
-                }
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        return res;
     }
 
     @Override
-    public List<Integer> getMaxTicketId(Store store) {
-        List<Integer> maxTicket = new ArrayList<>();
-        maxId = 0;
+    public void getMaxTicketId(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets");
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    if(Integer.parseInt(i.getKey())>maxId){
-                        maxId = Integer.parseInt(i.getKey());
-                    }
-                }
-                maxTicket.add(maxId);
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        return maxTicket;
     }
 
     @Override
-    public Boolean checkCredentials(String email, String password){
-        Boolean b = false;
+    public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener){
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
-                        temp = 0;
+                        onCredentialCheckListener.onSuccess();
                     } else{
                         user.sendEmailVerification();
-                        //res = false;
+                        onCredentialCheckListener.onFailure();
                     }
                 } else{
-                    //res = false;
+                    onCredentialCheckListener.onFailure();
                 }
             }
         });
-        return b;
     }
 
     @Override
-    public Ticket getTicket(Store store, String ticketId) {
+    public void getTicket(Store store, String ticketId, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets"+ticketId);
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    if(i.getKey().equals("expectedEnter")){
-                        tempTicket.setTimeslot(new Timeslot(Timestamp.valueOf(i.getValue().toString())));
-                    } else if(i.getKey().equals("ticketState")){
-                        switch (i.getValue().toString()){
-                            case "WAITING":
-                                tempTicket.setTicketState(TicketState.WAITING);
-                                break;
-                            case "IN_STORE":
-                                tempTicket.setTicketState(TicketState.IN_STORE);
-                                break;
-                            case "EXPIRED":
-                                tempTicket.setTicketState(TicketState.EXPIRED);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    System.out.println(i.getKey());
-                }
+                onGetDataListener.onSuccess(dataSnapshot);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
-        tempTicket.setStore(store);
-        tempTicket.setId(Integer.getInteger(ticketId));
-        return tempTicket;
     }
 
     static public DatabaseManager getInstance() {
@@ -219,5 +159,21 @@ public class DatabaseManager implements DatabaseManagerService {
     }
 
 
+    public void persistExit(Store store){
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/occupancy");
+        storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                DatabaseReference updateReference = storeReference.child("occupancy");
+                Map<String, Object> updated = new HashMap<>();
+                if(((Long)dataSnapshot.getValue()).intValue()>0)   updated.put("occupancy",((Long)dataSnapshot.getValue()).intValue()-1);
+                updateReference.updateChildren(updated);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {  }
+        });
+
+    }
     // TODO: delete all tickets at store closing time
 }
