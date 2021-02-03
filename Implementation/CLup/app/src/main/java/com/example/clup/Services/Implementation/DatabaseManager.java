@@ -35,7 +35,7 @@ public class DatabaseManager implements DatabaseManagerService {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference storeReference;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     private boolean loginSuccess;
@@ -119,6 +119,19 @@ public class DatabaseManager implements DatabaseManagerService {
     }
 
     @Override
+    public void getStoreMaxNoCustomers(Store store, OnGetDataListener onGetDataListener) {
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/maxNoCustomers/");
+        storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                onGetDataListener.onSuccess(dataSnapshot);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {  }
+        });
+    }
+
+    @Override
     public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener){
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -140,7 +153,7 @@ public class DatabaseManager implements DatabaseManagerService {
 
     @Override
     public void getTicket(Store store, String ticketId, OnGetDataListener onGetDataListener) {
-        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets"+ticketId);
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets/"+ticketId);
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -158,22 +171,54 @@ public class DatabaseManager implements DatabaseManagerService {
         return singleton;
     }
 
-
+    @Override
     public void persistExit(Store store){
-        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/occupancy");
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId());
         storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                DatabaseReference updateReference = storeReference.child("occupancy");
-                Map<String, Object> updated = new HashMap<>();
-                if(((Long)dataSnapshot.getValue()).intValue()>0)   updated.put("occupancy",((Long)dataSnapshot.getValue()).intValue()-1);
-                updateReference.updateChildren(updated);
+                DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/occupancy");
+                if(((Long)dataSnapshot.child("occupancy").getValue()).intValue()>0) updateReference.setValue(((Long)dataSnapshot.child("occupancy").getValue()).intValue()-1);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {  }
         });
+    }
+
+    @Override
+    public void persistEnter(Store store, Ticket ticket) {
+        DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/Tickets/"+ticket.getId()+"/ticketState/");
+        updateReference.setValue(TicketState.IN_STORE);
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId());
+        storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/occupancy");
+                updateReference.setValue(((Long)dataSnapshot.child("occupancy").getValue()).intValue()+1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {  }
+        });
+    }
+
+    @Override
+    public void persistTicket(Ticket ticket) {
+        System.out.println("Persist ticket db");
+        Store store = ticket.getStore();
+        DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/Tickets/");
+        Map<String, Object> updateParent = new HashMap<>();
+        Map<String, Object> updateChildren = new HashMap<>();
+        updateChildren.put("expectedEnter", ticket.getTimeslot().getExpectedEnter().toString());
+        updateChildren.put("qrurl", "www.stipe.stipe");
+        updateChildren.put("ticketState", ticket.getTicketState());
+        updateParent.put(String.valueOf(ticket.getId()), updateChildren);
+        System.out.println("Parent "+updateParent);
+        System.out.println(updateReference);
+        updateReference.updateChildren(updateParent);
 
     }
+
     // TODO: delete all tickets at store closing time
 }

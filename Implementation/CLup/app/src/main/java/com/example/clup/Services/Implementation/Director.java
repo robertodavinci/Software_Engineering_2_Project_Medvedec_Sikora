@@ -1,6 +1,5 @@
 package com.example.clup.Services.Implementation;
 
-import com.example.clup.Entities.Store;
 import com.example.clup.Services.DirectorService;
 import com.example.clup.Services.LoginManagerService;
 import com.example.clup.Services.StoreSelectionManagerService;

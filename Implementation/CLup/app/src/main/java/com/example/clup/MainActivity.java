@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,9 +18,15 @@ import com.example.clup.Entities.Store;
 import com.example.clup.Entities.Ticket;
 import com.example.clup.Entities.TicketState;
 import com.example.clup.Entities.Timeslot;
+import com.example.clup.Entities.UserType;
 import com.example.clup.Services.Implementation.DatabaseManager;
 import com.example.clup.Services.Implementation.Director;
+import com.example.clup.Services.Implementation.LoginManager;
+import com.example.clup.Services.Implementation.RequestManager;
+import com.example.clup.Services.Implementation.StoreManager;
 import com.example.clup.Services.Implementation.StoreSelectionManager;
+import com.example.clup.Services.LoginManagerService;
+import com.example.clup.Services.StoreSelectionManagerService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editEmail, editPassword;
 
     private TextView forgottenPassword;
+    //private TextView register:
     private Button loginButton;
     private ProgressBar progressBar;
     private List<String> temp;
@@ -73,6 +81,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+        Director director = new Director();
+        director.getStoreSelectionManager().getStores("Milano, Italy", new OnGetDataListener(){
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                List<String> res = new ArrayList<String>();
+                for(DataSnapshot i : dataSnapshot.getChildren()) {
+                    res.add(i.getKey());
+                }
+                System.out.println("bla "+res.size());
+            }
+        });
         db.getStores("Milano, Italy", new OnGetDataListener(){
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -97,14 +116,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-        db.getTickets(new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy"), new OnGetDataListener(){
+        Store store = new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy");
+        int ticketId = 0;
+        db.getTickets(store, new OnGetDataListener(){
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                List<String> res = new ArrayList<String>();
+                List<Ticket> res = new ArrayList<Ticket>();
                 for(DataSnapshot i : dataSnapshot.getChildren()) {
-                    //res.add(getTicket(store, i.getKey())); TODO
-                    System.out.println(i.getKey());
+                    int ticketId = Integer.parseInt(i.getKey());
+                    String ticketId_str = String.valueOf(Integer.parseInt(i.getKey()));
+                    db.getTicket(store, ticketId_str, new OnGetDataListener(){
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            Ticket tempTicket = new Ticket(ticketId, store, null); // ticketId the same as in new Store, just int instead of string
+                            for(DataSnapshot i : dataSnapshot.getChildren()) {
+                                if(i.getKey().equals("expectedEnter")){
+                                    tempTicket.setTimeslot(new Timeslot(Timestamp.valueOf(i.getValue().toString())));
+                                } else if(i.getKey().equals("ticketState")){
+                                    switch (i.getValue().toString()){
+                                        case "WAITING":
+                                            tempTicket.setTicketState(TicketState.WAITING);
+                                            break;
+                                        case "IN_STORE":
+                                            tempTicket.setTicketState(TicketState.IN_STORE);
+                                            break;
+                                        case "EXPIRED":
+                                            tempTicket.setTicketState(TicketState.EXPIRED);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                            res.add(tempTicket);
+                        }
+                    });
                 }
+                //res
             }
         });
         db.getMaxTicketId(new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy"), new OnGetDataListener(){
@@ -119,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(maxId);
             }
         });
-        /*db.checkCredentials("a@a.a", "a123", new OnCredentialCheckListener() {
+        director.getLoginManager().manageLogin("toma.petar.sikora@gmail.com", "Toma123", UserType.STORE_MANAGER, new OnCredentialCheckListener() {
             @Override
             public void onSuccess() {
                 System.out.println("Success");
@@ -128,9 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onFailure() {
                 System.out.println("Fail");
             }
-        });TODO*/
-        Store store = new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy");
-        int ticketId = 0;
+        });
         db.getTicket(store, String.valueOf(ticketId), new OnGetDataListener(){
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -157,6 +203,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(tempTicket.getId()+ " "+tempTicket.getTicketState());
             }
         });
+        //Ticket ticket = new Ticket(6, store, new Timeslot(Timestamp.valueOf("2018-09-01 09:01:16")));
+        //System.out.println("Persist ticket");
+        //db.persistTicket(ticket);
+        //ticket.setId(7);
+        //db.persistTicket(ticket);
+        db.getTickets(store, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                List<Ticket> tickets = new ArrayList<>();
+                for(DataSnapshot ticket : dataSnapshot.getChildren()){
+                    int ticketId = Integer.parseInt(ticket.getKey());
+                    Timeslot timeslot = new Timeslot(Timestamp.valueOf(ticket.child("expectedEnter").getValue().toString()));
+                    Ticket t = new Ticket(ticketId, store, timeslot);
+                    switch (ticket.child("ticketState").getValue().toString()){
+                        case "WAITING":
+                            t.setTicketState(TicketState.WAITING);
+                            break;
+                        case "IN_STORE":
+                            t.setTicketState(TicketState.IN_STORE);
+                            break;
+                        case "EXPIRED":
+                            t.setTicketState(TicketState.EXPIRED);
+                            break;
+                        default:
+                            System.err.println("Error with ticketstate"+ticket.child("ticketState").toString());
+                    }
+                    tickets.add(t);
+                }
+            }
+        });
+
+        /*RequestManager requestManager = new RequestManager();
+        requestManager.getTicket(store, new OnGetTicketListener() {
+            @Override
+            public void onSuccess(Ticket ticket) {
+
+            }
+        });*/
+        StoreManager storeManager = new StoreManager();
+        //storeManager.manageExit(store);
+        String qrCodeText = "Milano, Italy; Carrefour; Viale Ungheria 3; 0; 27";
+        storeManager.manageEntrance(qrCodeText, new OnTaskCompleteListener() {
+            @Override
+            public void onSuccess() {
+                System.out.println("Qr code check result is: Success");
+            }
+
+            @Override
+            public void onFailure() {
+                System.out.println("Qr code check result is: Fail");
+            }
+        });
+        /*System.out.println("Get ticket");
+        requestManager.getTicket(store, new OnGetTicketListener() {
+            @Override
+            public void onSuccess(Ticket ticket) {
+                System.out.println(ticket.getId()+ " " + ticket.getTimeslot().toString());
+                db.persistEnter(store, ticket);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        db.persistExit(store);
+                    }
+                }, 5000);   //5 seconds
+            }
+        });*/
+
         //System.out.println("Temp size "+temp.size());
         //db.getStores("Milano, Italy");
         //db.getStoreAddresses("Milano, Italy", "Esselunga");
@@ -171,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-           /* case R.id.registerLink:
+            /*case R.id.registerLink:
                 startActivity(new Intent(this, RegisterScreen.class));
                 break;*/
             case R.id.button:
