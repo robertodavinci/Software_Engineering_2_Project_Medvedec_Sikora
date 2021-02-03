@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CLup">
         <activity android:name=".HomeController">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ForgotPassword">
 
@@ -26,10 +21,18 @@
         <activity android:name=".StoreController" >
 
         </activity>
-        <activity android:name=".QrController" />
+        <activity android:name=".QrController" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ScannerController"
-            tools:ignore="DuplicateActivity" />
+            tools:ignore="DuplicateActivity" >
+
+        </activity>
         <activity android:name=".MainActivity" />
     </application>
 

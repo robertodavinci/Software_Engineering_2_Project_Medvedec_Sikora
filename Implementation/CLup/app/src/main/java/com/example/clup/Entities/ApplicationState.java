@@ -11,10 +11,10 @@ import java.util.Set;
 
 public class ApplicationState extends Application {
 
-    private String storeCity;
-    private Integer storeID;
-    private Integer ticketID;
-    private String storeName;
+    private String storeCity = "Mil";
+    private Integer storeID = 1;
+    private Integer ticketID = 2;
+    private String storeName = "Kon";
 
     public String getStoreCity() {
         return storeCity;
