@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.clup.Entities.Store;
+import com.example.clup.Services.Implementation.Director;
+import com.google.firebase.database.DataSnapshot;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
@@ -26,7 +30,18 @@ public class QrController extends AppCompatActivity {
     Button genButton;
     EditText qrText;
     ImageView qrImage;
-    static String algorithm = "DESede";
+    TextView storeInfo;
+    TextView ticketNum;
+    TextView ticketStatus;
+    String qrkey;
+    private String cipherstring  = new String();
+    private String qrString  = new String();
+    private String storeCity  = new String();
+    private String storeName  = new String();
+    private String address  = new String();
+    private String storeKey  = new String();
+    private Integer storeID;
+    private Integer ticketID;
 
     EncryptionService es = new EncryptionService();
     StrongAES sa = new StrongAES();
@@ -37,62 +52,54 @@ public class QrController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_controller);
 
-        qrText = (EditText)findViewById(R.id.editTextQR);
-        genButton = (Button) findViewById(R.id.buttonqr);
+        ticketNum = (TextView) findViewById(R.id.ticketNum);
+        storeInfo = (TextView) findViewById(R.id.storeInfo);
+        ticketStatus = (TextView) findViewById(R.id.ticketStatus);
+        //genButton = (Button) findViewById(R.id.buttonqr);
         qrImage = (ImageView) findViewById(R.id.imageViewQR);
-        String qrstring = new String();
-        qrstring =  ((ApplicationState) getApplication()).getStoreCity() + ((ApplicationState) getApplication()).getStoreName() + ((ApplicationState) getApplication()).getStoreID().toString();
-        try{
-            System.out.println(sa.AESDecrypt(sa.AESEncrypt(qrstring, "Bar12345Bar12345"), "Bar12345Bar12345"));
-            byte[] by = sa.AESEncrypt(qrstring,"Bar12345Bar12345");
-            String byy = new String();
-            for(byte b : by){
-                System.out.println(b);
-                byy += b;
-                byy += " ";
+        Director director = new Director();
+
+        storeID = ((ApplicationState) getApplication()).getStoreID();
+        storeCity = ((ApplicationState) getApplication()).getStoreCity();
+        storeName = ((ApplicationState) getApplication()).getStoreName();
+        address = ((ApplicationState) getApplication()).getAddress();
+        storeKey = ((ApplicationState) getApplication()).getStoreKey();
+        ticketID = ((ApplicationState) getApplication()).getTicketID();
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        ticketNum.setText(ticketID.toString());
+        storeInfo.setText(storeCity + "; " + storeName + "; " + address);
+        ticketStatus.setText("You're up!");
+
+        qrString = storeCity + ";" + storeName + ";" + storeID;
+        try {
+            byte[] ciphertext = sa.AESEncrypt(qrString, storeKey);
+            for (byte b : ciphertext) {
+                //System.out.println(b);
+                cipherstring += b;
+                cipherstring += "w";
             }
-            System.out.println(byy);
-            String[] splitted = byy.split(" ");
-            byte finalbb[] = new byte[splitted.length];
-            Integer i = 0;
-            for(String ac : splitted){
-                System.out.println(ac);
-                byte a = (byte) Integer.parseInt(ac);
-                finalbb[i] = a;
-                i++;
-            }
-            /*for(byte ba : splitted){
-                System.out.println(ba);
-            }*/
-            System.out.println(sa.AESDecrypt(finalbb, "Bar12345Bar12345"));
+            System.out.println(cipherstring);
+           /* System.out.println("KEY");
+            System.out.println(sa.AESDecrypt(finalcipher, storeKey));
+            System.out.println("KEYEND");
             //System.out.println(plainText);
+            */
+            BitMatrix bitMatrix = multiFormatWriter.encode(cipherstring, BarcodeFormat.QR_CODE,350, 350 );
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            qrImage.setImageBitmap(bitmap);
 
-
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("NOOOOOOOOOU");
         }
 
-        ///////////////////////////
-
-        /////////////////////////
-
-
-
-        genButton.setOnClickListener(new View.OnClickListener() {
+    /*    genButton.setOnClickListener(new View.OnClickListener() {
         @Override
          public void onClick(View view){
-            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
-            try{
-                BitMatrix bitMatrix = multiFormatWriter.encode(qrText.getText().toString(), BarcodeFormat.QR_CODE,500, 500 );
-                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                qrImage.setImageBitmap(bitmap);
-
-            }
-            catch (Exception e){}
         };
     });
+    }
+    */
     }
 }

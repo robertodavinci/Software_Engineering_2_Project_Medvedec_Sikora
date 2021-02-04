@@ -18,7 +18,7 @@ public interface DatabaseManagerService {
     public void getMaxTicketId(Store store, OnGetDataListener onGetDataListener);
     public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener);
     public void getTicket(Store store, String ticketId, OnGetDataListener onGetDataListener);
-
+    public void getStoreKey(Store store, OnGetDataListener onGetDataListener);
     public void persistExit(Store store);
     public void persistEnter(Store store, Ticket ticket);
     public void persistTicket(Ticket ticket);

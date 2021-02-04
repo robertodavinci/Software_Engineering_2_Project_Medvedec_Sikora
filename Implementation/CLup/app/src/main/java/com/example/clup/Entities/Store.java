@@ -5,6 +5,11 @@ public class Store {
     public int maxNoCustomers, id;
 
     public Store(){}
+    public Store(int id, String name, String city){
+        this.id = id;
+        this.name = name;
+        this.city = city;
+    }
     public Store(int id, String name, String address, String city){
         this.id = id;
         this.name = name;

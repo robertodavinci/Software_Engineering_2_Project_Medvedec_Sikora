@@ -57,4 +57,19 @@ public class ScannerController extends AppCompatActivity  {
         super.onPause();
     }
 
+
+
+/*
+    DECRYPT{
+        String[] splitcipher = cipherstring.split("w");
+        byte finalcipher[] = new byte[splitcipher.length];
+        Integer i = 0;
+        for(String ac : splitcipher){
+            //System.out.println(ac);
+            byte a = (byte) Integer.parseInt(ac);
+            finalcipher[i] = a;
+            i++;
+        }
+    }
+*/
 }

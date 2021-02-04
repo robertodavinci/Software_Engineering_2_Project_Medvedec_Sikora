@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 
 import com.example.clup.Entities.ApplicationState;
+import com.example.clup.Entities.Store;
 import com.example.clup.Services.Implementation.Director;
 import com.google.firebase.database.DataSnapshot;
 
@@ -32,12 +33,16 @@ public class StoreController extends AppCompatActivity{
         String sCit = new String();
         String sStore = new String();
         ArrayList<String> filteredList = new ArrayList<>();
+        Director director = new Director();
         Button selButton;
         private Boolean citySet = false;
         private Boolean storeSet = false;
         private Integer cityPos;
         private Integer storePos;
         private Integer storeID;
+        private String qrkey;
+        private String storeAddress;
+        List<String> adr = new ArrayList<String>();
 
 
         String[] country = { "","Esselunga", "Carrefour", "Eurospin", "Lidl", "Milan Store"};
@@ -86,7 +91,6 @@ public class StoreController extends AppCompatActivity{
                         System.out.println("AA");
                         sCit = parent.getItemAtPosition(position).toString();
                         //System.out.println(sCit) ;
-                        Director director = new Director();
                         List<String> res = new ArrayList<String>();
                         director.getStoreSelectionManager().getStores(sCit, new OnGetDataListener(){
                             @Override
@@ -129,8 +133,7 @@ public class StoreController extends AppCompatActivity{
                  //   else {
                         storeSet = true;
                         sStore = parent.getItemAtPosition(position).toString();
-                        Director director = new Director();
-                        List<String> adr = new ArrayList<String>();
+
                         director.getStoreSelectionManager().getStoreAddresses(sCit, sStore, new OnGetDataListener(){
                             @Override
                             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -151,12 +154,13 @@ public class StoreController extends AppCompatActivity{
             });
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                  public void onItemClick(AdapterView<?> parent, View view,
-                                                                         int position, long id) {
+                                                     int position, long id) {
                                                      String selected = ((TextView) view).getText().toString();
                                                      storeID = position;
-                                                     //((ApplicationState) getApplication()).setStoreID();
+                                                     storeAddress = adr.get(storeID);
+                                                     ((ApplicationState) getApplication()).setStoreID(storeID);
+                                                     ((ApplicationState) getApplication()).setAddress(storeAddress);
                                                      //System.out.println(team);
-
                                                  }
                                              });
 
@@ -167,16 +171,30 @@ public class StoreController extends AppCompatActivity{
                     ((ApplicationState) getApplication()).setStoreCity(sCit);
                     ((ApplicationState) getApplication()).setStoreID(storeID);
                     ((ApplicationState) getApplication()).setStoreName(sStore);
-                    System.out.println(((ApplicationState) getApplication()).getStoreCity());
-                    System.out.println(((ApplicationState) getApplication()).getStoreID());
-                    System.out.println(((ApplicationState) getApplication()).getStoreName());
-                    sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                    director.getDatabaseManager().getStoreKey(new Store(storeID, sStore, storeAddress, sCit), new OnGetDataListener() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            qrkey = dataSnapshot.getValue().toString();
+                            ((ApplicationState) getApplication()).setStoreKey(qrkey);
+                            System.out.println(((ApplicationState) getApplication()).getStoreCity());
+                            System.out.println(((ApplicationState) getApplication()).getStoreID());
+                            System.out.println(((ApplicationState) getApplication()).getStoreName());
+                            System.out.println(((ApplicationState) getApplication()).getAddress());
+                            System.out.println(((ApplicationState) getApplication()).getStoreKey());
+                            System.out.println(((ApplicationState) getApplication()).getTicketID());
+                            startActivity((new Intent(view.getContext(), QrController.class)));
+                        }
+                    });
+
+                    /*sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("City", sCit);
                     editor.putString("StoreName", sStore);
                     editor.putString("StoreID", storeID.toString());
                     editor.commit();
+                    */
                 }
+
             });
 
         }

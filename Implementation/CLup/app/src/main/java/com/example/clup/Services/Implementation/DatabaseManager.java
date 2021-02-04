@@ -204,6 +204,19 @@ public class DatabaseManager implements DatabaseManagerService {
     }
 
     @Override
+    public void getStoreKey(Store store, OnGetDataListener onGetDataListener) {
+        storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/key/");
+        storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                onGetDataListener.onSuccess(dataSnapshot);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {  }
+        });
+    }
+
+    @Override
     public void persistTicket(Ticket ticket) {
         System.out.println("Persist ticket db");
         Store store = ticket.getStore();

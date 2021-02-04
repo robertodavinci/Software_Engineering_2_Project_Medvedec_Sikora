@@ -62,6 +62,8 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/titan_one"
         android:text="Designed and created by T. Sikora, R. Medvedec"
+        android:textAlignment="center"
+        android:textColor="@color/white_t"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
