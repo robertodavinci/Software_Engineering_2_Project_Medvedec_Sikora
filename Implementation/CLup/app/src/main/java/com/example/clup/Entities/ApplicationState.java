@@ -15,6 +15,7 @@ public class ApplicationState extends Application {
     private String storeKey = "1234567812345678";
     private Integer storeID = 1;
     private Integer ticketID = 2;
+    private Boolean isStoreManager = false;
 
     public String getStoreCity() { return storeCity; }
     public Integer getStoreID() {
@@ -28,6 +29,8 @@ public class ApplicationState extends Application {
     }
     public String getAddress() { return address; }
     public String getStoreKey() { return storeKey; }
+    public Boolean getStoreManager() { return isStoreManager; }
+
     public void setStoreCity(String storeCity) {
         this.storeCity = storeCity;
     }
@@ -42,5 +45,6 @@ public class ApplicationState extends Application {
     }
     public void setAddress(String address) { this.address = address; }
     public void setStoreKey(String storeKey) { this.storeKey = storeKey; }
+    public void setStoreManager(Boolean storeManager) { isStoreManager = storeManager; }
 
 }

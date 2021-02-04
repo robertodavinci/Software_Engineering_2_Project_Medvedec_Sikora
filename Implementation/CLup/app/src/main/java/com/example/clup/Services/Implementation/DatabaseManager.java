@@ -164,7 +164,26 @@ public class DatabaseManager implements DatabaseManagerService {
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
-                        onCredentialCheckListener.onSuccess();
+                        // get store data from user
+                        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users");
+                        String userID = user.getUid();
+                        userReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.child("Store").getValue()==null){
+                                    onCredentialCheckListener.onFailure();
+                                    return;
+                                } else {
+                                    onCredentialCheckListener.onSuccess(dataSnapshot.child("Store").child("name").getValue().toString(),
+                                            dataSnapshot.child("Store").child("city").getValue().toString(),
+                                            Integer.parseInt(dataSnapshot.child("Store").child("id").getValue().toString())
+                                    );
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) { }
+                        });
                     } else{
                         user.sendEmailVerification();
                         onCredentialCheckListener.onFailure();
