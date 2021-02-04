@@ -181,8 +181,8 @@ public class StoreController extends AppCompatActivity{
                             System.out.println(((ApplicationState) getApplication()).getStoreName());
                             System.out.println(((ApplicationState) getApplication()).getAddress());
                             System.out.println(((ApplicationState) getApplication()).getStoreKey());
-                            System.out.println(((ApplicationState) getApplication()).getTicketID());
-                            startActivity((new Intent(view.getContext(), QrController.class)));
+                            //System.out.println(((ApplicationState) getApplication()).getTicket().getId());
+                            startActivity((new Intent(view.getContext(), TicketController.class)));
                         }
                     });
 

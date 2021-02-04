@@ -5,12 +5,13 @@
 
     <application
         android:name=".Entities.ApplicationState"
-        android:label="@string/app_name"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CLup">
+        <activity android:name=".TicketController"></activity>
         <activity android:name=".HomeController">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,21 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgotPassword">
-
-        </activity>
+        <activity android:name=".ForgotPassword"></activity>
         <activity android:name=".UserProfile" />
         <activity android:name=".RegisterScreen" />
-        <activity android:name=".StoreController" >
-
-        </activity>
-        <activity android:name=".QrController" >
-        </activity>
+        <activity android:name=".StoreController"></activity>
+        <activity android:name=".QrController"></activity>
         <activity
             android:name=".ScannerController"
-            tools:ignore="DuplicateActivity" >
-
-        </activity>
+            tools:ignore="DuplicateActivity"></activity>
         <activity android:name=".MainActivity" />
     </application>
 
