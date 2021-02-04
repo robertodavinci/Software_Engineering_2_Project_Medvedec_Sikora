@@ -5,8 +5,13 @@ public class Ticket {
     private TicketState ticketState;
     private Store store;
     private Timeslot timeslot;
-    //private qrCode;
+    private String qrCode = "www.stipe.stipe";
 
+    public Ticket(int id, Store store){
+        this.id = id;
+        this.ticketState = TicketState.WAITING;
+        this.store = store;
+    }
     public Ticket(int id, Store store, Timeslot timeslot){
         this.id = id;
         this.ticketState = TicketState.WAITING;
@@ -34,6 +39,10 @@ public class Ticket {
         return timeslot;
     }
 
+    public String getQrCode() {
+        return qrCode;
+    }
+
     public void setTimeslot(Timeslot timeslot) {
         this.timeslot = timeslot;
     }
@@ -44,6 +53,10 @@ public class Ticket {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 
     @Override

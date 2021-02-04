@@ -5,5 +5,5 @@ import com.example.clup.Entities.Timeslot;
 import com.example.clup.OnGetTimeslotListener;
 
 public interface QueueService {
-    public void getFreeTimeslot(Store store, OnGetTimeslotListener onGetTimeslotListener);
+    //public void getFreeTimeslot(Store store, OnGetTimeslotListener onGetTimeslotListener);
 }

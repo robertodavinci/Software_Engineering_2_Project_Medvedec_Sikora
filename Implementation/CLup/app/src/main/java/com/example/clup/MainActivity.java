@@ -37,6 +37,9 @@ import com.google.firebase.database.DataSnapshot;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,18 +73,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         forgottenPassword = (TextView) findViewById(R.id.forgottenPassword);
         forgottenPassword.setOnClickListener(this);
 
+
+
         DatabaseManager db = new DatabaseManager();
         System.out.println("begin");
-        db.getStoreCities(new OnGetDataListener(){
+        Director director = new Director();
+        RequestManager requestManager = new RequestManager();
+        String qrCodeText = "Milano, Italy; Carrefour; Viale Ungheria 3; 0; 8";
+        Store store = new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy");
+        Ticket ticket = new Ticket(10, store);
+        //director.getStoreManager().closeStore(store);
+        //director.getStoreManager().openStore(store);
+        //director.getStoreManager().updateQueue(store);
+        director.getRequestManager().cancelTicket(store, ticket, new OnTaskCompleteListener() {
+            @Override
+            public void onSuccess() {
+                System.out.println("Successful cancel");
+            }
+
+            @Override
+            public void onFailure() {
+                System.out.println("Faaaaaail");
+            }
+        });
+        /*StoreManager storeManager = new StoreManager();
+        storeManager.openStore(store);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                storeManager.closeStore(store);
+            }
+        }, 5000);   //5 seconds
+        */
+        /*requestManager.getTicket(store, new OnGetTicketListener() {
+            @Override
+            public void onSuccess(Ticket ticket) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        db.persistEnter(store, ticket);
+                    }
+                }, 5000);   //5 seconds
+            }
+
+            @Override
+            public void onFailure() {
+                System.out.println("Fail to get ticket");
+            }
+        });*/
+
+        db.getStoreCities(new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 List<String> res = new ArrayList<String>();
-                for(DataSnapshot i : dataSnapshot.getChildren()) {
+                for (DataSnapshot i : dataSnapshot.getChildren()) {
                     res.add(i.getKey());
                 }
             }
         });
-        Director director = new Director();
         director.getStoreSelectionManager().getStores("Milano, Italy", new OnGetDataListener(){
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -116,8 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-        Store store = new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy");
-        int ticketId = 0;
+        /*int ticketId = 0;
         db.getTickets(store, new OnGetDataListener(){
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -202,13 +250,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 System.out.println(tempTicket.getId()+ " "+tempTicket.getTicketState());
             }
-        });
+        });*/
         //Ticket ticket = new Ticket(6, store, new Timeslot(Timestamp.valueOf("2018-09-01 09:01:16")));
         //System.out.println("Persist ticket");
         //db.persistTicket(ticket);
         //ticket.setId(7);
         //db.persistTicket(ticket);
-        db.getTickets(store, new OnGetDataListener() {
+        /*db.getTickets(store, new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 List<Ticket> tickets = new ArrayList<>();
@@ -232,19 +280,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     tickets.add(t);
                 }
             }
-        });
+        });*/
 
-        /*RequestManager requestManager = new RequestManager();
-        requestManager.getTicket(store, new OnGetTicketListener() {
+        /*requestManager.getTicket(store, new OnGetTicketListener() {
             @Override
             public void onSuccess(Ticket ticket) {
 
             }
         });*/
-        StoreManager storeManager = new StoreManager();
         //storeManager.manageExit(store);
-        String qrCodeText = "Milano, Italy; Carrefour; Viale Ungheria 3; 0; 27";
-        storeManager.manageEntrance(qrCodeText, new OnTaskCompleteListener() {
+        /*storeManager.manageEntrance(qrCodeText, new OnTaskCompleteListener() {
             @Override
             public void onSuccess() {
                 System.out.println("Qr code check result is: Success");
@@ -254,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onFailure() {
                 System.out.println("Qr code check result is: Fail");
             }
-        });
+        });*/
         /*System.out.println("Get ticket");
         requestManager.getTicket(store, new OnGetTicketListener() {
             @Override

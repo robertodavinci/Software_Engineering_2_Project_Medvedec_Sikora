@@ -9,6 +9,8 @@ public class Director implements DirectorService {
     private LoginManagerService loginManager = new LoginManager();
     private StoreSelectionManagerService storeSelectionManager = new StoreSelectionManager();
     private DatabaseManagerService databaseManager = new DatabaseManager();
+    private StoreManager storeManager = new StoreManager();
+    private RequestManager requestManager = new RequestManager();
 
     public LoginManagerService getLoginManager() {
         return loginManager;
@@ -20,5 +22,11 @@ public class Director implements DirectorService {
 
     public DatabaseManagerService getDatabaseManager() {
         return databaseManager;
+    }
+    public StoreManager getStoreManager() {
+        return storeManager;
+    }
+    public RequestManager getRequestManager() {
+        return requestManager;
     }
 }

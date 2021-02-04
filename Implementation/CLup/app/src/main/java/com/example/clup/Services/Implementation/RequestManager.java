@@ -4,14 +4,17 @@ import com.example.clup.Entities.Store;
 import com.example.clup.Entities.Ticket;
 import com.example.clup.Entities.TicketState;
 import com.example.clup.Entities.Timeslot;
+import com.example.clup.OnCheckTicketListener;
 import com.example.clup.OnGetDataListener;
 import com.example.clup.OnGetTicketListener;
 import com.example.clup.OnGetTimeslotListener;
+import com.example.clup.OnTaskCompleteListener;
 import com.example.clup.Services.DatabaseManagerService;
 import com.example.clup.Services.QueueService;
 import com.example.clup.Services.TicketService;
 import com.google.firebase.database.DataSnapshot;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class RequestManager implements QueueService, TicketService {
     //TODO
     private int averageMinutesInStore = 15, maxId = -1;
 
-    @Override
+    /*@Override
     public void getFreeTimeslot(Store store, OnGetTimeslotListener onGetTimeslotListener) {
         List<Ticket> tickets = new ArrayList<Ticket>();
         databaseManager.getTickets(store, new OnGetDataListener() {
@@ -67,31 +70,76 @@ public class RequestManager implements QueueService, TicketService {
                 onGetTimeslotListener.onSuccess(timeslot);
             }
         });
-    }
+    }*/
 
     @Override
     public void getTicket(Store store, OnGetTicketListener onGetTicketListener) {
         System.out.println("Get ticket rm");
-        getFreeTimeslot(store, new OnGetTimeslotListener() {
+        maxId = -1;
+        databaseManager.getStore(store, new OnGetDataListener() {
             @Override
-            public void onSuccess(Timeslot timeslot) {
-                maxId = -1;
-                databaseManager.getMaxTicketId(store, new OnGetDataListener(){
-                    @Override
-                    public void onSuccess(DataSnapshot dataSnapshot) {
-                        int tempMaxId = 0;
-                        for(DataSnapshot i : dataSnapshot.getChildren()) {
-                            if(Integer.parseInt(i.getKey())>tempMaxId){
-                                tempMaxId = Integer.parseInt(i.getKey());
-                            }
-                        }
-                        maxId = tempMaxId;
-                        Ticket ticket = new Ticket(maxId+1, store, timeslot);
-                        ticket.setTicketState(TicketState.WAITING);
-                        databaseManager.persistTicket(ticket);
-                        onGetTicketListener.onSuccess(ticket);
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (Integer.parseInt(dataSnapshot.child("open").getValue().toString()) == 0) {
+                    onGetTicketListener.onFailure();
+                    return;
+                }
+                maxId = Integer.parseInt(dataSnapshot.child("maxId").getValue().toString());
+                Ticket ticket = new Ticket(maxId + 1, store);
+                int occupancy = Integer.parseInt(dataSnapshot.child("occupancy").getValue().toString());
+                int maxNoCustomers = Integer.parseInt(dataSnapshot.child("maxNoCustomers").getValue().toString());
+                int activeTickets = 0;
+                for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
+                    if (i.child("ticketState").getValue().toString().equals("ACTIVE"))
+                        activeTickets++;
+                }
+                if (occupancy + activeTickets < maxNoCustomers) {
+                    ticket.setTicketState(TicketState.ACTIVE);
+                    ticket.setTimeslot(new Timeslot(new Timestamp(System.currentTimeMillis() + 1000 * 60 * 5))); // wait for customer 5 mins
+                } else {
+                    ticket.setTicketState(TicketState.WAITING);
+                    ticket.setTimeslot(new Timeslot(new Timestamp(0)));
+                }
+                databaseManager.persistTicket(ticket);
+                onGetTicketListener.onSuccess(ticket);
+            }
+        });
+    }
+
+    @Override
+    public void checkTicket(Ticket ticket, OnCheckTicketListener onCheckTicketListener) {
+        maxId = -1;
+        databaseManager.getStore(ticket.getStore(), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("Tickets").child(String.valueOf(ticket.getId())).child("ticketState").getValue().toString().equals("ACTIVE")) {
+                    //how much does he have left
+                    onCheckTicketListener.onActive(Timestamp.valueOf(dataSnapshot.child("Tickets").child(String.valueOf(ticket.getId())).child("expires").getValue().toString()));
+                } else {
+                    //calculate people in front
+                    int peopleAhead = 1;
+                    for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
+                        if (i.child("ticketState").getValue().toString().equals("WAITING") && Integer.parseInt(i.getKey()) < ticket.getId())
+                            peopleAhead++;
                     }
-                });
+                    onCheckTicketListener.onWaiting(peopleAhead);
+                }
+                return;
+            }
+        });
+    }
+
+    @Override
+    public void cancelTicket(Store store, Ticket ticket, OnTaskCompleteListener onTaskCompleteListener) {
+        databaseManager.getTicket(store, String.valueOf(ticket.getId()), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() == null) {
+                    onTaskCompleteListener.onFailure();
+                    return;
+                }
+                dataSnapshot.getRef().setValue(null);
+                onTaskCompleteListener.onSuccess();
+                return;
             }
         });
     }

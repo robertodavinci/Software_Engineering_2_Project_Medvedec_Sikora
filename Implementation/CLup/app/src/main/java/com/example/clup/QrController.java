@@ -67,7 +67,7 @@ public class QrController extends AppCompatActivity {
         ticketID = ((ApplicationState) getApplication()).getTicketID();
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         ticketNum.setText(ticketID.toString());
-        storeInfo.setText(storeCity + "; " + storeName + "; " + address);
+        storeInfo.setText(storeName + ", " + address + ", " + storeCity);
         ticketStatus.setText("You're up!");
 
         qrString = storeCity + ";" + storeName + ";" + storeID;
