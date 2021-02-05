@@ -2,6 +2,7 @@ package com.example.clup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.ComponentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.clup.Entities.ApplicationState;
 import com.example.clup.Entities.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,13 +38,14 @@ public class UserProfile extends AppCompatActivity {
         nameField = (TextView) findViewById(R.id.nameField);
         surnameField = (TextView) findViewById(R.id.surnameField);
         emailField = (TextView) findViewById(R.id.emailField);
-
+        // CHECK APP STATE
+        ((ApplicationState) getApplication()).printAppState();
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(UserProfile.this, MainActivity.class));
+                startActivity(new Intent(UserProfile.this, LoginController.class));
             }
         });
 
@@ -56,7 +59,7 @@ public class UserProfile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
 
-                if(user != null){
+                if (user != null) {
                     String name = user.name;
                     String surname = user.surname;
                     String email = user.email;
@@ -68,11 +71,18 @@ public class UserProfile extends AppCompatActivity {
 
             }
 
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(UserProfile.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed () {
+        ((ApplicationState) getApplication()).setStoreManager(false);
+        startActivity(new Intent(UserProfile.this, HomeController.class));
     }
 }

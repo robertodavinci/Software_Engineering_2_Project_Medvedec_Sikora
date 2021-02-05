@@ -10,5 +10,6 @@ import com.example.clup.OnTaskCompleteListener;
 public interface TicketService {
     public void getTicket(Store store, OnGetTicketListener onGetTicketListener);
     public void checkTicket(Ticket ticket, OnCheckTicketListener onCheckTicketListener);
+    public void checkQueue(Store store, OnCheckTicketListener onCheckTicketListener);
     public void cancelTicket(Store store, Ticket ticket, OnTaskCompleteListener onTaskCompleteListener);
 }

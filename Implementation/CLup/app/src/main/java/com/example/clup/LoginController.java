@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -14,19 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.clup.Entities.ApplicationState;
 import com.example.clup.Entities.Store;
 import com.example.clup.Entities.Ticket;
-import com.example.clup.Entities.TicketState;
-import com.example.clup.Entities.Timeslot;
-import com.example.clup.Entities.UserType;
 import com.example.clup.Services.Implementation.DatabaseManager;
 import com.example.clup.Services.Implementation.Director;
-import com.example.clup.Services.Implementation.LoginManager;
 import com.example.clup.Services.Implementation.RequestManager;
-import com.example.clup.Services.Implementation.StoreManager;
-import com.example.clup.Services.Implementation.StoreSelectionManager;
-import com.example.clup.Services.LoginManagerService;
-import com.example.clup.Services.StoreSelectionManagerService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,14 +26,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginController extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editEmail, editPassword;
 
@@ -57,7 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_controller);
+        // CHECK APP STATE
+        ((ApplicationState) getApplication()).printAppState();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -85,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //director.getStoreManager().closeStore(store);
         //director.getStoreManager().openStore(store);
         //director.getStoreManager().updateQueue(store);
-        director.getRequestManager().cancelTicket(store, ticket, new OnTaskCompleteListener() {
+       /* director.getRequestManager().cancelTicket(store, ticket, new OnTaskCompleteListener() {
             @Override
             public void onSuccess() {
                 System.out.println("Successful cancel");
@@ -96,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("Faaaaaail");
             }
         });
+        */
+
         /*StoreManager storeManager = new StoreManager();
         storeManager.openStore(store);
         Handler handler = new Handler();
@@ -122,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });*/
 
-        db.getStoreCities(new OnGetDataListener() {
+       /* db.getStoreCities(new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 List<String> res = new ArrayList<String>();
@@ -165,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+        */
         /*int ticketId = 0;
         db.getTickets(store, new OnGetDataListener(){
             @Override
@@ -366,26 +360,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
                     if(user.isEmailVerified()){
-                        startActivity(new Intent(MainActivity.this, UserProfile.class));
+                        ((ApplicationState) getApplication()).setStoreManager(true);
+                        startActivity(new Intent(LoginController.this, UserProfile.class));
                     } else{
                         user.sendEmailVerification();
-                        Toast.makeText(MainActivity.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
                     }
                 } else{
-                    Toast.makeText(MainActivity.this, "Failed to log in!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginController.this, "Failed to log in!", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        progressBar.setVisibility(View.GONE);
+
     }
 }

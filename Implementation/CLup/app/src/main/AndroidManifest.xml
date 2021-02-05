@@ -27,7 +27,7 @@
         <activity
             android:name=".ScannerController"
             tools:ignore="DuplicateActivity"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginController" />
     </application>
 
 </manifest>

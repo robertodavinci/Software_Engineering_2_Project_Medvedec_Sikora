@@ -13,7 +13,7 @@ import com.example.clup.Entities.ApplicationState;
 
 public class HomeController extends AppCompatActivity implements View.OnClickListener{
 
-    private Button storeButton;
+    private Button storeButton, loginButton;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
 
@@ -21,20 +21,33 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_controller);
-
+        // CHECK APP STATE
+        ((ApplicationState) getApplication()).printAppState();
 
         storeButton = (Button) findViewById(R.id.storeButton);
-        storeButton.setOnClickListener(this);
+        loginButton = (Button) findViewById(R.id.loginButton);
+        storeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                //SharedPreferences.Editor editor = sharedpreferences.edit();
+                String cit = sharedpreferences.getString("City", "NoCity");
+                System.out.println(cit);
+                startActivity((new Intent(v.getContext(), StoreController.class)));
+            }
+        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v2) {
+                startActivity((new Intent(v2.getContext(), LoginController.class)));
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
 
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedpreferences.edit();
-        String cit = sharedpreferences.getString("City", "NoCity");
-        System.out.println(cit);
-        startActivity((new Intent(this, StoreController.class)));
+
 
 
         /* ERASING SHARED PREFERENCES

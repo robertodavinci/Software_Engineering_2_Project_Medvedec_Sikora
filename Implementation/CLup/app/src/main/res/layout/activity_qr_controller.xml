@@ -9,17 +9,30 @@
     android:fontFamily="@font/titan_one">
 
     <ImageView
-        android:id="@+id/imageViewQR"
+        android:id="@+id/imageViewQR2"
         android:layout_width="360dp"
         android:layout_height="360dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/text_round_thin"
+        android:background="@drawable/text_round"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewQR"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewQR2"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewQR2"
+        app:layout_constraintStart_toStartOf="@+id/imageViewQR2"
+        app:layout_constraintTop_toTopOf="@+id/imageViewQR2" />
 
     <TextView
         android:id="@+id/ticketNum"
@@ -36,7 +49,7 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewQR" />
+        app:layout_constraintTop_toBottomOf="@id/imageViewQR2" />
 
     <TextView
         android:id="@+id/storeInfo"

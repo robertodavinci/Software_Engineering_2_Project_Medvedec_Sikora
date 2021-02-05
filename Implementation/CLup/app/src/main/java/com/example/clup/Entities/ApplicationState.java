@@ -46,4 +46,25 @@ public class ApplicationState extends Application {
     public void setTicket(Ticket ticket) { this.ticket = ticket; }
     public void setPeopleAhead(Integer peopleInFront) { this.peopleAhead = peopleInFront; }
 
+    public void clearAppState(){
+            this.storeCity = "";
+            this.storeName = "";
+            this.address = "";
+            this.storeKey = "";
+            this.ticket = new Ticket(0,null);
+            this.storeID = 0;
+            this.isStoreManager = false;
+            this.peopleAhead = 0;
+    }
+    public void printAppState(){
+        System.out.println("STATE PRINT");
+        if(this.storeCity != null) System.out.println("storeCity: " + this.storeCity);
+        if(this.storeName != null) System.out.println("storeName: " + this.storeName);
+        if(this.address != null) System.out.println("address: " + this.address);
+        if(this.storeKey != null) System.out.println("storeKey: " + this.storeKey);
+        if(this.storeID != null) System.out.println("storeID: " + this.storeID.toString());
+        if(this.isStoreManager != null) System.out.println("isStoreManager: " + this.isStoreManager.toString());
+        if(this.peopleAhead != null) System.out.println("peopleAhead: " + this.peopleAhead.toString());
+    }
+
 }

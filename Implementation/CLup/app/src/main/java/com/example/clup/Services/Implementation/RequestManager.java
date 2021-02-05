@@ -129,6 +129,25 @@ public class RequestManager implements QueueService, TicketService {
     }
 
     @Override
+    public void checkQueue(Store store, OnCheckTicketListener onCheckTicketListener) {
+        maxId = -1;
+        databaseManager.getStore(store, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                //calculate people in front
+                int peopleAhead = 0;
+                for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
+                    if (i.child("ticketState").getValue().toString().equals("WAITING"))
+                        peopleAhead++;
+                }
+                onCheckTicketListener.onWaiting(peopleAhead);
+                System.out.println("AAAAA" + peopleAhead);
+                return;
+            }
+        });
+    }
+
+    @Override
     public void cancelTicket(Store store, Ticket ticket, OnTaskCompleteListener onTaskCompleteListener) {
         databaseManager.getTicket(store, String.valueOf(ticket.getId()), new OnGetDataListener() {
             @Override

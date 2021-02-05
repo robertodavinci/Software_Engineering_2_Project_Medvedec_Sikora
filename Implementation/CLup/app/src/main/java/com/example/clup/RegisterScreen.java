@@ -54,7 +54,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.banner:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginController.class));
                 break;
             case R.id.registerButton:
                 registerUser();

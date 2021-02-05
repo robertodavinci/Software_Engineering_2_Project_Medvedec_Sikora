@@ -59,7 +59,8 @@ public class StoreController extends AppCompatActivity{
             listView = findViewById(R.id.select_store);
             selButton = (Button) findViewById(R.id.storeSelectionButton);
             //textView = findViewById(R.id.text_v);
-
+            // CHECK APP STATE
+            ((ApplicationState) getApplication()).printAppState();
 
 
             ArrayList<String> cit = new ArrayList<>();
@@ -131,6 +132,7 @@ public class StoreController extends AppCompatActivity{
                         toast.show();
                     }*/
                  //   else {
+                        adr.clear();
                         storeSet = true;
                         sStore = parent.getItemAtPosition(position).toString();
 
@@ -197,6 +199,12 @@ public class StoreController extends AppCompatActivity{
 
             });
 
+        }
+
+        @Override
+        public void onBackPressed () {
+            ((ApplicationState) getApplication()).clearAppState();
+            startActivity(new Intent(StoreController.this, HomeController.class));
         }
 
        /* @Override

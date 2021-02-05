@@ -2,6 +2,7 @@ package com.example.clup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +57,8 @@ public class QrController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_controller);
+        // CHECK APP STATE
+        ((ApplicationState) getApplication()).printAppState();
 
         ticketNum = (TextView) findViewById(R.id.ticketNum);
         storeInfo = (TextView) findViewById(R.id.storeInfo);
@@ -105,7 +108,7 @@ public class QrController extends AppCompatActivity {
             System.out.println("KEYEND");
             //System.out.println(plainText);
             */
-            BitMatrix bitMatrix = multiFormatWriter.encode(cipherstring, BarcodeFormat.QR_CODE,350, 350 );
+            BitMatrix bitMatrix = multiFormatWriter.encode(cipherstring, BarcodeFormat.QR_CODE,500 , 500 );
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrImage.setImageBitmap(bitmap);
@@ -138,7 +141,9 @@ public class QrController extends AppCompatActivity {
                 director.getRequestManager().cancelTicket(((ApplicationState) getApplication()).getTicket().getStore(), ((ApplicationState) getApplication()).getTicket(), new OnTaskCompleteListener() {
                     @Override
                     public void onSuccess() {
+                        ((ApplicationState) getApplication()).clearAppState();
                         System.out.println("Ticket deleted");
+                        startActivity((new Intent(view.getContext(), HomeController.class)));
                     }
 
                     @Override
