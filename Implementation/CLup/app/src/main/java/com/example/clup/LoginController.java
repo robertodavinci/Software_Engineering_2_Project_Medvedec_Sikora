@@ -39,7 +39,7 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
     private ProgressBar progressBar;
     private List<String> temp;
     private List<Integer> occupancy;
-
+    Director director = new Director();
     private FirebaseAuth mAuth;
 
     @Override
@@ -67,7 +67,6 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
 
         DatabaseManager db = new DatabaseManager();
         System.out.println("begin");
-        Director director = new Director();
         RequestManager requestManager = new RequestManager();
         String qrCodeText = "Milano, Italy; Carrefour; Viale Ungheria 3; 0; 8";
         Store store = new Store(0, "Carrefour", "Viale Ungheria 3", "Milano, Italy");
@@ -368,8 +367,17 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
-                        ((ApplicationState) getApplication()).setStoreManager(true);
-                        startActivity(new Intent(LoginController.this, UserProfile.class));
+
+                        director.getDatabaseManager().getUserStore(FirebaseAuth.getInstance().getCurrentUser().getUid(), new OnGetDataListener() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                ((ApplicationState) getApplication()).setStoreName(dataSnapshot.child("name").getValue().toString());
+                                ((ApplicationState) getApplication()).setStoreCity(dataSnapshot.child("city").getValue().toString());
+                                ((ApplicationState) getApplication()).setStoreID(Integer.valueOf(String.valueOf(dataSnapshot.child("id").getValue())));
+                                ((ApplicationState) getApplication()).setStoreManager(true);
+                                startActivity(new Intent(LoginController.this, StoreManagerController.class));
+                            }
+                        });
                     } else{
                         user.sendEmailVerification();
                         Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();

@@ -16,6 +16,7 @@ public class ApplicationState extends Application {
     private Ticket ticket = new Ticket(0,null);
     private Integer storeID = 1;
     private Boolean isStoreManager = false;
+    private Boolean storeOpened;
     private Integer peopleAhead;
 
     public String getStoreCity() { return storeCity; }
@@ -30,6 +31,7 @@ public class ApplicationState extends Application {
     public Boolean getStoreManager() { return isStoreManager; }
     public Ticket getTicket() { return ticket; }
     public Integer getPeopleAhead() { return peopleAhead; }
+    public Boolean getStoreOpened() { return storeOpened; }
 
     public void setStoreCity(String storeCity) {
         this.storeCity = storeCity;
@@ -43,6 +45,7 @@ public class ApplicationState extends Application {
     public void setAddress(String address) { this.address = address; }
     public void setStoreKey(String storeKey) { this.storeKey = storeKey; }
     public void setStoreManager(Boolean storeManager) { isStoreManager = storeManager; }
+    public void setStoreOpened(Boolean storeStatus) { storeOpened = storeStatus; }
     public void setTicket(Ticket ticket) { this.ticket = ticket; }
     public void setPeopleAhead(Integer peopleInFront) { this.peopleAhead = peopleInFront; }
 
@@ -55,6 +58,7 @@ public class ApplicationState extends Application {
             this.storeID = 0;
             this.isStoreManager = false;
             this.peopleAhead = 0;
+            this.storeOpened = null;
     }
     public void printAppState(){
         System.out.println("STATE PRINT");
@@ -64,6 +68,7 @@ public class ApplicationState extends Application {
         if(this.storeKey != null) System.out.println("storeKey: " + this.storeKey);
         if(this.storeID != null) System.out.println("storeID: " + this.storeID.toString());
         if(this.isStoreManager != null) System.out.println("isStoreManager: " + this.isStoreManager.toString());
+        if(this.storeOpened != null) System.out.println("storeOpened: " + this.storeOpened.toString());
         if(this.peopleAhead != null) System.out.println("peopleAhead: " + this.peopleAhead.toString());
     }
 

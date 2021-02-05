@@ -10,6 +10,7 @@ import com.example.clup.Entities.TicketState;
 import com.example.clup.Entities.Timeslot;
 import com.example.clup.OnCredentialCheckListener;
 import com.example.clup.OnGetDataListener;
+import com.example.clup.OnGetTicketListener;
 import com.example.clup.Services.DatabaseManagerService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -78,6 +79,21 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
+
+    @Override
+    public void getUserStore(String uid, OnGetDataListener onGetDataListener) {
+        storeReference = firebaseDatabase.getReference("Users/"+ uid + "/" + "Store");
+        storeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                onGetDataListener.onSuccess(dataSnapshot);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {  }
+        });
+    }
+
+
     @Override
     public void getStoreOcupancy(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/occupancy/");
@@ -155,6 +171,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
+
 
     @Override
     public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener){

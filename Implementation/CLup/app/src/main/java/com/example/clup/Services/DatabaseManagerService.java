@@ -12,6 +12,7 @@ public interface DatabaseManagerService {
     public void getStoreCities(OnGetDataListener onGetDataListener);
     public void getStores(String city, OnGetDataListener onGetDataListener);
     public void getStore(Store store, OnGetDataListener onGetDataListener);
+    public void getUserStore(String uid, OnGetDataListener onGetDataListener);
     public void getStoreOcupancy(Store store, OnGetDataListener onGetDataListener);
     public void getStoreOpen(Store store, OnGetDataListener onGetDataListener);
     public void getStoreMaxNoCustomers(Store store, OnGetDataListener onGetDataListener);

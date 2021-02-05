@@ -105,6 +105,7 @@ public class RequestManager implements QueueService, TicketService {
         });
     }
 
+
     @Override
     public void checkTicket(Ticket ticket, OnCheckTicketListener onCheckTicketListener) {
         maxId = -1;
