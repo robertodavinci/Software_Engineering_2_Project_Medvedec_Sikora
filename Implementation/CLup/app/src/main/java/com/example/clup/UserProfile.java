@@ -2,7 +2,6 @@ package com.example.clup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.activity.ComponentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,7 +39,7 @@ public class UserProfile extends AppCompatActivity {
         emailField = (TextView) findViewById(R.id.emailField);
         // CHECK APP STATE
         ((ApplicationState) getApplication()).printAppState();
-        logoutButton = (Button) findViewById(R.id.logoutButton);
+        logoutButton = (Button) findViewById(R.id.continueButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

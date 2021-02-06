@@ -367,18 +367,9 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
-
-                        director.getDatabaseManager().getUserStore(FirebaseAuth.getInstance().getCurrentUser().getUid(), new OnGetDataListener() {
-                            @Override
-                            public void onSuccess(DataSnapshot dataSnapshot) {
-                                ((ApplicationState) getApplication()).setStoreName(dataSnapshot.child("name").getValue().toString());
-                                ((ApplicationState) getApplication()).setStoreCity(dataSnapshot.child("city").getValue().toString());
-                                ((ApplicationState) getApplication()).setStoreID(Integer.valueOf(String.valueOf(dataSnapshot.child("id").getValue())));
-                                ((ApplicationState) getApplication()).setStoreManager(true);
-                                startActivity(new Intent(LoginController.this, StoreManagerController.class));
-                            }
-                        });
-                    } else{
+                        startActivity(new Intent(LoginController.this, StoreManagerController.class));
+                    }
+                    else{
                         user.sendEmailVerification();
                         Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
                     }

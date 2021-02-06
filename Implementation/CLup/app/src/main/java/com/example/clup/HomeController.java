@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.clup.Entities.ApplicationState;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeController extends AppCompatActivity implements View.OnClickListener{
 
@@ -26,6 +28,11 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
 
         storeButton = (Button) findViewById(R.id.storeButton);
         loginButton = (Button) findViewById(R.id.loginButton);
+        // Update user
+        //FirebaseAuth.getInstance().updateCurrentUser(FirebaseAuth.getInstance().getCurrentUser());
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) System.out.println("NOPE");
+        //else System.out.println("EMAILL " + FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        //FirebaseAuth.getInstance().signOut();
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +46,10 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v2) {
-                startActivity((new Intent(v2.getContext(), LoginController.class)));
+                if (FirebaseAuth.getInstance().getCurrentUser() == null)
+                    startActivity((new Intent(v2.getContext(), LoginController.class)));
+                else
+                    startActivity((new Intent(v2.getContext(), PreLoginController.class)));
             }
         });
     }

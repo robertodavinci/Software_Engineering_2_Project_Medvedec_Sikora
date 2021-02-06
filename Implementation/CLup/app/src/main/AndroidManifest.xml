@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CLup">
-        <activity android:name=".StoreManagerController"></activity>
+        <activity android:name=".PreLoginController"></activity>
+        <activity android:name=".CustomerController" />
+        <activity android:name=".StoreManagerController" />
         <activity android:name=".TicketController" />
         <activity android:name=".HomeController">
             <intent-filter>

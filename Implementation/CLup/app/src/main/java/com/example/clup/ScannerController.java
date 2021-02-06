@@ -2,6 +2,9 @@ package com.example.clup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -32,7 +35,11 @@ public class ScannerController extends AppCompatActivity  {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ScannerController.this, result.getText(), Toast.LENGTH_SHORT).show();
+
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result",result.getText());
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
                     }
                 });
             }

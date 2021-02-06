@@ -35,7 +35,7 @@ public class DatabaseManager implements DatabaseManagerService {
     static private DatabaseManager singleton = null;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference storeReference;
+    private DatabaseReference storeReference, storeReference2;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -171,7 +171,6 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
 
     @Override
     public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener){
