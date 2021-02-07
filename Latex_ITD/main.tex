@@ -1,0 +1,119 @@
+\input{commandsFile}
+\DeclareUnicodeCharacter{202F}{AAAAAA}
+\begin{document}
+\fontfamily{ppl}\selectfont
+
+%TITLE PAGE
+\setlength\parindent{18pt}
+\begin{titlepage}
+
+
+%LOGO
+
+{\begin{table}[t!]
+\centering
+\begin{tabu} to \textwidth { X[1.3,r,p] X[1.7,l,p] }
+\textcolor{Blue}
+{\textbf{\small{Software Engineering 2\break CLup project by\break Robert Medvedec\break Toma Sikora}}} & \includegraphics[scale=0.5]{Images/PolimiLogo}
+\end{tabu}
+\end{table}}~\\ [7cm]
+
+%TITLE 
+
+\begin{flushleft}
+
+%Replace the text string with your title
+{\textcolor{Blue}{\textbf{\Huge{Implementation  and  Test  deliverable}}}} \\ [1cm]
+
+\end{flushleft}
+
+\end{titlepage}
+
+%Define deliverable specific info
+%Replace cell contents where needed
+\begin{table}[h!]
+\begin{tabu} to \textwidth { X[0.3,r,p] X[0.7,l,p] }
+\hline
+
+\break\textbf{Deliverable:} & \break ITD\\
+\break\textbf{Title:} & \break  Implementation  and  Test  deliverable \\
+\textbf{Authors:} & Robet Medvedec, Toma Sikora \\
+\textbf{Version:} & 1.0 \\ 
+\textbf{Date:} & 7-February-2021 \\
+\textbf{Download page:} & \url{https://github.com/robertodavinci/Software_Engineering_2_Project_Medvedec_Sikora/Implementation/Clup} \\
+\break\textbf{Copyright:} & \break Copyright © 2021, R. Medvedec, T. Sikora – All rights reserved\break\\
+\hline
+\end{tabu}
+\end{table}
+
+
+
+
+\setcounter{page}{2}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\newpage
+\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+\newpage
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Introduction}}}
+\label{sect:introduction}
+\input{Files/introduction}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Requirements}}}
+\label{sect:requirements}
+\input{Files/requirements}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Adopted Development Frameworks}}}
+\label{sect:adopteddevelopmentframeworks}
+\input{Files/adopteddevelopmentframeworks}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Code Structure}}}
+\label{sect:codestructure}
+\input{Files/codestructure}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Testing}}}
+\label{sect:testing}
+\input{Files/testing}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Installation Instructions}}}
+\label{sect:installationinstructions}
+\input{Files/installationinstructions}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+{\color{Blue}{\section{Effort Spent}}}
+\label{sect:effort}
+\input{Files/effort}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plain}
+\bibliography{main}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+\end{document}

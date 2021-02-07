@@ -1,0 +1,68 @@
+\subsection{Idea of requirements implementation}
+\hspace{\parindent}This version of the application is not meant for the mass market. It is rather a rough concept and a representation of the design ideas presented in the previous documents. Whilst most of the main functionalities are implemented and are pretty much ready to go (at least on a smaller scale), some of the more detailed functionalities are not completely implemented, if they are implemented at all.
+
+Some of the design ideas of the app are also based on the fact that this will not be used on a mass scale. For a version that would go on the market, some things would be adapted and changed and some other technologies might be considered. More on these topics in the following chapters.
+\subsection{Original project requirements}
+\hspace{\parindent}The original idea of CLup system required the following functionalities:
+\begin{itemize}
+\item Simple to use
+\item Support majority of devices
+\item Used by both customers and store employees 
+\item \textbf{User features}
+\begin{itemize}
+\item Selecting a desired store from the list of supported stores
+\item Requesting a virtual ticket
+\item Booking a visit
+\item Getting an estimation of travel time to the store and waiting time
+\item Notifying customers about their ticket state
+\end{itemize}
+\item \textbf{Store features}
+\begin{itemize}
+\item Opening and closing a virtual store
+\item Controlling the influx of customers to the store
+\item Managing queue of customers
+\item Ticket scanning mechanism
+\end{itemize}
+\end{itemize}
+\newpage
+\subsection{Requirements implementation}
+
+\hspace{\parindent}The following functionalities are implemented into this version of CLup system:
+\begin{itemize}
+\item \textbf{Simple to use} \newline
+\hspace{\parindent} Selected app design consists of only a few colors that are providing maximal simplicity and clarity when using the app. Every time an application takes more than a second to load a certain data, a loading screen is shown to ensure that the user is aware of the loading action. Every action in the app is logical and prevents the user from doing some irreversible actions or something they would not like to do in that situation. Finally, app is considerably fast and provides clear instructions on main actions at all times. No additional menus or hidden buttons are implemented that could possibly confuse the user.
+
+\item \textbf{Support majority of devices} \newline
+\hspace{\parindent} App is built for all Android devices (tablets and phones) that support Android version 8.0 (Oreo) or above. Since application only has sense to be used on a mobile or tablet device, no desktop application has been developed. Android mobile phones take up around 72\% of all mobile devices worldwide, with the Android 8.0 version or above being around 91\% of that number, which means that this app covers around 65\% of all mobile phones. This number could easily be brought to  well over 90\% with an iOS version of the app which would be relatively easy to port and adapt to iPhones and iPads. The idea of making only an Android version was due to the fact that the main functionalities would work exactly the same on both operating systems and only one version is sufficient to showcase the idea and design rationale of the project. 
+
+\item \textbf{Used by both customers and store employees } \newline
+\hspace{\parindent} The same app is used for both requesting a ticket and controlling the store customer influx. Since only store managers that are in control of the store have user accounts, it was easy to separate those two functionalities of the app. Customers don't require to make accounts and they can use the app simply by downloading and installing it on their phones.
+
+\item \textbf{Selecting a desired store from the list of supported stores} \newline
+\hspace{\parindent} A simple drop down menu of the stores is located in the main part of the app. To simplify the certain store search progress, stores have been arranged by both the city and the store name. Customer firstly selects the city of the desired store and then the store chain name, after which a list of all stores with the same name in that city are displayed along with their addresses, making searching for the store easy and fast. 
+\item \textbf{Requesting a virtual ticket} \newline
+\hspace{\parindent} After selecting a store, customer can request a virtual ticket with a simple click. Before generating a ticket there will be a number shown indicating how many customers are currently in queue for that exact store, allowing customer to plan his arrival. After the customer gets his ticket, he can check the ticket state by simple press of a button and see whether they are in queue or whether they can enter the store. After the ticket has been activated, customers have 5 minutes to enter the store before the ticket expires, which would force customers to request another ticket.
+\item \textbf{Opening and closing a virtual store} \newline
+\hspace{\parindent} Store managers have certain stores connected to them and they can control both the influx of customers and the store opening/closing. A simple push of a button can used to open the store and allow ticket requests, while the same can be done with the closing of the store, which deletes all the tickets that are currently in queue or active.
+\item \textbf{Controlling the influx of customers to the store} \newline
+\hspace{\parindent} Influx control is done with two main functions - ticket scanning and store exit registration. Every time a valid ticket has been scanned, the ticket is immediately invalidated and a customer is allowed to go into store. Store attributes regarding current occupants and maximum number of occupants are updated, allowing the store manager to see the store status and availability at all times. 
+A store exit is registered with a simple button press, without scanning in order to speed up the process and reduce the number of close encounters between the store manager and the customer, allowing another customer that is currently in queue to enter the store.
+
+\item \textbf{Managing queue of customers}
+\hspace{\parindent} Queue managing has been explained in the requirement above.
+\item \textbf{Ticket scanning mechanism}
+\hspace{\parindent} Ticket scanning is done using a simple QR code scanner that is encoded. After its decoding, the ticket is validated and the customer is either allowed or denied entrance to the store. QR code scanning is done with the phone camera so no additional hardware is required.
+\end{itemize}
+
+The following functionalities are NOT implemented into this version of CLup system:
+\begin{itemize}
+\item \textbf{ Booking a visit}
+\hspace{\parindent} This feature is not required to be implemented in the groups of two. However, it can easily be added as most of the functionalities are written, like timeslots, and this implementation would only require minor adjustments. 
+\item \textbf{Getting an estimation of travel time to the store and waiting time}
+\hspace{\parindent} In our specification documents, this features was solely meant to be used with "Book a visit" feature, which is the reason it is not implemented in this version. The main reason for excluding waiting time estimation was the need for the tickets to be scanned twice in order to get the average shopping time data, thus increasing the possibility of spreading the disease. This can also easily be implemented if a greater need for this feature is shown. We have replaced it with the number of customers in front that can also help the customer to assume the average wait time.
+\item \textbf{Notifying customers about their ticket state}
+\hspace{\parindent} Same as the example above, we decided to exclude the notifications to keep simplicity of the app since requesting a ticket without reservation is mainly done when being close to the store, due to ticket's short lifespan in order to keep the queue going fast. This requirement can easily be added together with "Book a visit" feature since adding push notifications is not a large task.
+\end{itemize}
+
+
+

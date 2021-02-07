@@ -42,7 +42,7 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
 
         if (checkSelfPermission(Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-        
+
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
