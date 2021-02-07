@@ -1,10 +1,14 @@
 package com.example.clup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +22,7 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
     private Button storeButton, loginButton;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,11 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
         if (FirebaseAuth.getInstance().getCurrentUser() == null) System.out.println("NOPE");
         //else System.out.println("EMAILL " + FirebaseAuth.getInstance().getCurrentUser().getEmail());
         //FirebaseAuth.getInstance().signOut();
+
+
+        if (checkSelfPermission(Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
