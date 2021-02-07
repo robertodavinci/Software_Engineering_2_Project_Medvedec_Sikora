@@ -76,7 +76,9 @@ public class DatabaseManager implements DatabaseManagerService {
                 onGetDataListener.onSuccess(dataSnapshot);
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {  }
+            public void onCancelled(DatabaseError databaseError) {
+                onGetDataListener.onFailure(databaseError);
+            }
         });
     }
 
@@ -230,12 +232,13 @@ public class DatabaseManager implements DatabaseManagerService {
         }
         return singleton;
     }
-
+/*
     @Override
     public void persistTicketQrCodeString(Ticket ticket) {
         DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+ticket.getStore().getCity()+"/"+ticket.getStore().getName()+"/"+ticket.getStore().getId() + "/Tickets/"+ticket.getId()+"/qrurl");
         updateReference.setValue(ticket.getQrCode());
     }
+    */
 
     @Override
     public void persistExit(Store store){
@@ -290,7 +293,7 @@ public class DatabaseManager implements DatabaseManagerService {
         Map<String, Object> updateParent = new HashMap<>();
         Map<String, Object> updateChildren = new HashMap<>();
         updateChildren.put("expires", ticket.getTimeslot().getExpectedEnter().toString());
-        updateChildren.put("qrurl", ticket.getQrCode());
+        // updateChildren.put("qrurl", ticket.getQrCode());
         updateChildren.put("ticketState", ticket.getTicketState());
         updateParent.put(String.valueOf(ticket.getId()), updateChildren);
         System.out.println("Parent "+updateParent);
@@ -301,6 +304,9 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onSuccess(DataSnapshot dataSnapshot) {
                 DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/maxId");
                 updateReference.setValue(Integer.parseInt(dataSnapshot.getValue().toString())+1);
+            }
+            @Override
+            public void onFailure(DatabaseError databaseError){
             }
         });
     }

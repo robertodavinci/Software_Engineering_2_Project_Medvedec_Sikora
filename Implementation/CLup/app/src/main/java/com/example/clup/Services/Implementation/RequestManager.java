@@ -13,6 +13,7 @@ import com.example.clup.Services.DatabaseManagerService;
 import com.example.clup.Services.QueueService;
 import com.example.clup.Services.TicketService;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -102,6 +103,9 @@ public class RequestManager implements QueueService, TicketService {
                 databaseManager.persistTicket(ticket);
                 onGetTicketListener.onSuccess(ticket);
             }
+            @Override
+            public void onFailure(DatabaseError databaseError){
+            }
         });
     }
 
@@ -112,19 +116,29 @@ public class RequestManager implements QueueService, TicketService {
         databaseManager.getStore(ticket.getStore(), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("Tickets").child(String.valueOf(ticket.getId())).child("ticketState").getValue().toString().equals("ACTIVE")) {
-                    //how much does he have left
-                    onCheckTicketListener.onActive(Timestamp.valueOf(dataSnapshot.child("Tickets").child(String.valueOf(ticket.getId())).child("expires").getValue().toString()));
-                } else {
-                    //calculate people in front
-                    int peopleAhead = 1;
-                    for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
-                        if (i.child("ticketState").getValue().toString().equals("WAITING") && Integer.parseInt(i.getKey()) < ticket.getId())
-                            peopleAhead++;
+                if(dataSnapshot.child("Tickets").hasChild(String.valueOf(ticket.getId())) == true) {
+                    if (dataSnapshot.child("Tickets").child(String.valueOf(ticket.getId())).child("ticketState").getValue().toString().equals("ACTIVE")) {
+                        //how much does he have left
+                        onCheckTicketListener.onActive(Timestamp.valueOf(dataSnapshot.child("Tickets").child(String.valueOf(ticket.getId())).child("expires").getValue().toString()));
+                    } else {
+                        //calculate people in front
+                        int peopleAhead = 1;
+                        for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
+                            if (i.child("ticketState").getValue().toString().equals("WAITING") && Integer.parseInt(i.getKey()) < ticket.getId())
+                                peopleAhead++;
+                        }
+                        onCheckTicketListener.onWaiting(peopleAhead);
                     }
-                    onCheckTicketListener.onWaiting(peopleAhead);
                 }
+                else {
+                    onCheckTicketListener.onBadStore("Ticket has already been used");
+                    }
                 return;
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError){
+                onCheckTicketListener.onBadStore("Bad store information - reload app");
             }
         });
     }
@@ -136,6 +150,10 @@ public class RequestManager implements QueueService, TicketService {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 //calculate people in front
+                if (Integer.parseInt(dataSnapshot.child("open").getValue().toString()) == 0) {
+                    onCheckTicketListener.onBadStore("The store is not open");
+                    return;
+                }
                 int peopleAhead = 0;
                 for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
                     if (i.child("ticketState").getValue().toString().equals("WAITING"))
@@ -144,6 +162,9 @@ public class RequestManager implements QueueService, TicketService {
                 onCheckTicketListener.onWaiting(peopleAhead);
                 System.out.println("AAAAA" + peopleAhead);
                 return;
+            }
+            @Override
+            public void onFailure(DatabaseError databaseError){
             }
         });
     }
@@ -154,12 +175,15 @@ public class RequestManager implements QueueService, TicketService {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {
-                    onTaskCompleteListener.onFailure();
+                    onTaskCompleteListener.onFailure(0);
                     return;
                 }
                 dataSnapshot.getRef().setValue(null);
                 onTaskCompleteListener.onSuccess();
                 return;
+            }
+            @Override
+            public void onFailure(DatabaseError databaseError){
             }
         });
     }

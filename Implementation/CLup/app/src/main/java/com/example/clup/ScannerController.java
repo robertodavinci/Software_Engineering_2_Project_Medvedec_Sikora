@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.clup.Entities.ApplicationState;
 import com.google.zxing.Result;
 
 
@@ -64,19 +65,10 @@ public class ScannerController extends AppCompatActivity  {
         super.onPause();
     }
 
-
-
-/*
-    DECRYPT{
-        String[] splitcipher = cipherstring.split("w");
-        byte finalcipher[] = new byte[splitcipher.length];
-        Integer i = 0;
-        for(String ac : splitcipher){
-            //System.out.println(ac);
-            byte a = (byte) Integer.parseInt(ac);
-            finalcipher[i] = a;
-            i++;
-        }
+    @Override
+    public void onBackPressed () {
+        startActivity(new Intent(ScannerController.this, CustomerController.class));
+        finish();
     }
-*/
+
 }

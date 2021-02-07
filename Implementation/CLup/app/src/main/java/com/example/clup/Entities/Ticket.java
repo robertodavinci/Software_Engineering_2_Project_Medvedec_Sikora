@@ -5,7 +5,7 @@ public class Ticket {
     private TicketState ticketState;
     private Store store;
     private Timeslot timeslot;
-    private String qrCode = "www.stipe.stipe";
+   // private String qrCode;
 
     public Ticket(int id, Store store){
         this.id = id;
@@ -39,9 +39,11 @@ public class Ticket {
         return timeslot;
     }
 
-    public String getQrCode() {
+  /*  public String getQrCode() {
         return qrCode;
     }
+
+   */
 
     public void setTimeslot(Timeslot timeslot) {
         this.timeslot = timeslot;
@@ -55,9 +57,11 @@ public class Ticket {
         this.id = id;
     }
 
-    public void setQrCode(String qrCode) {
+  /*  public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
     }
+    */
+
 
     @Override
     public String toString() {

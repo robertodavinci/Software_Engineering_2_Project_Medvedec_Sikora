@@ -30,7 +30,7 @@ import java.util.Base64;
 
 public class QrController extends AppCompatActivity {
 
-    Button genButton, cancelButton;
+    Button checkButton, cancelButton;
     EditText qrText;
     ImageView qrImage;
     TextView storeInfo;
@@ -63,7 +63,7 @@ public class QrController extends AppCompatActivity {
         ticketNum = (TextView) findViewById(R.id.ticketNum);
         storeInfo = (TextView) findViewById(R.id.storeInfo);
         ticketStatus = (TextView) findViewById(R.id.ticketStatus);
-        genButton = (Button) findViewById(R.id.buttonqr);
+        checkButton = (Button) findViewById(R.id.buttonqr);
         cancelButton = (Button) findViewById(R.id.buttoncan);
         qrImage = (ImageView) findViewById(R.id.imageViewQR);
         Director director = new Director();
@@ -91,7 +91,12 @@ public class QrController extends AppCompatActivity {
                 ((ApplicationState) getApplication()).getTicket().setTimeslot(new Timeslot(expireTime));
                 ticketStatus.setText("You're up - ticket expires at " + expireTime.toString());
             }
+            @Override
+            public void onBadStore(String string){
+                ticketStatus.setText("Bad store information - reload app");
+            }
         });
+
 
 
         qrString = storeCity + ";" + storeName + ";" + storeID + ";" + ticketID.toString();
@@ -108,7 +113,7 @@ public class QrController extends AppCompatActivity {
             System.out.println("KEYEND");
             //System.out.println(plainText);
             */
-            BitMatrix bitMatrix = multiFormatWriter.encode(cipherstring, BarcodeFormat.QR_CODE,500 , 500 );
+            BitMatrix bitMatrix = multiFormatWriter.encode(cipherstring, BarcodeFormat.QR_CODE,400 , 400 );
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrImage.setImageBitmap(bitmap);
@@ -117,7 +122,7 @@ public class QrController extends AppCompatActivity {
             System.out.println("NOOOOOOOOOU");
         }
 
-        genButton.setOnClickListener(new View.OnClickListener() {
+        checkButton.setOnClickListener(new View.OnClickListener() {
         @Override
          public void onClick(View view){
             director.getRequestManager().checkTicket(((ApplicationState) getApplication()).getTicket(), new OnCheckTicketListener() {
@@ -132,8 +137,13 @@ public class QrController extends AppCompatActivity {
                     ((ApplicationState) getApplication()).getTicket().setTimeslot(new Timeslot(expireTime));
                     ticketStatus.setText("You're up - ticket expires at " + expireTime.toString());
                 }
+                @Override
+                public void onBadStore(String string){
+                    ticketStatus.setText(string);
+                }
+
             });
-        };
+        }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,12 +157,19 @@ public class QrController extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure() {
+                    public void onFailure(int err) {
                         System.out.println("Ticket not deleted");
+                        startActivity((new Intent(view.getContext(), TicketController.class)));
                     }
                 });
             };
         });
+    }
+
+    @Override
+    public void onBackPressed () {
+        startActivity(new Intent(QrController.this, TicketController.class));
+        finish();
     }
 
 }

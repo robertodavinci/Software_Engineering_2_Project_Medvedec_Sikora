@@ -46,4 +46,9 @@ public class PreLoginController extends AppCompatActivity {
             };
         });
     }
+    @Override
+    public void onBackPressed () {
+        startActivity(new Intent(PreLoginController.this, HomeController.class));
+        finish();
+    }
 }

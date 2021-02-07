@@ -57,14 +57,28 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-
-
-
         /* ERASING SHARED PREFERENCES
          SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
          SharedPreferences.Editor editor = sharedpreferences.edit();
          editor.clear();
          editor.commit();
+         */
+    }
+
+    @Override
+    public void onBackPressed () {
+        ((ApplicationState) getApplication()).clearAppState();
+        //startActivity(new Intent(HomeController.this, StoreController.class));
+        // Clears stack of activities
+        finishAffinity();
+
+        //finish();
+        /*Intent(Intent.ACTION_MAIN).apply {
+        addCategory(Intent.CATEGORY_HOME)
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(this)
+        }
+
          */
     }
 }

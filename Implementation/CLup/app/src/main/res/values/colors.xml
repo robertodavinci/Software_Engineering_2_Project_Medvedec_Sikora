@@ -12,6 +12,7 @@
     <color name="greyed_out">#555555</color>
     <color name="colorPrimaryDark">#1A2C56</color> <!--// yankee blue-->
     <color name="colorPrimary">#D1A683</color>
+    <color name="colorPrimaryTransparent">#B3D1A683</color>
     <color name="colorPrimaryGreyed">#7C6655</color>
     <color name="colorAccent">#66ccff</color>
 

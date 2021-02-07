@@ -25,7 +25,7 @@ public interface DatabaseManagerService {
     public void persistExit(Store store);
     public void persistEnter(Store store, Ticket ticket);
     public void persistTicket(Ticket ticket);
-    public void persistTicketQrCodeString(Ticket ticket);
+   // public void persistTicketQrCodeString(Ticket ticket);
     public void openStore(Store store);
     public void closeStore(Store store);
 }

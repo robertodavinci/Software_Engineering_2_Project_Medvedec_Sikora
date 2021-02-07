@@ -47,13 +47,12 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_controller);
         // CHECK APP STATE
-        ((ApplicationState) getApplication()).printAppState();
+        //((ApplicationState) getApplication()).printAppState();
 
         mAuth = FirebaseAuth.getInstance();
 
         editEmail = (EditText) findViewById(R.id.editEmailAddress);
         editPassword = (EditText) findViewById(R.id.editPassword);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         loginButton = (Button) findViewById(R.id.button);
         loginButton.setOnClickListener(this);
@@ -379,6 +378,11 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+    }
 
+    @Override
+    public void onBackPressed () {
+        startActivity(new Intent(LoginController.this, HomeController.class));
+        finish();
     }
 }

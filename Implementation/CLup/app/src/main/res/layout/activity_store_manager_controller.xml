@@ -8,82 +8,119 @@
     android:fontFamily="@font/titan_one"
     tools:context=".StoreManagerController">
 
-    <TextView
-        android:id="@+id/storeInfo3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/titan_one"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/storeOpen"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/titan_one"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storeInfo3" />
+        <TextView
+            android:id="@+id/storeInfo3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/titan_one"
+            android:text="Store address Store address Store address"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/customerControl"
-        android:layout_width="0dp"
-        android:layout_height="175dp"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="66dp"
-        android:fontFamily="@font/titan_one"
-        android:text="Customer control"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storeOpen" />
+        <TextView
+            android:id="@+id/storeOpen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/titan_one"
+            android:text="Store status"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storeInfo3" />
 
-    <Button
-        android:id="@+id/closeStore"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/titan_one"
-        android:text="Close store"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customerControl" />
+        <Button
+            android:id="@+id/customerControl"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="66dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="66dp"
+            android:fontFamily="@font/titan_one"
+            android:text="Customer control"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storeOpen" />
 
-    <Button
-        android:id="@+id/openStore"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/titan_one"
-        android:text="Open store"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customerControl" />
+        <Button
+            android:id="@+id/closeStore"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/titan_one"
+            android:text="Close store"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/openStore"
+            app:layout_constraintTop_toBottomOf="@+id/customerControl" />
+
+        <Button
+            android:id="@+id/openStore"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/titan_one"
+            android:text="Open store"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@+id/closeStore"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customerControl" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/loadscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/loadingbckg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryTransparent"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/loading2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:maxWidth="200dp"
+            android:maxHeight="200dp"
+            android:visibility="visible"
+            tools:srcCompat="@drawable/loading" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

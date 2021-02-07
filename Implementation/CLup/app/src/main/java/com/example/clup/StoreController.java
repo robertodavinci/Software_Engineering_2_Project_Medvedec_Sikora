@@ -2,7 +2,6 @@ package com.example.clup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +17,7 @@ import com.example.clup.Entities.ApplicationState;
 import com.example.clup.Entities.Store;
 import com.example.clup.Services.Implementation.Director;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class StoreController extends AppCompatActivity{
             ((ApplicationState) getApplication()).setStoreCity(null);
             ((ApplicationState) getApplication()).setStoreID(null);
             ((ApplicationState) getApplication()).setStoreName(null);
-            setContentView(R.layout.activity_store);
+            setContentView(R.layout.activity_store_controller);
             cities = findViewById(R.id.spinner_cities);
             stores = findViewById(R.id.spinner_stores);
             listView = findViewById(R.id.select_store);
@@ -103,7 +103,9 @@ public class StoreController extends AppCompatActivity{
                                 stores.setAdapter(new ArrayAdapter<>(StoreController.this,
                                         android.R.layout.simple_spinner_dropdown_item, res));
                             }
-
+                            @Override
+                            public void onFailure(DatabaseError databaseError){
+                            }
                         });
 
 
@@ -143,6 +145,10 @@ public class StoreController extends AppCompatActivity{
                                     adr.add(i.child("address").getValue().toString());
                                 }
                                 listView.setAdapter(new ArrayAdapter<>(StoreController.this, android.R.layout.simple_list_item_1, adr));
+                            }
+                            @Override
+                            public void onFailure(DatabaseError databaseError){
+
                             }
 
                         });
@@ -186,6 +192,8 @@ public class StoreController extends AppCompatActivity{
                             //System.out.println(((ApplicationState) getApplication()).getTicket().getId());
                             startActivity((new Intent(view.getContext(), TicketController.class)));
                         }
+                        @Override
+                        public void onFailure(DatabaseError databaseError){}
                     });
 
                     /*sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -205,6 +213,7 @@ public class StoreController extends AppCompatActivity{
         public void onBackPressed () {
             ((ApplicationState) getApplication()).clearAppState();
             startActivity(new Intent(StoreController.this, HomeController.class));
+            finish();
         }
 
        /* @Override

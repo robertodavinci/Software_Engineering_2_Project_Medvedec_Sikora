@@ -19,19 +19,20 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="286dp"
+            android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_marginStart="71dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="54dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="67dp"
             android:fontFamily="@font/titan_one"
-            android:textColorHighlight="@color/colorPrimary"
             android:scaleX="1"
             android:scaleY="1"
             android:text="Store selection"
+            android:textAlignment="center"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#FFFFFF"
+            android:textColorHighlight="@color/colorPrimary"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="160dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,13 +52,13 @@
 
         <LinearLayout
             android:layout_width="299dp"
-            android:layout_height="163dp"
+            android:layout_height="140dp"
             android:layout_marginStart="59dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="60dp"
             android:orientation="vertical"
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -68,7 +69,7 @@
                 android:background="@drawable/text_round_thin"
                 android:ems="10"
                 android:fontFamily="@font/titan_one"
-                android:paddingLeft="10dp"
+                android:paddingLeft="5dp"
                 app:hintText="Enter city" />
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -79,7 +80,7 @@
                 android:background="@drawable/text_round_thin"
                 android:ems="10"
                 android:fontFamily="@font/titan_one"
-                android:paddingLeft="10dp"
+                android:paddingLeft="5dp"
                 app:hintText="Enter store name"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -102,20 +103,19 @@
 
         <ListView
             android:id="@+id/select_store"
-            android:layout_width="369dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
 
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/text_round_thin"
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.519">
+            app:layout_constraintTop_toTopOf="parent">
 
         </ListView>
 
@@ -135,16 +135,16 @@
             android:layout_width="124dp"
             android:layout_height="66dp"
             android:layout_marginStart="160dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="159dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/titan_one"
             android:text="Select store"
             android:textAllCaps="true"
             android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- <ScrollView

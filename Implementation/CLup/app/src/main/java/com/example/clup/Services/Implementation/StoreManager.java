@@ -9,6 +9,7 @@ import com.example.clup.OnTaskCompleteListener;
 import com.example.clup.Services.EnterService;
 import com.example.clup.Services.ExitService;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -25,15 +26,15 @@ public class StoreManager implements EnterService, ExitService {
         //TODO: parse qrCodeText/check
         String city = qrCodeText.split(";")[0].trim();
         String name = qrCodeText.split(";")[1].trim();
-        String address = qrCodeText.split(";")[2].trim();
-        String storeId  = qrCodeText.split(";")[3].trim();
-        String ticketId = qrCodeText.split(";")[4].trim();
-        Store store = new Store(Integer.parseInt(storeId), name, address, city);
+        String storeId  = qrCodeText.split(";")[2].trim();
+        String ticketId = qrCodeText.split(";")[3].trim();
+        Store store = new Store(Integer.parseInt(storeId), name, city);
         databaseManager.getTicket(store, ticketId, new OnGetDataListener(){
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue()==null) {
-                    onTaskCompleteListener.onFailure();
+                    // errCode 1 - Invalid ticket
+                    onTaskCompleteListener.onFailure(2);
                     return;
                 }
                 Timeslot timeslot = new Timeslot(Timestamp.valueOf(dataSnapshot.child("expires").getValue().toString()));
@@ -43,18 +44,23 @@ public class StoreManager implements EnterService, ExitService {
                     databaseManager.persistEnter(store, t); // update occupancy and delete ticket after entrance
                     onTaskCompleteListener.onSuccess();
                 } else {
-                    onTaskCompleteListener.onFailure();
+                    onTaskCompleteListener.onFailure(2);
                 }
                 updateQueue(store);
                 return;
+            }
+            @Override
+            public void onFailure(DatabaseError databaseError){
             }
         });
     }
 
     @Override
-    public void manageExit(Store store) {
+    public void manageExit(Store store, OnTaskCompleteListener onTaskCompleteListener) {
         databaseManager.persistExit(store);
         updateQueue(store);
+        System.out.println("ch");
+        onTaskCompleteListener.onSuccess();
     }
     public void openStore(Store store){ databaseManager.openStore(store);}
     public void closeStore(Store store){ databaseManager.closeStore(store);}
@@ -81,6 +87,9 @@ public class StoreManager implements EnterService, ExitService {
                         active--;
                     }
                 }
+            }
+            @Override
+            public void onFailure(DatabaseError databaseError){
             }
         });
     }

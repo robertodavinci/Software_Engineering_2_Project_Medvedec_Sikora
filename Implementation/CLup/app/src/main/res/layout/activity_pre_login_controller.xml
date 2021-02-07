@@ -78,7 +78,7 @@
         android:id="@+id/continueButton"
         android:layout_width="200sp"
         android:layout_height="80sp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/titan_one"
         android:text="Continue"
         android:textColor="@color/white"
