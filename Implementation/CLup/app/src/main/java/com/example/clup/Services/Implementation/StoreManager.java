@@ -46,7 +46,15 @@ public class StoreManager implements EnterService, ExitService {
                 } else {
                     onTaskCompleteListener.onFailure(2);
                 }
-                updateQueue(store);
+                updateQueue(store, new OnTaskCompleteListener() {
+                    @Override
+                    public void onSuccess() {
+                    }
+                    @Override
+                    public void onFailure(int errCode) {
+
+                    }
+                });
                 return;
             }
             @Override
@@ -58,38 +66,48 @@ public class StoreManager implements EnterService, ExitService {
     @Override
     public void manageExit(Store store, OnTaskCompleteListener onTaskCompleteListener) {
         databaseManager.persistExit(store);
-        updateQueue(store);
+        updateQueue(store, new OnTaskCompleteListener() {
+            @Override
+            public void onSuccess() {
+            }
+            @Override
+            public void onFailure(int errCode) {
+            }
+        });
         System.out.println("ch");
         onTaskCompleteListener.onSuccess();
     }
     public void openStore(Store store){ databaseManager.openStore(store);}
     public void closeStore(Store store){ databaseManager.closeStore(store);}
-    public void updateQueue(Store store){
+    public void updateQueue(Store store, OnTaskCompleteListener onTaskCompleteListener){
         databaseManager.getStore(store, new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                Timestamp now = new Timestamp(System.currentTimeMillis());
-                int occupancy, maxNoCustomers;
-                maxNoCustomers = Integer.parseInt(dataSnapshot.child("maxNoCustomers").getValue().toString());
-                occupancy = Integer.parseInt(dataSnapshot.child("occupancy").getValue().toString());
-                int active = maxNoCustomers-occupancy;
-                for(DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
-                    if(active<1) return;
-                    if(i.child("ticketState").getValue().toString().equals("ACTIVE")) {
-                        if (now.after(Timestamp.valueOf(i.child("expires").getValue().toString())))
-                            i.getRef().setValue(null);
-                        else    active--;
+                if (dataSnapshot != null) {
+                    Timestamp now = new Timestamp(System.currentTimeMillis());
+                    int occupancy, maxNoCustomers;
+                    maxNoCustomers = Integer.parseInt(dataSnapshot.child("maxNoCustomers").getValue().toString());
+                    occupancy = Integer.parseInt(dataSnapshot.child("occupancy").getValue().toString());
+                    int active = maxNoCustomers - occupancy;
+                    for (DataSnapshot i : dataSnapshot.child("Tickets").getChildren()) {
+                        if (active < 1) return;
+                        if (i.child("ticketState").getValue().toString().equals("ACTIVE")) {
+                            if (now.after(Timestamp.valueOf(i.child("expires").getValue().toString())))
+                                i.getRef().setValue(null);
+                            else active--;
+                        } else if (i.child("ticketState").getValue().toString().equals("WAITING") && active > 0) {
+                            Timeslot timeslot = new Timeslot(new Timestamp(System.currentTimeMillis() + 1000 * 60 * 5));
+                            i.getRef().child("expires").setValue(timeslot.getExpectedEnter().toString());
+                            i.getRef().child("ticketState").setValue("ACTIVE");
+                            active--;
+                        }
                     }
-                    else if (i.child("ticketState").getValue().toString().equals("WAITING") && active>0){
-                        Timeslot timeslot = new Timeslot(new Timestamp(System.currentTimeMillis()+1000*60*5));
-                        i.getRef().child("expires").setValue(timeslot.getExpectedEnter().toString());
-                        i.getRef().child("ticketState").setValue("ACTIVE");
-                        active--;
-                    }
+                    onTaskCompleteListener.onSuccess();
                 }
             }
             @Override
             public void onFailure(DatabaseError databaseError){
+                onTaskCompleteListener.onFailure(0);
             }
         });
     }

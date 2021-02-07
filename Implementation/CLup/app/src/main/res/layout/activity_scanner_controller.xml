@@ -2,33 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ScannerController"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="20dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="20dp">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".ScannerController">
 
     <com.budiyev.android.codescanner.CodeScannerView
-        android:layout_height="match_parent"
-        android:layout_width="400dp"
         android:id="@+id/scanner"
-        app:autoFocusButtonColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:autoFocusButtonColor="@color/white"
         app:autoFocusButtonVisible="true"
-        app:flashButtonColor="@android:color/white"
+        app:flashButtonColor="@color/white"
         app:flashButtonVisible="true"
-        app:maskColor="#6C000000" />
-
-    <TextView
-        android:id="@+id/textView_scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/scanner"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:text="Scannnn boiiiii"
-        android:textColor="@color/colorPrimary"/>
+        app:maskColor="@color/colorPrimaryTransparentv2" />
 
 
 </RelativeLayout>

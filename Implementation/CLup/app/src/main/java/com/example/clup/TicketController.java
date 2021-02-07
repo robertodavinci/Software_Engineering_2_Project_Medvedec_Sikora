@@ -76,6 +76,7 @@ public class TicketController extends AppCompatActivity {
             public void onClick(View view) {
                 ((ApplicationState) getApplication()).clearAppState();
                 startActivity((new Intent(view.getContext(), StoreController.class)));
+                finish();
             }
         });
     }

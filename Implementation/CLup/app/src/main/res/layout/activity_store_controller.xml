@@ -9,142 +9,175 @@
     android:fontFamily="@font/titan_one"
     tools:context=".StoreController">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="642dp">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="67dp"
-            android:fontFamily="@font/titan_one"
-            android:scaleX="1"
-            android:scaleY="1"
-            android:text="Store selection"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="@color/colorPrimary"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="160dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
-
-        <LinearLayout
-            android:layout_width="299dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="59dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="60dp"
-            android:orientation="vertical"
-            android:padding="20dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_cities"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:background="@drawable/text_round_thin"
-                android:ems="10"
-                android:fontFamily="@font/titan_one"
-                android:paddingLeft="5dp"
-                app:hintText="Enter city" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_stores"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="67dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/text_round_thin"
-                android:ems="10"
+                android:layout_marginEnd="67dp"
                 android:fontFamily="@font/titan_one"
-                android:paddingLeft="5dp"
-                app:hintText="Enter store name"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+                android:scaleX="1"
+                android:scaleY="1"
+                android:text="Store selection"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            searchableSpinner.setTitle("Select Item");
-            searchableSpinner.setPositiveButton("OK");
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="403dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout3">
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        <ListView
-            android:id="@+id/select_store"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="160dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout">
 
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/text_round_thin"
-            android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            <LinearLayout
+                android:layout_width="299dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="59dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="60dp"
+                android:orientation="vertical"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner_cities"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/text_round_thin"
+                    android:ems="10"
+                    android:fontFamily="@font/titan_one"
+                    android:paddingLeft="5dp"
+                    app:hintText="Enter city" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner_stores"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/text_round_thin"
+                    android:ems="10"
+                    android:fontFamily="@font/titan_one"
+                    android:paddingLeft="5dp"
+                    app:hintText="Enter store name"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+                searchableSpinner.setTitle("Select Item");
+                searchableSpinner.setPositiveButton("OK");
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="403dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout3">
+            app:layout_constraintBottom_toBottomOf="parent"
 
-        </ListView>
+            <ListView
+                android:id="@+id/select_store"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/text_round_thin"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            </ListView>
 
-        <Button
-            android:id="@+id/storeSelectionButton"
-            android:layout_width="124dp"
-            android:layout_height="66dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginEnd="159dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/titan_one"
-            android:text="Select store"
-            android:textAllCaps="true"
-            android:textColor="#FFFFFF"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/storeSelectionButton"
+                android:layout_width="124dp"
+                android:layout_height="66dp"
+                android:layout_marginStart="160dp"
+                android:layout_marginEnd="159dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/titan_one"
+                android:text="Select store"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.531"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/loadscreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/loadingbckg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryTransparent"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/loading2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
+                android:visibility="visible"
+                tools:srcCompat="@drawable/loading" />
+
+        </FrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- <ScrollView

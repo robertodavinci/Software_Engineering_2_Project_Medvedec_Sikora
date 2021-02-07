@@ -3,11 +3,14 @@ package com.example.clup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +38,7 @@ public class StoreController extends AppCompatActivity{
         ArrayList<String> filteredList = new ArrayList<>();
         Director director = new Director();
         Button selButton;
+        private FrameLayout loadscreen;
         private Boolean citySet = false;
         private Boolean storeSet = false;
         private Integer cityPos;
@@ -58,6 +62,8 @@ public class StoreController extends AppCompatActivity{
             stores = findViewById(R.id.spinner_stores);
             listView = findViewById(R.id.select_store);
             selButton = (Button) findViewById(R.id.storeSelectionButton);
+            loadscreen = (FrameLayout) findViewById(R.id.loadscreen);
+            loadscreen.setVisibility(View.GONE);
             //textView = findViewById(R.id.text_v);
             // CHECK APP STATE
             ((ApplicationState) getApplication()).printAppState();
@@ -88,6 +94,12 @@ public class StoreController extends AppCompatActivity{
                         toast.show();
                     }*/
                    // else {
+
+                    ImageView loading = (ImageView) findViewById(R.id.loading2);
+                    loadscreen.setVisibility(View.VISIBLE);
+                    loading.setBackgroundResource(R.drawable.loading);
+                    AnimationDrawable animation = (AnimationDrawable)loading.getBackground();
+                    animation.start();
                         citySet = true;
                         System.out.println("AA");
                         sCit = parent.getItemAtPosition(position).toString();
@@ -102,6 +114,8 @@ public class StoreController extends AppCompatActivity{
                                 System.out.println(sCit) ;
                                 stores.setAdapter(new ArrayAdapter<>(StoreController.this,
                                         android.R.layout.simple_spinner_dropdown_item, res));
+                                animation.stop();
+                                loadscreen.setVisibility(View.GONE);
                             }
                             @Override
                             public void onFailure(DatabaseError databaseError){

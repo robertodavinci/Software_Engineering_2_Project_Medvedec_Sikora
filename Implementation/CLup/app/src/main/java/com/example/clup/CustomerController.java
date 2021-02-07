@@ -60,7 +60,15 @@ public class CustomerController extends AppCompatActivity {
                 (new Runnable() {
                     public void run() {
                         System.out.println("printer"); //* tu pozvat updateQueue na storeManageru
-                        director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()));
+                        director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnTaskCompleteListener() {
+                            @Override
+                            public void onSuccess() {
+                            }
+
+                            @Override
+                            public void onFailure(int errCode) {
+                            }
+                        });
                         updateStoreStatus();
                     }
                 }, 0, 10, TimeUnit.SECONDS);
@@ -82,9 +90,18 @@ public class CustomerController extends AppCompatActivity {
                 director.getStoreManager().manageExit(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnTaskCompleteListener() {
                     @Override
                     public void onSuccess() {
-                        director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()));
-                        updateStoreStatus();
-                        scanStatus.setText("Exit confirmed");
+                        director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnTaskCompleteListener() {
+                            @Override
+                            public void onSuccess() {
+                                updateStoreStatus();
+                                scanStatus.setText("Exit confirmed");
+                            }
+
+                            @Override
+                            public void onFailure(int errCode) {
+
+                            }
+                        });
                     }
                     @Override
                     public void onFailure(int err) {
@@ -130,10 +147,18 @@ public class CustomerController extends AppCompatActivity {
                         @Override
                         public void onSuccess() {
                             scanStatus.setText("Ticket valid - entrance allowed");
-                            updateStoreStatus();
-                            director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()));
-                        }
+                            director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnTaskCompleteListener() {
+                                @Override
+                                public void onSuccess() {
+                                    updateStoreStatus();
+                                }
 
+                                @Override
+                                public void onFailure(int errCode) {
+
+                                }
+                            });
+                        }
                         @Override
                         public void onFailure(int err) {
                             if(err == 1)
@@ -162,7 +187,7 @@ public class CustomerController extends AppCompatActivity {
                     });
                     */
 
-                    Toast.makeText(CustomerController.this, decrypted, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(CustomerController.this, decrypted, Toast.LENGTH_SHORT).show();
 
                 } catch (Exception e) {
                     System.out.println(e.toString());

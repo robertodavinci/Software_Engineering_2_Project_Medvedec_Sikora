@@ -42,7 +42,6 @@ public class StoreManagerController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_manager_controller);
-
         ImageView loading = (ImageView) findViewById(R.id.loading2);
         loadscreen = (FrameLayout) findViewById(R.id.loadscreen);
         loading.setBackgroundResource(R.drawable.loading);

@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +44,7 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
     private List<Integer> occupancy;
     Director director = new Director();
     private FirebaseAuth mAuth;
+    private FrameLayout loadscreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,9 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
         //register.setOnClickListener(this);
         forgottenPassword = (TextView) findViewById(R.id.forgottenPassword);
         forgottenPassword.setOnClickListener(this);
+
+        loadscreen = (FrameLayout) findViewById(R.id.loadscreen);
+        loadscreen.setVisibility(View.GONE);
 
 
 
@@ -358,6 +365,12 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
+        ImageView loading = (ImageView) findViewById(R.id.loading2);
+        loadscreen.setVisibility(View.VISIBLE);
+        loading.setBackgroundResource(R.drawable.loading);
+        AnimationDrawable animation = (AnimationDrawable)loading.getBackground();
+        animation.start();
+
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
@@ -365,14 +378,19 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    animation.stop();
+                    loadscreen.setVisibility(View.GONE);
                     if(user.isEmailVerified()){
                         startActivity(new Intent(LoginController.this, StoreManagerController.class));
+                        finish();
                     }
                     else{
                         user.sendEmailVerification();
                         Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
                     }
                 } else{
+                    animation.stop();
+                    loadscreen.setVisibility(View.GONE);
                     Toast.makeText(LoginController.this, "Failed to log in!", Toast.LENGTH_LONG).show();
                 }
             }
