@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 public class DatabaseManager implements DatabaseManagerService {
-    static private DatabaseManager singleton = null;
+    static private DatabaseManager singleton = null; // singleton - only one instance of this class exists
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference storeReference, storeReference2;
@@ -43,6 +43,7 @@ public class DatabaseManager implements DatabaseManagerService {
     private int temp, maxId;
     private Ticket tempTicket;
 
+    // returns all the cities in which the stores are located
     @Override
     public void getStoreCities(OnGetDataListener onGetDataListener){
         storeReference = firebaseDatabase.getReference("Stores");
@@ -55,6 +56,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
+    // returns all the stores from a certain city
     @Override
     public void getStores(String city, OnGetDataListener onGetDataListener){
         storeReference = firebaseDatabase.getReference("Stores/"+city);
@@ -67,6 +69,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
+    // returns a specific store ID based on an instance of Store class
     @Override
     public void getStore(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId());
@@ -81,7 +84,7 @@ public class DatabaseManager implements DatabaseManagerService {
             }
         });
     }
-
+    // returns a Store instance of a StoreManager based on his UID (Firebase id)
     @Override
     public void getUserStore(String uid, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Users/"+ uid + "/" + "Store");
@@ -94,8 +97,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
-
+    // returns current occupancy of a certain Store
     @Override
     public void getStoreOcupancy(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/occupancy/");
@@ -108,7 +110,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // returns current open status of a certain Store
     @Override
     public void getStoreOpen(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/open/");
@@ -121,7 +123,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // returns all the addresses of a certain store chain for a specific city
     @Override
     public void getStoreAddresses(String city, String name, OnGetDataListener onGetDataListener){
         storeReference = firebaseDatabase.getReference("Stores/"+city+"/"+name);
@@ -134,7 +136,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // returns all Tickets from a certain Store
     @Override
     public void getTickets(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets");
@@ -147,7 +149,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // returns latest ticket ID that has been created
     @Override
     public void getMaxTicketId(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/maxId");
@@ -160,7 +162,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // returns maximum number of customers allowed in a certain store
     @Override
     public void getStoreMaxNoCustomers(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/maxNoCustomers/");
@@ -173,10 +175,10 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // checks user credentials and tries to log them in
     @Override
     public void checkCredentials(String email, String password, OnCredentialCheckListener onCredentialCheckListener){
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() { // Firebase has its own sign in and credential check method
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -212,7 +214,7 @@ public class DatabaseManager implements DatabaseManagerService {
             }
         });
     }
-
+    // returns ticket info based on ID and a Store
     @Override
     public void getTicket(Store store, String ticketId, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/Tickets/"+ticketId);
@@ -239,7 +241,7 @@ public class DatabaseManager implements DatabaseManagerService {
         updateReference.setValue(ticket.getQrCode());
     }
     */
-
+    // sends info that a person has exited a store - occupancy reduced by one
     @Override
     public void persistExit(Store store){
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId());
@@ -254,7 +256,8 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // sends info that a person has entered a store - done after all the checks whether the ticket is valid and whether a customer is allowed in
+    // increases occupancy by one
     @Override
     public void persistEnter(Store store, Ticket ticket) {
         DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/Tickets/"+ticket.getId());
@@ -271,7 +274,7 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // returns AES key of a specific Store
     @Override
     public void getStoreKey(Store store, OnGetDataListener onGetDataListener) {
         storeReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId()+"/key/");
@@ -284,10 +287,10 @@ public class DatabaseManager implements DatabaseManagerService {
             public void onCancelled(DatabaseError databaseError) {  }
         });
     }
-
+    // updates Ticket state
     @Override
     public void persistTicket(Ticket ticket) {
-        System.out.println("Persist ticket db");
+        //System.out.println("Persist ticket db");
         Store store = ticket.getStore();
         DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/Tickets/");
         Map<String, Object> updateParent = new HashMap<>();
@@ -296,8 +299,8 @@ public class DatabaseManager implements DatabaseManagerService {
         // updateChildren.put("qrurl", ticket.getQrCode());
         updateChildren.put("ticketState", ticket.getTicketState());
         updateParent.put(String.valueOf(ticket.getId()), updateChildren);
-        System.out.println("Parent "+updateParent);
-        System.out.println(updateReference);
+        //System.out.println("Parent "+updateParent);
+        //System.out.println(updateReference);
         updateReference.updateChildren(updateParent);
         getMaxTicketId(store, new OnGetDataListener() {
             @Override
@@ -310,7 +313,7 @@ public class DatabaseManager implements DatabaseManagerService {
             }
         });
     }
-
+    // sets Store status to OPEN
     // TODO: delete all tickets at store closing time
     @Override
     public void openStore(Store store) {
@@ -321,6 +324,7 @@ public class DatabaseManager implements DatabaseManagerService {
         updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/maxId");
         updateReference.setValue(0);
     }
+    // sets Store status to CLOSED
     @Override
     public void closeStore(Store store) {
         DatabaseReference updateReference = firebaseDatabase.getReference("Stores/"+store.getCity()+"/"+store.getName()+"/"+store.getId() + "/open");

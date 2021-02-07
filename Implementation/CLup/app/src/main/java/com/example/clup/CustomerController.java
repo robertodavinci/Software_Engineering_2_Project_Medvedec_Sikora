@@ -35,31 +35,32 @@ public class CustomerController extends AppCompatActivity {
     private Button scanTicket, storeExit;
     private AnimationDrawable animation;
     private FrameLayout loadscreen;
-    Director director = new Director();
-    int LAUNCH_SECOND_ACTIVITY = 1;
-    StrongAES sa = new StrongAES();
+    private Director director = new Director();
+    private int LAUNCH_SECOND_ACTIVITY = 1;
+    private StrongAES sa = new StrongAES();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_controller);
+        setContentView(R.layout.activity_customer_controller); // Setting activity view to the controller
         storeInfo4 = findViewById(R.id.storeInfo4);
         storeStatus3 = findViewById(R.id.storeStatus3);
         scanTicket = findViewById(R.id.scanTicket);
         storeExit = findViewById(R.id.storeExit);
-        scanStatus = findViewById(R.id.scanStatus);
-        ImageView loading = (ImageView) findViewById(R.id.loading2);
-        loadscreen = (FrameLayout) findViewById(R.id.loadscreen);
-        loading.setBackgroundResource(R.drawable.loading);
-        animation = (AnimationDrawable)loading.getBackground();
-        animation.start();
+        scanStatus = findViewById(R.id.scanStatus);            // end setting
+        ImageView loading = (ImageView) findViewById(R.id.loading2);  // Loading animation
+        loadscreen = (FrameLayout) findViewById(R.id.loadscreen);     //
+        loading.setBackgroundResource(R.drawable.loading);            //
+        animation = (AnimationDrawable)loading.getBackground();       //
+        animation.start();                                            // Loading animation code start
         storeInfo4.setText(((ApplicationState) getApplication()).getStoreName() + ", " + ((ApplicationState) getApplication()).getAddress() + ", " + ((ApplicationState) getApplication()).getStoreCity());
+
+        // Scheduler that checks and updates store queue every 10 seconds
         ScheduledExecutorService scheduler;
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate
                 (new Runnable() {
                     public void run() {
-                        System.out.println("printer"); //* tu pozvat updateQueue na storeManageru
                         director.getStoreManager().updateQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnTaskCompleteListener() {
                             @Override
                             public void onSuccess() {
@@ -69,16 +70,15 @@ public class CustomerController extends AppCompatActivity {
                             public void onFailure(int errCode) {
                             }
                         });
-                        updateStoreStatus();
+                        updateStoreStatus(); // used for printing store status on the display
                     }
                 }, 0, 10, TimeUnit.SECONDS);
 
-        //updateStoreStatus();
+        // sets button listener
         scanTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                System.out.println("GO TO SCAN");
-
+                // goes to scanner controller and waits for the return value (scanned ticket)
                 startActivityForResult((new Intent(view.getContext(), ScannerController.class)), LAUNCH_SECOND_ACTIVITY);
             };
         });
@@ -108,39 +108,29 @@ public class CustomerController extends AppCompatActivity {
                         scanStatus.setText("Exit not confirmed - error");
                     }
                 });
-                //System.out.println("EXIT STORE 1");
-            };
+            }
         });
 
     }
-
+    // return value from the scanner - return string is decrypted and used to validate ticket
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == LAUNCH_SECOND_ACTIVITY) {
-            System.out.println("Step 1");
             if(resultCode == Activity.RESULT_OK){
-                System.out.println("Step 2");
                 String qrcode = data.getStringExtra("result");
-               // Toast.makeText(CustomerController.this, qrcode, Toast.LENGTH_SHORT).show();
 
                 try {
-                    System.out.println("Step 3");
                     String[] splitqr = qrcode.split("w");
                     byte[] plaintext = new byte[splitqr.length];;
-
-
-
                     Integer i = 0;
                     for(String ac : splitqr){
-                        //System.out.println(ac);
                         byte a = (byte) Integer.parseInt(ac);
                         plaintext[i] = a;
                         i++;
                     }
                     String decrypted = sa.AESDecrypt(plaintext ,((ApplicationState) getApplication()).getStoreKey());
-                    System.out.println(decrypted);
                     String[] ticketFields = decrypted.split(";");
                     Ticket ticket = new Ticket(Integer.parseInt(ticketFields[3]), new Store(Integer.parseInt(ticketFields[2]), ticketFields[1], ticketFields[0]));
                     director.getStoreManager().manageEntrance(decrypted, new OnTaskCompleteListener() {
@@ -169,29 +159,9 @@ public class CustomerController extends AppCompatActivity {
                                 scanStatus.setText("Scan error");
                         }
                     });
-                    /*director.getRequestManager().checkTicket(ticket, new OnCheckTicketListener() {
-                        @Override
-                        public void onWaiting(int peopleAhead) {
-                            scanStatus.setText("Invalid ticket - not active yet");
-                        }
-
-                        @Override
-                        public void onActive(Timestamp expireTime) {
-                            scanStatus.setText("Ticket valid - entrance allowed");director.getStoreManager().manageEntrance();
-                        }
-                        @Override
-                        public void onBadStore(String errorString){
-                            System.out.println(errorString);
-                            scanStatus.setText("Invalid QR code");
-                        }
-                    });
-                    */
-
-                   // Toast.makeText(CustomerController.this, decrypted, Toast.LENGTH_SHORT).show();
 
                 } catch (Exception e) {
                     System.out.println(e.toString());
-                    System.out.println("NOOOOOOOOOU");
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -199,7 +169,7 @@ public class CustomerController extends AppCompatActivity {
             }
         }
     }
-
+    // updates UI regarding the store status
     public void updateStoreStatus(){
         director.getDatabaseManager().getStore(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnGetDataListener() {
             @Override
@@ -211,8 +181,8 @@ public class CustomerController extends AppCompatActivity {
                 Integer maxCustomers = Integer.valueOf(maxCus);
                 Integer occupancy = Integer.valueOf(occ);
                 Integer availability = maxCustomers - occupancy;
-                System.out.println(maxCustomers);
-                System.out.println(occupancy);
+                //System.out.println(maxCustomers);
+                //System.out.println(occupancy);
                 storeStatus3.setText(availability.toString());
                 animation.stop();
                 loadscreen.setVisibility(View.GONE);
@@ -222,7 +192,7 @@ public class CustomerController extends AppCompatActivity {
             }
         });
     }
-
+    // Sets the action of a back button pressed from Android
     @Override
     public void onBackPressed () {
         startActivity(new Intent(CustomerController.this, StoreManagerController.class));

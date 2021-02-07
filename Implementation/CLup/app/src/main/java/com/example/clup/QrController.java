@@ -30,13 +30,13 @@ import java.util.Base64;
 
 public class QrController extends AppCompatActivity {
 
-    Button checkButton, cancelButton;
-    EditText qrText;
-    ImageView qrImage;
-    TextView storeInfo;
-    TextView ticketNum;
-    TextView ticketStatus;
-    String qrkey;
+    private Button checkButton, cancelButton;
+    private EditText qrText;
+    private ImageView qrImage;
+    private TextView storeInfo;
+    private TextView ticketNum;
+    private TextView ticketStatus;
+    private String qrkey;
     private String cipherstring  = new String();
     private String qrString  = new String();
     private String storeCity  = new String();
@@ -49,7 +49,6 @@ public class QrController extends AppCompatActivity {
     private Integer ticketID;
 
 
-    EncryptionService es = new EncryptionService();
     StrongAES sa = new StrongAES();
 
 
@@ -58,7 +57,7 @@ public class QrController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_controller);
         // CHECK APP STATE
-        ((ApplicationState) getApplication()).printAppState();
+        // ((ApplicationState) getApplication()).printAppState();
 
         ticketNum = (TextView) findViewById(R.id.ticketNum);
         storeInfo = (TextView) findViewById(R.id.storeInfo);
@@ -67,7 +66,7 @@ public class QrController extends AppCompatActivity {
         cancelButton = (Button) findViewById(R.id.buttoncan);
         qrImage = (ImageView) findViewById(R.id.imageViewQR);
         Director director = new Director();
-
+        // gets all the Applicatio state data for easier use
         storeID = ((ApplicationState) getApplication()).getStoreID();
         storeCity = ((ApplicationState) getApplication()).getStoreCity();
         storeName = ((ApplicationState) getApplication()).getStoreName();
@@ -96,9 +95,10 @@ public class QrController extends AppCompatActivity {
                 ticketStatus.setText("Bad store information - reload app");
             }
         });
-
-
-
+        // QR string is consisted of storeCity, storeName, StoreID and ticketID
+        // after they have been encrpyted, we get several signed integers, which we
+        // interleave wtih a character "w"
+        // when decoding, this is split based on regex "w"
         qrString = storeCity + ";" + storeName + ";" + storeID + ";" + ticketID.toString();
         try {
             byte[] ciphertext = sa.AESEncrypt(qrString, storeKey);
@@ -113,15 +113,16 @@ public class QrController extends AppCompatActivity {
             System.out.println("KEYEND");
             //System.out.println(plainText);
             */
+            // generation of QR code
             BitMatrix bitMatrix = multiFormatWriter.encode(cipherstring, BarcodeFormat.QR_CODE,400 , 400 );
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrImage.setImageBitmap(bitmap);
 
         } catch (Exception e) {
-            System.out.println("NOOOOOOOOOU");
+            System.out.println("Error");
         }
-
+        // Check the current state of the ticket
         checkButton.setOnClickListener(new View.OnClickListener() {
         @Override
          public void onClick(View view){
@@ -145,6 +146,7 @@ public class QrController extends AppCompatActivity {
             });
         }
         });
+        // cancel and delete the ticket
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -165,7 +167,7 @@ public class QrController extends AppCompatActivity {
             };
         });
     }
-
+    // Sets the action of a back button pressed from Android
     @Override
     public void onBackPressed () {
         startActivity(new Intent(QrController.this, TicketController.class));

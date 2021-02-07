@@ -19,12 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-public class UserProfile extends AppCompatActivity {
+// Not used in this version of the app, was used during the development just for checking data
+public class UserProfileController extends AppCompatActivity {
 
     private TextView nameField, surnameField, emailField;
     private Button logoutButton;
-
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
@@ -32,7 +31,7 @@ public class UserProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile3);
+        setContentView(R.layout.activity_user_profile);
 
         nameField = (TextView) findViewById(R.id.nameField);
         surnameField = (TextView) findViewById(R.id.surnameField);
@@ -44,7 +43,7 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(UserProfile.this, LoginController.class));
+                startActivity(new Intent(UserProfileController.this, LoginController.class));
             }
         });
 
@@ -73,15 +72,15 @@ public class UserProfile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserProfile.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserProfileController.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
             }
         });
 
     }
-
+    // Sets the action of a back button pressed from Android
     @Override
     public void onBackPressed () {
         ((ApplicationState) getApplication()).setStoreManager(false);
-        startActivity(new Intent(UserProfile.this, HomeController.class));
+        startActivity(new Intent(UserProfileController.this, HomeController.class));
     }
 }

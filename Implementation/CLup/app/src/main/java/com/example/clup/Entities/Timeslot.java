@@ -4,7 +4,10 @@ import java.sql.Timestamp;
 
 public class Timeslot {
     private Timestamp expectedEnter, expectedExit;
+    // exptectedEnter is used as an expire timeslot for the ticket, 5 minutes after it has been activated
+    // expectedExit is not used in this version
 
+    // Timeslot constructors
     public Timeslot(Timestamp expectedEnter){
         this.expectedEnter = expectedEnter;
         this.expectedExit = null;
@@ -31,16 +34,14 @@ public class Timeslot {
             System.err.println("Wrong date time format");
         }
     }
-    // Timestamp ts2 = Timestamp.valueOf("2018-09-01 09:01:16");
 
+    // Timeslot getters and setters
     public Timestamp getExpectedEnter() {
         return expectedEnter;
     }
-
     public void setExpectedEnter(Timestamp expectedEnter) {
         this.expectedEnter = expectedEnter;
     }
-
     public void setExpectedExit(Timestamp expectedExit) {
         this.expectedExit = expectedExit;
     }

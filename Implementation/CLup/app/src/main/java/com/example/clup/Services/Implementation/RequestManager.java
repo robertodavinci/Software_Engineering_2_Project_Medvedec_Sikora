@@ -24,6 +24,8 @@ public class RequestManager implements QueueService, TicketService {
     private StoreSelectionManager storeSelectionManager;
     private DatabaseManager databaseManager = DatabaseManager.getInstance();
 
+    // Average waiting time and tickets lists have not been implemented in this version, as well as timeslots
+    // This can be used as an template for implementing "Book a visit" feature
     List<Ticket> tickets;
     //TODO
     private int averageMinutesInStore = 15, maxId = -1;
@@ -72,10 +74,10 @@ public class RequestManager implements QueueService, TicketService {
             }
         });
     }*/
-
+    // retrieves Ticket and sets its state based on other Store attributes
     @Override
     public void getTicket(Store store, OnGetTicketListener onGetTicketListener) {
-        System.out.println("Get ticket rm");
+        //System.out.println("Get ticket rm");
         maxId = -1;
         databaseManager.getStore(store, new OnGetDataListener() {
             @Override
@@ -109,7 +111,7 @@ public class RequestManager implements QueueService, TicketService {
         });
     }
 
-
+    // checks the Ticket state, whether it's ACTIVE or WAITING
     @Override
     public void checkTicket(Ticket ticket, OnCheckTicketListener onCheckTicketListener) {
         maxId = -1;
@@ -142,7 +144,7 @@ public class RequestManager implements QueueService, TicketService {
             }
         });
     }
-
+    // checks the current store queue to see how many customers are in line
     @Override
     public void checkQueue(Store store, OnCheckTicketListener onCheckTicketListener) {
         maxId = -1;
@@ -160,7 +162,7 @@ public class RequestManager implements QueueService, TicketService {
                         peopleAhead++;
                 }
                 onCheckTicketListener.onWaiting(peopleAhead);
-                System.out.println("AAAAA" + peopleAhead);
+                //System.out.println("AAAAA" + peopleAhead);
                 return;
             }
             @Override
@@ -168,7 +170,7 @@ public class RequestManager implements QueueService, TicketService {
             }
         });
     }
-
+    // cancels and deletes a Ticket
     @Override
     public void cancelTicket(Store store, Ticket ticket, OnTaskCompleteListener onTaskCompleteListener) {
         databaseManager.getTicket(store, String.valueOf(ticket.getId()), new OnGetDataListener() {

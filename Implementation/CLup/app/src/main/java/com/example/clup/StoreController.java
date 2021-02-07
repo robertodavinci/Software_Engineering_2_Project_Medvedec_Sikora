@@ -28,25 +28,21 @@ import java.util.List;
 // implements AdapterView.OnItemSelectedListener
 public class StoreController extends AppCompatActivity{
 
-        SharedPreferences sharedpreferences;
-        public static final String MyPREFERENCES = "MyPrefs" ;
-        Spinner stores, cities;
-        TextView textView;
-        ListView listView;
-        String sCit = new String();
-        String sStore = new String();
-        ArrayList<String> filteredList = new ArrayList<>();
-        Director director = new Director();
-        Button selButton;
+        // SharedPreferences sharedpreferences;
+        // private static final String MyPREFERENCES = "MyPrefs" ;
+        private Spinner stores, cities;
+        private TextView textView;
+        private ListView listView;
+        private String sCit = new String();
+        private String sStore = new String();
+        private ArrayList<String> filteredList = new ArrayList<>();
+        private Director director = new Director();
+        private Button selButton;
         private FrameLayout loadscreen;
-        private Boolean citySet = false;
-        private Boolean storeSet = false;
-        private Integer cityPos;
-        private Integer storePos;
         private Integer storeID;
         private String qrkey;
         private String storeAddress;
-        List<String> adr = new ArrayList<String>();
+        private List<String> adr = new ArrayList<String>();
 
 
         String[] country = { "","Esselunga", "Carrefour", "Eurospin", "Lidl", "Milan Store"};
@@ -62,46 +58,50 @@ public class StoreController extends AppCompatActivity{
             stores = findViewById(R.id.spinner_stores);
             listView = findViewById(R.id.select_store);
             selButton = (Button) findViewById(R.id.storeSelectionButton);
+
+            // Animation setup
             loadscreen = (FrameLayout) findViewById(R.id.loadscreen);
-            loadscreen.setVisibility(View.GONE);
-            //textView = findViewById(R.id.text_v);
+            ImageView loading = (ImageView) findViewById(R.id.loading2);
+            loadscreen.setVisibility(View.VISIBLE);
+            loading.setBackgroundResource(R.drawable.loading);
+            AnimationDrawable animation = (AnimationDrawable)loading.getBackground();
+            animation.start();
+            //loadscreen.setVisibility(View.INVISIBLE);
             // CHECK APP STATE
-            ((ApplicationState) getApplication()).printAppState();
+            // ((ApplicationState) getApplication()).printAppState();
 
 
             ArrayList<String> cit = new ArrayList<>();
-            cit.add("Split, Croatia");
-            cit.add("Milano, Italy");
+            /*cit.add("Split, Croatia");
+            cit.add("Milano, Italy");*/
 
-            ArrayList<String> cit2 = new ArrayList<>();
-            cit2.add("Budva");
-            cit2.add("Hvar");
+            // Fetching list of all cities from the database and adding it to spinner (drop down list)
+            director.getDatabaseManager().getStoreCities(new OnGetDataListener() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot i : dataSnapshot.getChildren()) {
+                        cit.add(i.getKey());
+                    }
+                    //System.out.println(sCit) ;
+                    cities.setAdapter(new ArrayAdapter<>(StoreController.this,
+                            android.R.layout.simple_spinner_dropdown_item, cit));
+                    animation.stop();
+                    loadscreen.setVisibility(View.INVISIBLE);
+                }
+                @Override
+                public void onFailure(DatabaseError databaseError) {
 
-
-
-            cities.setAdapter(new ArrayAdapter<>(StoreController.this,
-            android.R.layout.simple_spinner_dropdown_item, cit));
-
-
+                }
+            });
+            // Fetching list of all stores from the certain city in the database and adding it to spinner (drop down list)
             cities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                   /* if (position == 0) {
-                        citySet = false;
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Select a city", Toast.LENGTH_LONG);
-                        //toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }*/
-                   // else {
 
-                    ImageView loading = (ImageView) findViewById(R.id.loading2);
                     loadscreen.setVisibility(View.VISIBLE);
                     loading.setBackgroundResource(R.drawable.loading);
                     AnimationDrawable animation = (AnimationDrawable)loading.getBackground();
                     animation.start();
-                        citySet = true;
-                        System.out.println("AA");
                         sCit = parent.getItemAtPosition(position).toString();
                         //System.out.println(sCit) ;
                         List<String> res = new ArrayList<String>();
@@ -111,7 +111,7 @@ public class StoreController extends AppCompatActivity{
                                 for(DataSnapshot i : dataSnapshot.getChildren()) {
                                     res.add(i.getKey());
                                 }
-                                System.out.println(sCit) ;
+                                //System.out.println(sCit);
                                 stores.setAdapter(new ArrayAdapter<>(StoreController.this,
                                         android.R.layout.simple_spinner_dropdown_item, res));
                                 animation.stop();
@@ -121,14 +121,6 @@ public class StoreController extends AppCompatActivity{
                             public void onFailure(DatabaseError databaseError){
                             }
                         });
-
-
-                        //listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, res));
-                        //filteredList = (ArrayList<String>) director.getStoreSelectionManager().getStores(sCit);
-                        //System.out.println(filteredList.size());
-                        //listView.setAdapter(new ArrayAdapter<>(HomeController.this, android.R.layout.simple_list_item_1, filteredList));
-                       // textView.setText(sCit);
-                   // }
                 }
 
                 @Override
@@ -136,20 +128,11 @@ public class StoreController extends AppCompatActivity{
 
                 }
             });
-
+            // Fetching list of all addresses of stores from the certain city of a certain chain in the database and adding it to spinner (drop down list)
             stores.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                   /* if (position == 0) {
-                        storeSet = false;
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Select a store", Toast.LENGTH_LONG);
-                        //toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }*/
-                 //   else {
                         adr.clear();
-                        storeSet = true;
                         sStore = parent.getItemAtPosition(position).toString();
 
                         director.getStoreSelectionManager().getStoreAddresses(sCit, sStore, new OnGetDataListener(){
@@ -185,8 +168,6 @@ public class StoreController extends AppCompatActivity{
                                                      //System.out.println(team);
                                                  }
                                              });
-
-
             selButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
@@ -198,18 +179,13 @@ public class StoreController extends AppCompatActivity{
                         public void onSuccess(DataSnapshot dataSnapshot) {
                             qrkey = dataSnapshot.getValue().toString();
                             ((ApplicationState) getApplication()).setStoreKey(qrkey);
-                            System.out.println(((ApplicationState) getApplication()).getStoreCity());
-                            System.out.println(((ApplicationState) getApplication()).getStoreID());
-                            System.out.println(((ApplicationState) getApplication()).getStoreName());
-                            System.out.println(((ApplicationState) getApplication()).getAddress());
-                            System.out.println(((ApplicationState) getApplication()).getStoreKey());
-                            //System.out.println(((ApplicationState) getApplication()).getTicket().getId());
                             startActivity((new Intent(view.getContext(), TicketController.class)));
                         }
                         @Override
                         public void onFailure(DatabaseError databaseError){}
                     });
 
+                    // Not used shared preferences
                     /*sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("City", sCit);
@@ -218,11 +194,10 @@ public class StoreController extends AppCompatActivity{
                     editor.commit();
                     */
                 }
-
             });
 
         }
-
+        // Sets the action of a back button pressed from Android
         @Override
         public void onBackPressed () {
             ((ApplicationState) getApplication()).clearAppState();
@@ -230,31 +205,4 @@ public class StoreController extends AppCompatActivity{
             finish();
         }
 
-       /* @Override
-        public void onClick(View v) {
-         startActivity((new Intent(this, StoreController.class)));
-        }*/
-
-            /*
-            //Getting the instance of Spinner and applying OnItemSelectedListener on it
-            Spinner spin = (Spinner) findViewById(R.id.spinner_cities);
-            spin.setOnItemSelectedListener(this);
-
-            //Creating the ArrayAdapter instance having the country list
-            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,country);
-            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            //Setting the ArrayAdapter data on the Spinner
-            spin.setAdapter(aa);
-
-        }
-
-        //Performing action onItemSelected and onNothing selected
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-            Toast.makeText(getApplicationContext(),country[position] , Toast.LENGTH_LONG).show();
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
-        } */
     }

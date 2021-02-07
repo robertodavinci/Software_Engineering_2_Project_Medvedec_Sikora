@@ -1,0 +1,29 @@
+\contentsline {section}{Table of Contents}{3}{table.caption.2}%
+\contentsline {section}{List of Figures}{4}{section*.3}%
+\contentsline {section}{List of Tables}{4}{section*.4}%
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Purpose}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Scope}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Definitions, Acronyms, Abbreviations}{7}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Definitions}{7}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Acronyms}{7}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}Abbreviations}{7}{subsubsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.4}Revision History}{8}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Reference Documents}{9}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Document Structure}{10}{subsection.1.6}%
+\contentsline {section}{\numberline {2}Requirements}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Idea of requirements implementation}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Original project requirements}{11}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Requirements implementation}{12}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Adopted Development Frameworks}{14}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Adopted programming languages and frameworks}{14}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Adopted additional algorithms and middleware}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Database model}{16}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Code Structure}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Classes, Interfaces, and Enumerations}{20}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Code examples}{22}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Testing}{30}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Unit testing}{30}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Firebase testing}{38}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Security testing}{39}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Installation Instructions}{40}{section.6}%

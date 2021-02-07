@@ -1,9 +1,10 @@
 package com.example.clup.Entities;
 
 public class Store {
-    public String name, address, city;
-    public int maxNoCustomers, id;
+    public String name, address, city; // variables that define each Store
+    public int maxNoCustomers, id; // variables that define each Store
 
+    // Store constructors
     public Store(){}
     public Store(int id, String name, String city){
         this.id = id;
@@ -23,23 +24,19 @@ public class Store {
         this.city = city;
         this.maxNoCustomers = maxNoCustomers;
     }
-
+    // Store getters
     public String getAddress() {
         return address;
     }
-
     public String getCity() {
         return city;
     }
-
     public String getName() {
         return name;
     }
-
     public int getId() {
         return id;
     }
-
     public int getMaxNoCustomers() {
         return maxNoCustomers;
     }

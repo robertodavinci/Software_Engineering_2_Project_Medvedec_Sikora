@@ -8,17 +8,21 @@ import androidx.annotation.Nullable;
 
 
 public class ApplicationState extends Application {
+    // ApplicationState serves as the model for the app - it contains some attributes so that app knows who is currently
+    // using it and so that it doesn't have to retrieve data from Firebase all the time, which is significantly slower than
+    // retrieving it from here
 
-    private String storeCity = "Milano, Italy";
-    private String storeName = "Carrefour";
-    private String address = "Via Golgi 1";
-    private String storeKey = "1234567812345678";
+    private String storeCity = "";
+    private String storeName = "";
+    private String address = "";
+    private String storeKey = "";
     private Ticket ticket = new Ticket(0,null);
     private Integer storeID = 1;
     private Boolean isStoreManager = false;
     private Boolean storeOpened;
-    private Integer peopleAhead;
+    private Integer peopleAhead = 0;
 
+    // ApplicationState getters and setters
     public String getStoreCity() { return storeCity; }
     public Integer getStoreID() {
         return storeID;
@@ -49,6 +53,7 @@ public class ApplicationState extends Application {
     public void setTicket(Ticket ticket) { this.ticket = ticket; }
     public void setPeopleAhead(Integer peopleInFront) { this.peopleAhead = peopleInFront; }
 
+    // method for clearing ApplicationState to default values
     public void clearAppState(){
             this.storeCity = "";
             this.storeName = "";
@@ -60,6 +65,8 @@ public class ApplicationState extends Application {
             this.peopleAhead = 0;
             this.storeOpened = null;
     }
+
+    // method that prints ApplicationState variables, used for checking data in debug
     public void printAppState(){
         System.out.println("STATE PRINT");
         if(this.storeCity != null) System.out.println("storeCity: " + this.storeCity);

@@ -20,7 +20,8 @@ public class StoreManager implements EnterService, ExitService {
     private DatabaseManager databaseManager = DatabaseManager.getInstance();
 
     private Ticket ticket;
-
+    // manages entrance of a customer and qrcode scan
+    // checks the validity of the Ticket and sets ticket state based on the Store status
     @Override
     public void manageEntrance(String qrCodeText, OnTaskCompleteListener onTaskCompleteListener) {
         //TODO: parse qrCodeText/check
@@ -63,6 +64,7 @@ public class StoreManager implements EnterService, ExitService {
         });
     }
 
+    // sends exit signal to the store, updates queue and sets another Ticket to Active if it's waiting in the queue
     @Override
     public void manageExit(Store store, OnTaskCompleteListener onTaskCompleteListener) {
         databaseManager.persistExit(store);
@@ -74,7 +76,7 @@ public class StoreManager implements EnterService, ExitService {
             public void onFailure(int errCode) {
             }
         });
-        System.out.println("ch");
+        //System.out.println("ch");
         onTaskCompleteListener.onSuccess();
     }
     public void openStore(Store store){ databaseManager.openStore(store);}

@@ -18,23 +18,22 @@ import java.sql.Timestamp;
 
 public class TicketController extends AppCompatActivity {
 
-    Button getTicket, changeStore;
-    TextView storeInfo;
-    TextView storeStatus;
+    private Button getTicket, changeStore;
+    private TextView storeInfo;
+    private TextView storeStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_controller);
-        // CHECK APP STATE
-        System.out.println("CREATED");
-        ((ApplicationState) getApplication()).printAppState();
         Director director = new Director();
         getTicket = findViewById(R.id.getTicket);
         changeStore = findViewById(R.id.changeStore);
         storeInfo = (TextView) findViewById(R.id.storeInfo2);
         storeStatus = (TextView) findViewById(R.id.storeStatus);
         storeInfo.setText(((ApplicationState) getApplication()).getStoreName() + ", " + ((ApplicationState) getApplication()).getAddress() + ", " + ((ApplicationState) getApplication()).getStoreCity());
+
+        // Checks current store queue status and prints it out on the UI
         director.getRequestManager().checkQueue(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(),((ApplicationState) getApplication()).getStoreCity()), new OnCheckTicketListener() {
             @Override
             public void onWaiting(int peopleAhead) {
@@ -51,6 +50,7 @@ public class TicketController extends AppCompatActivity {
             }
         });
 
+        // Starts ticket generation and starts QrController if ticket info is valid
         getTicket.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -71,6 +71,7 @@ public class TicketController extends AppCompatActivity {
             }
         });
 
+        // if change store is pressed, clear ApplicationState data and go back to store selection
         changeStore.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -80,7 +81,7 @@ public class TicketController extends AppCompatActivity {
             }
         });
     }
-
+    // Sets the action of a back button pressed from Android
     @Override
     public void onBackPressed () {
         ((ApplicationState) getApplication()).clearAppState();

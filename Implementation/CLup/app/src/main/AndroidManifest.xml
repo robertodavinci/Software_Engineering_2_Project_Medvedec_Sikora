@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".RegisterScreen" />
+        <activity android:name=".ForgotPasswordController" />
+        <activity android:name=".UserProfileController" />
+        <activity android:name=".RegisterController" />
         <activity android:name=".StoreController" />
         <activity android:name=".QrController" />
         <activity

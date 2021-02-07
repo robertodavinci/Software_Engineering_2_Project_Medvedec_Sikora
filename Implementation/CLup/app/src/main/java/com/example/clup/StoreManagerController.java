@@ -34,7 +34,7 @@ public class StoreManagerController extends AppCompatActivity {
     private String storeCity;
     private String storeAddress;
     private Integer storeID;
-    Director director = new Director();
+    private Director director = new Director();
     private Store store;
 
 
@@ -53,16 +53,7 @@ public class StoreManagerController extends AppCompatActivity {
         storeInfo3 = findViewById(R.id.storeInfo3);
         storeOpenText = findViewById(R.id.storeOpen);
 
-
-        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        /*System.out.println(storeName);
-        System.out.println(storeID.toString());
-        System.out.println(storeCity);
-        */
-
-        //storeInfo3.setText(((ApplicationState) getApplication()).getStoreName() + ", " + ((ApplicationState) getApplication()).getAddress() + ", " + ((ApplicationState) getApplication()).getStoreCity());
-
-       // director.getDatabaseManager().getStoreOpen(new Store(((ApplicationState) getApplication()).getStoreID(), ((ApplicationState) getApplication()).getStoreName(), ((ApplicationState) getApplication()).getStoreCity()), new OnGetDataListener() {
+        // gets current store manager store from database based on UserID and sets those values into ApplicationState for easier use
         director.getDatabaseManager().getUserStore(FirebaseAuth.getInstance().getCurrentUser().getUid(), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -132,7 +123,7 @@ public class StoreManagerController extends AppCompatActivity {
         });
 
     }
-
+    // Sets the action of a back button pressed from Android
     @Override
     public void onBackPressed () {
         ((ApplicationState) getApplication()).clearAppState();
@@ -140,7 +131,7 @@ public class StoreManagerController extends AppCompatActivity {
         finish();
     }
 
-
+    // When store close is pressed, update UI so that store close button cannot be pressed
     protected void ButCloseStore(Button open, Button close, Button cc){
         open.setBackgroundColor(ContextCompat.getColor(StoreManagerController.this, R.color.white));
         // open.setTextColor(ContextCompat.getColor(StoreManagerController.this, R.color.colorPrimaryDark));
@@ -154,6 +145,7 @@ public class StoreManagerController extends AppCompatActivity {
         storeOpenText.setText("The store is closed");
     }
 
+    // When store open is pressed, update UI so that store open button cannot be pressed
     protected void ButOpenStore(Button open, Button close, Button cc){
         close.setBackgroundColor(ContextCompat.getColor(StoreManagerController.this, R.color.white));
         close.setClickable(true);

@@ -29,6 +29,8 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+
+// Not used in this version of the app -  using second version of AES
 public class EncryptionService {
     static String algorithm = "DESede";
 
@@ -51,7 +53,7 @@ public class EncryptionService {
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 128);
         SecretKey secret = new SecretKeySpec(factory.generateSecret(spec)
                 .getEncoded(), "AES");
-        System.out.println("KEYYYYYYY");
+        System.out.println("KEY");
         System.out.println(secret);
         return secret;
     }

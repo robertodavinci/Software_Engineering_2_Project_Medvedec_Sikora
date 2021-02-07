@@ -26,10 +26,9 @@ public class ScannerController extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_controller);
-
-
         CodeScannerView scannerView = findViewById(R.id.scanner);
         codeScanner = new CodeScanner(this, scannerView);
+        // Scans the QR code and returns it to CustomerController
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
@@ -52,19 +51,17 @@ public class ScannerController extends AppCompatActivity  {
             }
         });
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         codeScanner.startPreview();
     }
-
     @Override
     protected void onPause() {
         codeScanner.releaseResources();
         super.onPause();
     }
-
+    // Sets the action of a back button pressed from Android
     @Override
     public void onBackPressed () {
         startActivity(new Intent(ScannerController.this, CustomerController.class));

@@ -5,15 +5,14 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 public class StrongAES
 {
-
-
+    // function that Encrypts and Decrypts data
     public byte[] AESEncrypt(String plaintext, String key){
         try {
             Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES");
             // encrypt the text
-            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-            byte[] cy = cipher.doFinal(plaintext.getBytes());
+            cipher.init(Cipher.ENCRYPT_MODE, aesKey); // encrypted with a key
+            byte[] cy = cipher.doFinal(plaintext.getBytes()); // encryption is returned in bytes[] array
             //System.out.println(cy);
             return cy;
         }
@@ -27,17 +26,19 @@ public class StrongAES
         try {
             Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.DECRYPT_MODE, aesKey);
-            String cy2 = new String(cipher.doFinal(cyphertext));
+            cipher.init(Cipher.DECRYPT_MODE, aesKey); // decrypted with a key
+            String cy2 = new String(cipher.doFinal(cyphertext)); // decryption is returned in String
             //System.out.println(cy2);
             return cy2;
         }
         catch(Exception e){
             System.err.println(e);
-            return "CCCC";
+            return "Error";
         }
     }
 
+    // function not used in this version
+    /*
     public String run(String text, String key)
     {
         try
@@ -62,7 +63,8 @@ public class StrongAES
         catch(Exception e)
         {
             //e.printStackTrace();
-            return "DDDD";
+            return "Error";
         }
     }
+    */
 }

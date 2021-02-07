@@ -17,20 +17,68 @@ This standard uses either 128, 192, or 256 bit keys to encode and decode data. I
 
 The way AES works is that it takes plaintext and a key, encodes it using a special algorithm, and then sends the ciphertext to the destination. The receiver receiver the ciphertext and decodes it using the same key, getting the original message. \newline
 
-SLIKA AES
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/AES}
+\caption{\label{fig:aes}\textbf{AES sketch}}
+\end{figure}
 
 Each store in our database has a unique 128 bit key with mixed characters. This key is used for encryption when requesting a ticket and then for decryption when scanning a ticket. The key is not sent at any moment over the network and it's not shown to the customer or the store manager at any time, making the app very secure in that regard.\newline
 If user tries to scan the QR code, they will get something like this:\newline
 
 "-112w-22w34w-41w34w-120w2w-22w87w-93w-41w65w11".\newline
 
-Good luck with trying to get any data from that!
-Our encryption code generates random signed 8 bit integers which are then interleaved with a letter, "w" in this scenario, for easier decryption later. The code for the algorithm is provided here.
+Good luck with trying to get any data from that! Even NSA uses it.
+Our encryption code generates random signed 8 bit integers which are then interleaved with a letter, "w" in this scenario, for easier decryption later. The code for the algorithm is provided here.\newline
 
-KOD ENKRIPCIJE I DEKRIPCIJE
+\textbf{Entities - StrongAES}
+
+\begin{lstlisting}
+// StrongAES.java
+package com.example.clup;
+
+import java.security.Key;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+public class StrongAES
+{
+    // function that Encrypts and Decrypts data
+    public byte[] AESEncrypt(String plaintext, String key){
+        try {
+            Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            // encrypt the text
+            cipher.init(Cipher.ENCRYPT_MODE, aesKey); // encrypted with a key
+            byte[] cy = cipher.doFinal(plaintext.getBytes()); // encryption is returned in bytes[] array
+            //System.out.println(cy);
+            return cy;
+        }
+        catch(Exception e){
+            //return 'D';
+            return "false".getBytes();
+        }
+    }
+
+    public String AESDecrypt(byte[] cyphertext, String key){
+        try {
+            Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, aesKey); // decrypted with a key
+            String cy2 = new String(cipher.doFinal(cyphertext)); // decryption is returned in String
+            //System.out.println(cy2);
+            return cy2;
+        }
+        catch(Exception e){
+            System.err.println(e);
+            return "Error";
+        }
+    }
+   }
+\end{lstlisting}
+
 
 \subsection{Database model}
-\hspace{\parindent} Google's Firebase is a very powerful databse tool for two reason - it is very simple and it's easily integrated with Android apps. It is not a standard database tool that uses SQL language, but rather separates its data by using JSON structures and a classic key-value methodology. Every item can have a key and a value, as well as be a parent and have multiple children. However, any item that has a child or children cannot have any values, but is rather just represented with a key. \newline
+\hspace{\parindent} Google's Firebase is a very powerful databse tool for two reason - it is very simple and it's easily integrated with Android apps. It is not a standard database tool that uses SQL language (it is NoSQL), but rather separates its data by using JSON structures and a classic key-value methodology. Every item can have a key and a value, as well as be a parent and have multiple children. However, any item that has a child or children cannot have any values, but is rather just represented with a key. \newline
 
 This all makes extracting data very simple, but it generates a problem with data multiplication since there is no way of connecting some items with a pointer or by id. What must be done is a manual data copying, which increases size and complexity of the structure. \newline
 
@@ -40,8 +88,16 @@ The whole Firebase interface is also very well done and allows maximum customiza
 
 You can see the way we have structured our database in the following examples. 
 
-SLIKA FIREBASE
-SLIKA FIREBASE
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/Firebase1}
+\caption{\label{fig:fire1}\textbf{Our Firebase database 1}}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/Firebase2}
+\caption{\label{fig:fire2}\textbf{Our Firebase database 2}}
+\end{figure}
 
 
 The two main items are "Stores" and "Users". Stores are ordered by cities, then by store names, and finally by id. Each store has an address, a key, a current ticket id, a maximum number of customers, an occupancy number, and an open indicator. Also, each store has another set of children "Tickets", which is created dynamically. \newline

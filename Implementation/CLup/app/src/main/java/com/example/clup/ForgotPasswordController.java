@@ -13,16 +13,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.clup.Entities.ApplicationState;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
+public class ForgotPasswordController extends AppCompatActivity implements View.OnClickListener {
 
     private TextView banner;
     private EditText emailField;
     private Button resetButton;
-    private ProgressBar progressBar;
+    // private ProgressBar progressBar;
 
     FirebaseAuth auth;
 
@@ -34,7 +35,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         banner = (TextView) findViewById(R.id.banner);
         emailField = (EditText) findViewById(R.id.emailField);
         resetButton = (Button) findViewById(R.id.resetButton);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        // progressBar = (ProgressBar) findViewById(R.id.progressBar);
         banner.setOnClickListener(this);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +43,6 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 resetPassword();
             }
         });
-
         auth = FirebaseAuth.getInstance();
 
 
@@ -52,7 +52,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.banner:
-                startActivity(new Intent(ForgotPassword.this, LoginController.class));
+                startActivity(new Intent(ForgotPasswordController.this, LoginController.class));
                 break;
             case R.id.resetButton:
 
@@ -72,19 +72,17 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             emailField.requestFocus();
             return;
         }
-
-        progressBar.setVisibility(View.VISIBLE);
+        // progressBar.setVisibility(View.VISIBLE);
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(ForgotPassword.this, "Check your email!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasswordController.this, "Check your email!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(ForgotPassword.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasswordController.this, "Something has gone wrong!", Toast.LENGTH_LONG).show();
                 }
-                progressBar.setVisibility(View.GONE);
+                // progressBar.setVisibility(View.GONE);
             }
         });
     }
-
 }
