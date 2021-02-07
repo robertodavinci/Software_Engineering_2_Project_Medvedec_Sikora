@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 FEB 2021 23:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 FEB 2021 23:29
 entering extended mode
 **./main.tex
 (main.tex
@@ -1016,7 +1016,37 @@ This may cause the page layout to be inconsistent, however.
  [4] (Files/introduction.tex [5
 
 ]
-[6] [7] [8] [9]) [10] (Files/requirements.tex [11
+[6] [7] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+
+ []
+
+) [10] (Files/requirements.tex [11
 
 ] [12]) [13]
 (Files/adopteddevelopmentframeworks.tex
@@ -3519,14 +3549,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--7
 ]
 No file main.bbl.
 (main.aux)
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 7EA8D935DABF491B085F9B6DAB2A2F34;1919.
 
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 4C4E6003F568F7334A9C39279EFB49D5;1948
-(rerunfilecheck)             After:  7EA8D935DABF491B085F9B6DAB2A2F34;1919.
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -3547,7 +3572,7 @@ rs/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/
 Users/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><
 C:/Users/medve/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.p
 fb>
-Output written on main.pdf (40 pages, 1317407 bytes).
+Output written on main.pdf (40 pages, 1318968 bytes).
 PDF statistics:
  949 PDF objects out of 1000 (max. 8388607)
  470 named destinations out of 1000 (max. 500000)
