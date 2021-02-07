@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 FEB 2021 23:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.15)  7 FEB 2021 23:23
 entering extended mode
 **./main.tex
 (main.tex
@@ -3519,9 +3519,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--7
 ]
 No file main.bbl.
 (main.aux)
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7EA8D935DABF491B085F9B6DAB2A2F34;1919.
 
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 4C4E6003F568F7334A9C39279EFB49D5;1948
+(rerunfilecheck)             After:  7EA8D935DABF491B085F9B6DAB2A2F34;1919.
 
 LaTeX Warning: There were multiply-defined labels.
 
