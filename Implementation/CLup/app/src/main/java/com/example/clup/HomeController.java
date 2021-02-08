@@ -1,5 +1,6 @@
 package com.example.clup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -14,8 +15,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.clup.Entities.ApplicationState;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeController extends AppCompatActivity implements View.OnClickListener{
 
@@ -44,6 +49,7 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
         if (checkSelfPermission(Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
 
+
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +71,7 @@ public class HomeController extends AppCompatActivity implements View.OnClickLis
                     startActivity((new Intent(v2.getContext(), PreLoginController.class)));
             }
         });
+
     }
 
     @Override

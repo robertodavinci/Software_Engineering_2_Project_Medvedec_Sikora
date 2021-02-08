@@ -125,8 +125,10 @@ public class LoginController extends AppCompatActivity implements View.OnClickLi
                         finish();
                     }
                     else{
-                        user.sendEmailVerification();
-                        Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
+                        //user.sendEmailVerification();
+                        //Toast.makeText(LoginController.this, "Check your mail to verify the account!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(LoginController.this, StoreManagerController.class));
+                        finish();
                     }
                 } else{
                     animation.stop();
