@@ -66,7 +66,8 @@
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="#000000">
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinner_cities"
@@ -76,7 +77,8 @@
                     android:ems="10"
                     android:fontFamily="@font/titan_one"
                     android:paddingLeft="5dp"
-                    app:hintText="Enter city" />
+                    app:hintText="Enter city"
+                    />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinner_stores"
@@ -111,7 +113,6 @@
                 android:id="@+id/select_store"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="40dp"
